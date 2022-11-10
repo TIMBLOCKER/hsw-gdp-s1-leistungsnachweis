@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/11-aufgabe1/11-aufgabe1.iml" filepath="$PROJECT_DIR$/11-aufgabe1/11-aufgabe1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/12-aufgabe2/12-aufgabe2.iml" filepath="$PROJECT_DIR$/12-aufgabe2/12-aufgabe2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/13-aufgabe3/13-aufgabe3.iml" filepath="$PROJECT_DIR$/13-aufgabe3/13-aufgabe3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/14-aufgabe4/14-aufgabe4.iml" filepath="$PROJECT_DIR$/14-aufgabe4/14-aufgabe4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/15-aufgabe5/15-aufgabe5.iml" filepath="$PROJECT_DIR$/15-aufgabe5/15-aufgabe5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/16-aufgabe6/16-aufgabe6.iml" filepath="$PROJECT_DIR$/16-aufgabe6/16-aufgabe6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/21-aufgabe/21-aufgabe.iml" filepath="$PROJECT_DIR$/21-aufgabe/21-aufgabe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hsw-gdp-uebung.iml" filepath="$PROJECT_DIR$/.idea/hsw-gdp-uebung.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/21-aufgabe/pom.xml" />
+        <option value="$PROJECT_DIR$/11-aufgabe1/pom.xml" />
+        <option value="$PROJECT_DIR$/12-aufgabe2/pom.xml" />
+        <option value="$PROJECT_DIR$/13-aufgabe3/pom.xml" />
+        <option value="$PROJECT_DIR$/14-aufgabe4/pom.xml" />
+        <option value="$PROJECT_DIR$/15-aufgabe5/pom.xml" />
+        <option value="$PROJECT_DIR$/16-aufgabe6/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK" />
+</project>
