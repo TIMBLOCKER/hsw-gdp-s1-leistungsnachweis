@@ -1,14 +1,15 @@
 package de.hsw;
 
-import javax.swing.*;
+
 import java.util.Random;
-import java.util.Scanner;
+
+
 
 
 public class Lottozahlen {
+    Random rand = new Random();
 
-    public void lottoscheinErstellen(int anzahl) {
-        Random rand = new Random();
+    public void lottoscheinZahlen(int anzahl) {
 
 
             int[] spielRundenArray = new int[anzahl];
@@ -20,16 +21,20 @@ public class Lottozahlen {
 
                 for (int n = 0; n < lottozahlenArray.length; n++) {
                     lottozahlenArray[n] = rand.nextInt(50);
-                    System.out.println(lottozahlenArray[n]);
+                    System.out.println("[" + lottozahlenArray[n] +"]");
 
                 }
              }
-            System.out.println("Ihre Zusatzzahl: ");
 
 
-            System.out.println("Ihre Superzahl: ");
+    } //laut Internet wurde Zusatzzahl durch Superzahl ersetzt --> Zusatzzahl wird nicht mehr benötigt
+    public void lottoscheinSuperzahl(){
+
+            int superZahl = rand.nextInt(9);
+            System.out.println("Ihre Superzahl: " + superZahl);
     }
 }
+
 
 
 
