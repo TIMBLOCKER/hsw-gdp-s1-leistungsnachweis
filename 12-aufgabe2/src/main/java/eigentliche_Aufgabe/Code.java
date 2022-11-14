@@ -12,10 +12,18 @@ public class Code {
         System.out.println("In welches Format soll die Datei umgewandelt werden? Bsp. (.html)");
         String neuedatei = eingabe();
 
-        String[] arr = altedatei.split(".");
 
-        System.out.println(arr[0]);
 
+        String arr = zerschnippel(altedatei);
+
+        arr += neuedatei;
+
+        System.out.println(arr);
+
+    }
+
+    public String zerschnippel(String param) {
+        return param.substring(0, param.lastIndexOf('.'));
     }
 
     public String eingabe(){
@@ -24,7 +32,5 @@ public class Code {
         return eingabe;
     }
 }
-
-
 
 
