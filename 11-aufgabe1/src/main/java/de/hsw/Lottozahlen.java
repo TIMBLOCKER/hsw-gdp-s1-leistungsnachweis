@@ -12,12 +12,12 @@ public class Lottozahlen {
     public void lottoscheinZahlen(int anzahl) {
 
 
-            int[] spielRundenArray = new int[anzahl];
-            for (int i = 0; i < spielRundenArray.length; i++) {
+        int[] spielRundenArray = new int[anzahl];
+        Set<Integer> lottozahlenArray = null;
+        for (int i = 0; i < spielRundenArray.length; i++) {
 
-                System.out.println("Das sind die Zahlen für Spielrunde " + (i+1) +":");
-                Set<Integer> lottozahlenArray = new TreeSet<>();
-    //TO Zahlen nicht wiederholen innerhalb eines Feldes
+            System.out.println("DAS SIND DIE ZAHLEN FÜR DIE SPIELRUNDE " + (i + 1) + ":");
+            lottozahlenArray = new TreeSet<>();
 
 
 
