@@ -19,6 +19,13 @@ public class Kunde {
         this.konten = konten;
     }
 
+    public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum) {
+        this.name = name;
+        this.vorname = vorname;
+        this.adresse = adresse;
+        this.geburtsdatum = geburtsdatum;
+    }
+
     public String getName() {
         return name;
     }

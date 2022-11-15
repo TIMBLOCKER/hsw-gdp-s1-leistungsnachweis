@@ -4,8 +4,13 @@ public class Tagesgeld extends Konto{
 
     double zinsen;
 
-    public Tagesgeld(String iban, double saldo, double zinsen) {
-        super(iban, saldo);
+    public Tagesgeld(String iban,  double zinsen) {
+        super(iban);
+        this.zinsen = zinsen;
+    }
+
+    public Tagesgeld(double zinsen) {
+        super();
         this.zinsen = zinsen;
     }
 

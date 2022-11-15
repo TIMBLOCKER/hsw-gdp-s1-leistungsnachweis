@@ -21,25 +21,23 @@ public class Lottozahlen {
 
 
 
-                    while (lottozahlenArray.size() < 6){
-                    lottozahlenArray.add(rand.nextInt(50));
-                }
+            while (lottozahlenArray.size() < 6) {
+                lottozahlenArray.add(rand.nextInt(1,49));
 
-                System.out.println(lottozahlenArray.toString());
-             }
+            }
+            System.out.println(lottozahlenArray.toString());
+            System.out.println("Ihre Zusatzzahl: [" + "PLATZHALTER" + "]");
+
+            System.out.println(" ");
+        }
+        System.out.println("----------SUPERZAHL----------");
+        int superZahl = rand.nextInt(1,9);
+        System.out.println("Ihre Superzahl: " + superZahl);
 
 
-    }
-    public void lottoscheinSuperzahl(){
 
-            int superZahl = rand.nextInt(9);
-            System.out.println("Ihre Superzahl: " + superZahl);
-        int zusatzzahl = rand.nextInt(9);
-        System.out.println("Ihre Zusatzzahl: ");
-        // zusatzzahl --> siebte Zahl aus 49
     }
 }
-
 
 
 
