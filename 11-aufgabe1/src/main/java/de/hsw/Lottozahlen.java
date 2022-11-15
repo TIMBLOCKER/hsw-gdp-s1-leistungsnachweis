@@ -1,9 +1,9 @@
 package de.hsw;
 
 
-import java.util.Random;
+import com.sun.source.tree.Tree;
 
-
+import java.util.*;
 
 
 public class Lottozahlen {
@@ -16,22 +16,27 @@ public class Lottozahlen {
             for (int i = 0; i < spielRundenArray.length; i++) {
 
                 System.out.println("Das sind die Zahlen für Spielrunde " + (i+1) +":");
-                int[] lottozahlenArray = new int[6];
+                Set<Integer> lottozahlenArray = new TreeSet<>();
+    //TO Zahlen nicht wiederholen innerhalb eines Feldes
 
 
-                for (int n = 0; n < lottozahlenArray.length; n++) {
-                    lottozahlenArray[n] = rand.nextInt(50);
-                    System.out.println("[" + lottozahlenArray[n] +"]");
 
+                    while (lottozahlenArray.size() < 6){
+                    lottozahlenArray.add(rand.nextInt(50));
                 }
+
+                System.out.println(lottozahlenArray.toString());
              }
 
 
-    } //laut Internet wurde Zusatzzahl durch Superzahl ersetzt --> Zusatzzahl wird nicht mehr benötigt
+    }
     public void lottoscheinSuperzahl(){
 
             int superZahl = rand.nextInt(9);
             System.out.println("Ihre Superzahl: " + superZahl);
+        int zusatzzahl = rand.nextInt(9);
+        System.out.println("Ihre Zusatzzahl: ");
+        // zusatzzahl --> siebte Zahl aus 49
     }
 }
 
