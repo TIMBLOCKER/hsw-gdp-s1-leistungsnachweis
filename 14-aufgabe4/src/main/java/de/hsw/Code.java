@@ -9,13 +9,14 @@ public class Code {
     }
 
     public String zeichen_ersetzen(String s){
-
-        s = s.replaceAll("[^a-zA-Z 0-9]", "");
-        s = s.replace(" ", "");
-        s = s.toLowerCase();
-
-
-        return s;
+        if (s.matches("^(?i:[abcdefghijklmnopqrstuvwxyz,.!?;\":]+)$")) {
+            s = s.replaceAll("[^a-zA-Z]", "");
+            s = s.replace(" ", "");
+            s = s.toLowerCase();
+            return s;
+        } else {
+            throw new IllegalArgumentException("Invalid char");
+        }
     }
 
     public String strumdrehen(String s){
