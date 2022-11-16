@@ -37,6 +37,30 @@ public class Lottozahlen {
 
 
     }
+
+    public void tristanderprofi(){
+            Random random = new Random();
+
+            int arr[] = {12, 13 ,25, 24, 30, 14};
+            int zzz = 0;
+            boolean lol = false;
+            while (lol == false){
+                boolean lal = false;
+                int zz = random.nextInt(1,49);
+                for (int i = 0; i < 6; i++) {
+                    if (arr[i] == zz){
+                        lal = true;
+                        break;
+                    }
+                }
+                if (lal == false){
+                    lol = true;
+                    zzz = zz;
+                }
+            }
+            System.out.println(arr[0] + " " + arr[1] + " " + arr[2] + " " + arr[3] + " " + arr[4] + " " + arr[5]);
+            System.out.println("Deine ZZ ist: " + zzz);
+    }
 }
 
 
