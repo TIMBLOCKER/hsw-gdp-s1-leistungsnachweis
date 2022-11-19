@@ -47,12 +47,13 @@ public class Konto {
         Random random = new Random();
         String blz = String.valueOf(random.nextInt(10000000, 99999999));
         String ktn = String.valueOf(random.nextLong(0, 9999999999L));
-        String pruefziffer = String.valueOf(generatePruefziffer(ktn, blz));
+        String pruefziffer = String.valueOf(generateChecksum(ktn, blz));
 
         return assembleIban(blz, ktn, pruefziffer);
     }
 
-    public long generatePruefziffer(String ktn, String blz){
+    public long generateChecksum(String ktn, String blz){
+
         String lkz = "131400";
         String assemble = blz + ktn + lkz;
 
@@ -78,4 +79,7 @@ public class Konto {
     }
 
 
+    public double getMaxDispo() {
+        return maxDispo;
+    }
 }

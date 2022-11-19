@@ -5,8 +5,8 @@ public class Giro extends Konto{
     double maxDispo, maxAuszahlung;
 
     public Giro(String iban, double saldo, double maxDispo, double maxAuszahlung) {
-        super(iban, saldo);
-        this.maxDispo = maxDispo;
+        super(iban);
+        this.maxDispo = -1000;
         this.maxAuszahlung = maxAuszahlung;
     }
 

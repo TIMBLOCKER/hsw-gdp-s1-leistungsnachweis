@@ -8,7 +8,8 @@ public class Kunde {
     String name, vorname, adresse;
     LocalDate geburtsdatum;
     int bonitaet; //nach Creditreform Bonitätsindex
-    ArrayList<Konto> konten = new ArrayList<Konto>();
+    ArrayList<Konto> konten = new ArrayList<>();
+    int tgeld = 0, giro = 0;
 
     public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum, int bonitaet, ArrayList<Konto> konten) {
         this.name = name;
@@ -28,6 +29,47 @@ public class Kunde {
 
     public String getName() {
         return name;
+    }
+
+    public boolean addKonto(Konto konto) {
+        updateIndex();
+        if (konto instanceof Tagesgeld) {
+            if (tgeld < 3) {
+                konten.add(konto);
+                return true;
+            }
+        } else if (konto instanceof Giro) {
+            if (giro < 2) {
+                konten.add(konto);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void updateIndex(){
+        giro = 0;
+        tgeld = 0;
+        for (Konto k : konten) {
+            if (k instanceof Tagesgeld) {
+                tgeld++;
+            } else {
+                giro++;
+            }
+        }
+    }
+
+    public boolean deleteKonto(Konto konto){
+        if (konto instanceof Tagesgeld) {
+                konten.remove(konto);
+                tgeld--;
+                return true;
+        } else if (konto instanceof Giro) {
+                konten.add(konto);
+                giro--;
+                return true;
+            }
+        return false;
     }
 
     public void setName(String name) {
