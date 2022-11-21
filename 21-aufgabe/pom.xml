@@ -81,5 +81,16 @@
 			<artifactId>jaxb-runtime</artifactId>
 			<version>3.0.2</version>
 		</dependency>
-	</dependencies>
+			<dependency>
+				<groupId>jakarta.xml.bind</groupId>
+				<artifactId>jakarta.xml.bind-api</artifactId>
+				<version>4.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>4.0.1</version>
+				<scope>runtime</scope>
+			</dependency>
+		</dependencies>
 </project>

@@ -1,10 +1,14 @@
 package de.hsw;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
+@XmlRootElement(name = "bank")
+@XmlType(propOrder = {"name", "adresse", "blz", "kunden", "konten"})
 public class Bank {
 
     String name, adresse;
@@ -93,7 +97,7 @@ public class Bank {
 
         if (konto instanceof Giro && amount < ((Giro) konto).getMaxAuszahlung()) {
             konto.setSaldo(saldo-amount);
-
+            return true;
         }
 
         return false;
