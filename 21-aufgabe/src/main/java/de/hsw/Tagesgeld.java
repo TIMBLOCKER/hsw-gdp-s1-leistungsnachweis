@@ -13,6 +13,9 @@ public class Tagesgeld extends Konto{
         super();
         this.zinsen = zinsen;
     }
+    public Tagesgeld() {
+        this.zinsen = 0.45;
+    }
 
     public double getZinsen() {
         return zinsen;

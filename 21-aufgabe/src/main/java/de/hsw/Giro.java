@@ -16,6 +16,12 @@ public class Giro extends Konto{
         this.maxAuszahlung = maxAuszahlung;
     }
 
+    public Giro() {
+        super();
+        this.maxDispo = 1000;
+        this.maxAuszahlung = 1000;
+    }
+
     public double getMaxDispo() {
         return maxDispo;
     }

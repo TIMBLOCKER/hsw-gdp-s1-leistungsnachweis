@@ -103,7 +103,7 @@ public class Bank {
         return false;
     }
 
-
-
-
+    public ArrayList<Kunde> getKunden() {
+        return kunden;
+    }
 }
