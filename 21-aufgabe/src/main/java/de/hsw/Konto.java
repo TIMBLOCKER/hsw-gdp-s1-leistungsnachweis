@@ -17,14 +17,10 @@ public class Konto {
         this.maxDispo = maxDispo;
     }
 
-    public Konto(String iban) {
-        this.iban = iban;
-        this.saldo = 0;
-        this.maxDispo = 0;
-    }
 
-    public Konto() {
-        this.iban = generateIBANDE();
+
+    public Konto(String blz) {
+        this.iban = generateIBANDE(blz);
         this.saldo = 0;
         this.maxDispo = 0;
     }
@@ -48,7 +44,7 @@ public class Konto {
 
     public String generateIBANDE(String blz) {
         Random random = new Random();
-        String blz = String.valueOf(random.nextInt(10000000, 99999999));
+       // String blz = String.valueOf(random.nextInt(10000000, 99999999));
         String ktn = String.valueOf(random.nextLong(0, 9999999999L));
         String pruefziffer = String.valueOf(generateChecksum(ktn, blz));
 

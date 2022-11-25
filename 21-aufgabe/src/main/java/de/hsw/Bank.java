@@ -12,12 +12,12 @@ import java.util.HashMap;
 public class Bank {
 
     String name, adresse;
-    int blz;
+    String blz;
     HashMap<String, Konto> konten = new HashMap<String, Konto>();
     ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 
 
-    public Bank(String name, String adresse, int blz) {
+    public Bank(String name, String adresse, String blz) {
         this.name = name;
         this.adresse = adresse;
         this.blz = blz;
@@ -46,6 +46,20 @@ public class Bank {
         return konten.remove(iban);
     }
 
+    public Kunde getKundefromIBAN(String iban) {
+        for (Kunde kunde : kunden) {
+            for (Konto konto : kunde.getKonten()) {
+                if (konto.getIban().equals(iban))
+                    return kunde;
+            }
+        }
+        return null;
+    }
+
+    public Konto getKontofromIBAN(String iban) {
+        return konten.get(iban);
+    }
+
     public boolean deleteKonto(Konto konto) {
         String iban = konto.getIban();
         return konten.remove(iban, konto);
@@ -58,14 +72,16 @@ public class Bank {
         return kunde1.addKonto(konto);
     }
 
-    public boolean unAssignKonto(Kunde kunde, String iban){
+
+    public Konto unAssignKonto(Kunde kunde, String iban) {
         int kundeIndex = kunden.indexOf(kunde);
         Kunde kunde1 = kunden.get(kundeIndex);
         Konto konto = konten.get(iban);
         return kunde1.deleteKonto(konto);
     }
 
-    public boolean transferMoney(String from, String to, double amount){
+
+    public boolean transferMoney(String from, String to, double amount) {
         Konto konto1 = konten.get(from);
         Konto konto2 = konten.get(to);
 

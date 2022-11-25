@@ -6,8 +6,8 @@ public class Tagesgeld extends Konto {
 
 
 
-    public Tagesgeld(double zinsen) {
-        super();
+    public Tagesgeld(String blz, double zinsen) {
+        super(blz);
         this.zinsen = zinsen;
     }
 
