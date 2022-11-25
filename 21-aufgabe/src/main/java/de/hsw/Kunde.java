@@ -47,7 +47,7 @@ public class Kunde {
         return false;
     }
 
-    public void updateIndex(){
+    public void updateIndex() {
         giro = 0;
         tgeld = 0;
         for (Konto k : konten) {
@@ -59,17 +59,17 @@ public class Kunde {
         }
     }
 
-    public boolean deleteKonto(Konto konto){
+    public Konto deleteKonto(Konto konto) {
         if (konto instanceof Tagesgeld) {
-                konten.remove(konto);
-                tgeld--;
-                return true;
+            konten.remove(konto);
+            tgeld--;
+            return konto;
         } else if (konto instanceof Giro) {
-                konten.add(konto);
-                giro--;
-                return true;
-            }
-        return false;
+            konten.add(konto);
+            giro--;
+            return konto;
+        }
+        return null;
     }
 
     public void setName(String name) {

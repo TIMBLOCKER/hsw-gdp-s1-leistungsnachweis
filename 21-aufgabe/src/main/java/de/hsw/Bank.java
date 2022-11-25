@@ -23,35 +23,35 @@ public class Bank {
         this.blz = blz;
     }
 
-    public Kunde addKunde(String name, String vorname, String adresse, LocalDate geburtstag){
+    public Kunde addKunde(String name, String vorname, String adresse, LocalDate geburtstag) {
         Kunde kunde = new Kunde(name, vorname, adresse, geburtstag);
         kunden.add(kunde);
         return kunde;
     }
 
-    public boolean deleteKunde(Kunde kunde){
+    public boolean deleteKunde(Kunde kunde) {
         return kunden.remove(kunde);
     }
 
-    public Kunde deleteKundeAtPosition(int position){
+    public Kunde deleteKundeAtPosition(int position) {
         return kunden.remove(position);
     }
 
-    public Konto addKonto(Konto konto){
+    public Konto addKonto(Konto konto) {
         String iban = konto.getIban();
-        return konten.putIfAbsent(iban , konto);
+        return konten.putIfAbsent(iban, konto);
     }
 
-    public Konto deleteKontofromIBAN(String iban){
+    public Konto deleteKontofromIBAN(String iban) {
         return konten.remove(iban);
     }
 
-    public boolean deleteKonto(Konto konto){
+    public boolean deleteKonto(Konto konto) {
         String iban = konto.getIban();
-      return konten.remove(iban, konto);
+        return konten.remove(iban, konto);
     }
 
-    public boolean assignKonto(Kunde kunde, String iban){
+    public boolean assignKonto(Kunde kunde, String iban) {
         int kundeIndex = kunden.indexOf(kunde);
         Kunde kunde1 = kunden.get(kundeIndex);
         Konto konto = konten.get(iban);
@@ -72,16 +72,16 @@ public class Bank {
         double saldo1 = konto1.getSaldo();
         double saldo2 = konto2.getSaldo();
 
-        if ((saldo1-amount) > konto1.getMaxDispo()){
-            konto2.setSaldo(saldo2+amount);
-            konto1.setSaldo(saldo1-amount);
+        if ((saldo1 - amount) > konto1.getMaxDispo()) {
+            konto2.setSaldo(saldo2 + amount);
+            konto1.setSaldo(saldo1 - amount);
             return true;
         }
         return false;
     }
 
 
-    public boolean addMoney(String iban, double amount){
+    public boolean addMoney(String iban, double amount) {
         Konto konto1 = konten.get(iban);
         double saldo1 = konto1.getSaldo();
 
@@ -91,12 +91,12 @@ public class Bank {
     }
 
 
-    public boolean outputMoney(String iban, double amount){
+    public boolean outputMoney(String iban, double amount) {
         Konto konto = konten.get(iban);
         double saldo = konto.getSaldo();
 
         if (konto instanceof Giro && amount < ((Giro) konto).getMaxAuszahlung()) {
-            konto.setSaldo(saldo-amount);
+            konto.setSaldo(saldo - amount);
             return true;
         }
 

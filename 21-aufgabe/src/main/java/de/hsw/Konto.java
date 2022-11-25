@@ -46,7 +46,7 @@ public class Konto {
         this.saldo = saldo;
     }
 
-    public String generateIBANDE(){
+    public String generateIBANDE(String blz) {
         Random random = new Random();
         String blz = String.valueOf(random.nextInt(10000000, 99999999));
         String ktn = String.valueOf(random.nextLong(0, 9999999999L));
@@ -55,7 +55,7 @@ public class Konto {
         return assembleIban(blz, ktn, pruefziffer);
     }
 
-    public long generateChecksum(String ktn, String blz){
+    public long generateChecksum(String ktn, String blz) {
 
         String lkz = "131400";
         String assemble = blz + ktn + lkz;
@@ -68,7 +68,7 @@ public class Konto {
         return 98 - div; //long longNachModulo = 98 - div;
     }
 
-    public String assembleIban(String ktn, String blz, String pz){
+    public String assembleIban(String ktn, String blz, String pz) {
         String iban = "DE" + pz + blz + ktn;
 
         StringBuilder ibanBuilder = new StringBuilder(iban);
@@ -86,7 +86,7 @@ public class Konto {
         return maxDispo;
     }
 
-    public String getType(){
+    public String getType() {
         return "Konto";
     }
 }

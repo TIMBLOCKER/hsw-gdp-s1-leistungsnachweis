@@ -1,19 +1,18 @@
 package de.hsw;
 
-public class Tagesgeld extends Konto{
+public class Tagesgeld extends Konto {
 
     double zinsen;
 
-    public Tagesgeld(String iban,  double zinsen) {
-        super(iban);
-        this.zinsen = zinsen;
-    }
+
 
     public Tagesgeld(double zinsen) {
         super();
         this.zinsen = zinsen;
     }
-    public Tagesgeld() {
+
+    public Tagesgeld(String blz) {
+        super(blz);
         this.zinsen = 0.45;
     }
 
@@ -25,7 +24,7 @@ public class Tagesgeld extends Konto{
         this.zinsen = zinsen;
     }
 
-    public String getType(){
+    public String getType() {
         return "Tagesgeld";
     }
 }

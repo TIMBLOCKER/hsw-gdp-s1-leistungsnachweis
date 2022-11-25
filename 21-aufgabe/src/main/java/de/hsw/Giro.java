@@ -1,6 +1,6 @@
 package de.hsw;
 
-public class Giro extends Konto{
+public class Giro extends Konto {
 
     double maxDispo, maxAuszahlung;
 
@@ -38,7 +38,7 @@ public class Giro extends Konto{
         this.maxAuszahlung = maxAuszahlung;
     }
 
-    public String getType(){
+    public String getType() {
         return "Giro";
     }
 }

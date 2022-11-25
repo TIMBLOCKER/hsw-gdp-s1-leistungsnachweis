@@ -73,14 +73,13 @@ public class Starter {
             }
 
 
-
         }
 
 
         System.out.println("Auf Wiedersehen!");
     }
 
-    public static void kontoAufloesen(){
+    public static void kontoAufloesen() {
         System.out.println("Welches Konto möchten Sie auflösen?");
         getKontenListe();
         System.out.println("\nBitte IBAN eingeben:");
@@ -89,7 +88,7 @@ public class Starter {
         geldAuszahlen(konto.getSaldo());
     }
 
-    public static void geldAuszahlen(double amount){
+    public static void geldAuszahlen(double amount) {
         System.out.println("Das verbleibende Saldo beträgt: " + amount + "€ und wird nun ausgezahlt:");
         for (int i = 0; i < amount; i++) {
             String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
@@ -99,18 +98,19 @@ public class Starter {
 
     }
 
-    public static void getKontenListe(){
+    public static void getKontenListe() {
         ArrayList<Kunde> kunden = bank.getKunden();
-        for (Kunde kunde: kunden) {
-            for (Konto k:kunde.getKonten()) {
+        for (Kunde kunde : kunden) {
+            for (Konto k : kunde.getKonten()) {
                 System.out.println(k.getType() + " | " + kunde.getName() + ", " + kunde.getVorname() + " | " + k.getIban() + " | Saldo: " + k.getSaldo());
             }
         }
     }
-    public static void getKundenListe(){
+
+    public static void getKundenListe() {
         ArrayList<Kunde> kunden = bank.getKunden();
-        for (Kunde kunde: kunden) {
-            System.out.println("["+kunden.indexOf(kunde)+".] "+ kunde.getName() + ", " +  kunde.getVorname()+ " → " + kunde.getAdresse());
+        for (Kunde kunde : kunden) {
+            System.out.println("[" + kunden.indexOf(kunde) + ".] " + kunde.getName() + ", " + kunde.getVorname() + " → " + kunde.getAdresse());
         }
     }
 
@@ -158,7 +158,7 @@ public class Starter {
         String iban = promiseStringFromConsole();
             bank.assignKonto(kunden.get(kundennummer), iban);
             System.out.println("Konto zu Kunden hinzugefügt:" + iban);
-        }else{
+        } else {
             System.out.println("Bitte zuerst Kunden anlegen");
         }
     }
@@ -213,7 +213,7 @@ public class Starter {
         }
     }
 
-    public static void waitThread(){
+    public static void waitThread() {
         Random random = new Random();
         try {
             Thread.sleep(random.nextLong(10L, 100L));
