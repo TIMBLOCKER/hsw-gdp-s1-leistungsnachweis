@@ -14,12 +14,12 @@ public class Starter {
     public static final String ADRESSE = "Am Stockhof 2";
     public static final int BANKLEITZAHL = 10000000;
 
-    public static boolean end = false;
 
     static Bank bank = new Bank(NAME, ADRESSE, BANKLEITZAHL);
 
     public static void main(String[] args) {
 
+        boolean end = false;
 
         System.out.println("Wilkommen bei der");
         System.out.println("\n" +
@@ -37,12 +37,13 @@ public class Starter {
             System.out.println("--- Menü: Was möchten Sie tun? ---\n");
             System.out.println("[1]. Kunden hinzufügen");
             System.out.println("[2]. Konto eröffnen");
-            System.out.println("[3]. Kunden löschen");
+            System.out.println("[3]. Konto transferieren");
             System.out.println("[4]. Konto auflösen");
-            System.out.println("[5]. Geld einzahlen");
-            System.out.println("[6]. Geld auszahlen");
-            System.out.println("[7]. Überweisung tätigen");
-
+            System.out.println("[5]. Kunden löschen");
+            System.out.println("[6]. Geld einzahlen");
+            System.out.println("[7]. Geld auszahlen");
+            System.out.println("[8]. Überweisung tätigen");
+            System.out.println("[9]. Bank beenden");
             switch (promiseIntFromConsole()) {
                 case 1:
                     addKundeToBank();
@@ -51,20 +52,27 @@ public class Starter {
                     kontoEroeffnen();
                     break;
                 case 3:
+
                     break;
                 case 4:
+                    kontoAufloesen();
                     break;
                 case 5:
                     break;
                 case 6:
                     break;
                 case 7:
-
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    end = true;
+                    break;
                 default:
                     System.out.println("\033[3mFehler: Bitte eine Zahl aus dem Menü eingeben!\033[0m");
             }
 
-            end = true;
+
 
         }
 
@@ -72,6 +80,33 @@ public class Starter {
         System.out.println("Auf Wiedersehen!");
     }
 
+    public static void kontoAufloesen(){
+        System.out.println("Welches Konto möchten Sie auflösen?");
+        getKontenListe();
+        System.out.println("\nBitte IBAN eingeben:");
+        String iban  = promiseStringFromConsole();
+        Konto konto = bank.deleteKontofromIBAN(iban);
+        geldAuszahlen(konto.getSaldo());
+    }
+
+    public static void geldAuszahlen(double amount){
+        System.out.println("Das verbleibende Saldo beträgt: " + amount + "€ und wird nun ausgezahlt:");
+        for (int i = 0; i < amount; i++) {
+            String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
+            System.out.print(moneyOutput + "\r");
+            waitThread();
+        }
+
+    }
+
+    public static void getKontenListe(){
+        ArrayList<Kunde> kunden = bank.getKunden();
+        for (Kunde kunde: kunden) {
+            for (Konto k:kunde.getKonten()) {
+                System.out.println(k.getType() + " | " + kunde.getName() + ", " + kunde.getVorname() + " | " + k.getIban() + " | Saldo: " + k.getSaldo());
+            }
+        }
+    }
     public static void getKundenListe(){
         ArrayList<Kunde> kunden = bank.getKunden();
         for (Kunde kunde: kunden) {
@@ -114,14 +149,18 @@ public class Starter {
         } else {
             System.out.println("Kontotyp nicht erkannt. Bitte erneut versuchen.");
         }
-
+        ArrayList<Kunde> kunden = bank.getKunden();
+        if(kunden.size() > 0) {
         System.out.println("\nZu welchem Kunden möchten Sie dieses Konto hinzufügen?");
         getKundenListe();
         int kundennummer = promiseIntFromConsole();
         System.out.println("Bitte IBAN eingeben (mit Leerzeichen):");
         String iban = promiseStringFromConsole();
-        bank.assignKonto(bank.getKunden().get(kundennummer), iban);
-        System.out.println("Konto zu Kunden hinzugefügt:" + iban);
+            bank.assignKonto(kunden.get(kundennummer), iban);
+            System.out.println("Konto zu Kunden hinzugefügt:" + iban);
+        }else{
+            System.out.println("Bitte zuerst Kunden anlegen");
+        }
     }
 
     public static void showProgressBar() {
@@ -131,14 +170,7 @@ public class Starter {
             String progressBarSpaces = String.join("", Collections.nCopies(10 - progress, " "));
             String progressStart = i + "% [";
             System.out.print(progressStart + progressBarSteps + ">" + progressBarSpaces + "]\r");
-
-            // System.out.print("  " + i + "% [" + String.join(""+Collections.nCopies(progress, "="), Collections.nCopies(10-progress, " ")) + "]\r");
-            Random random = new Random();
-            try {
-                Thread.sleep(random.nextLong(10L, 100L));
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            waitThread();
         }
     }
 
@@ -181,4 +213,12 @@ public class Starter {
         }
     }
 
+    public static void waitThread(){
+        Random random = new Random();
+        try {
+            Thread.sleep(random.nextLong(10L, 100L));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

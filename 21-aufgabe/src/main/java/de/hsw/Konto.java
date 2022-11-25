@@ -85,4 +85,8 @@ public class Konto {
     public double getMaxDispo() {
         return maxDispo;
     }
+
+    public String getType(){
+        return "Konto";
+    }
 }

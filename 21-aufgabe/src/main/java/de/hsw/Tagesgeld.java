@@ -24,4 +24,8 @@ public class Tagesgeld extends Konto{
     public void setZinsen(double zinsen) {
         this.zinsen = zinsen;
     }
+
+    public String getType(){
+        return "Tagesgeld";
+    }
 }

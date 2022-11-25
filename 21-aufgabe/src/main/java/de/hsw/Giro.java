@@ -37,4 +37,8 @@ public class Giro extends Konto{
     public void setMaxAuszahlung(double maxAuszahlung) {
         this.maxAuszahlung = maxAuszahlung;
     }
+
+    public String getType(){
+        return "Giro";
+    }
 }
