@@ -1,5 +1,4 @@
 package de.hsw;
-
 public class Starter {
     public static void main(String[] args) {
         Code code = new Code();
@@ -13,7 +12,7 @@ public class Starter {
 
             System.out.println("");
 
-            if (kontonummer.length() == 10) {
+            if (kontonummer.length() == 10){
                 String pruefziffer = String.valueOf(code.pruefziffer(kontonummer, bankleitzahl, "131400"));
 
                 System.out.println("Die eingegebene BLZ lautet: " + bankleitzahl);
@@ -21,12 +20,12 @@ public class Starter {
                 System.out.println("Die eingegebene Kontonummer lautet: " + kontonummer);
                 System.out.println("");
                 System.out.println("Die generierte IBAN lautet: " + code.ibanzsmfuegen(bankleitzahl, kontonummer, pruefziffer));
-            } else {
+            }else {
                 System.out.println("Deine Eingabe ist fehlerhaft!");
             }
 
 
-        } else {
+        }else {
             System.out.println("Deine Eingabe ist fehlerhaft!");
         }
     }

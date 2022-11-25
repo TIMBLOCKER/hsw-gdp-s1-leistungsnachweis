@@ -1,17 +1,14 @@
 package de.hsw;
 
+import java.io.File;
+import java.util.Scanner;
+
 public class Starter {
 
     public static void main(String[] args) {
-        Code code = new Code();
+        DateiFormataendern dateiFormataendern = new DateiFormataendern();
 
-        System.out.println("Welche Datei soll umbenannt werden? Bsp (engel.pdf)");
-        String altedatei = code.eingabe();
+        dateiFormataendern.dateiformatstarten();
 
-        System.out.println("In was / welches Format soll die Datei umbenannt/umgewandelt werden? Bsp. (hallo.html)");
-        String neuedatei = code.eingabe();
-
-        code.dateiumbenennen(altedatei, neuedatei);
     }
-
 }
