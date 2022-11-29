@@ -12,8 +12,7 @@ public class Checksummeberechnen {
             s = ueberpruefenaufzeichen(eingabe);
             l = ueberpruefeersteziffer(s);
 
-            long checksumme = stringhochzaehlen(l);
-            long checksummenichtminus = ueberpruefenobminus(checksumme);
+            long checksumme = checksummenberechnung(l);
 
             String hexa = deziinhexa(checksumme);
             System.out.println("Die Checksumme ist: " + hexa);
@@ -38,7 +37,7 @@ public class Checksummeberechnen {
         throw new IllegalArgumentException("Dein String enthält illegale Zeichen!");
     }
 
-    public long stringhochzaehlen(String eingabe){
+    public long checksummenberechnung(String eingabe){
         long checksumme = 0;
         eingabe = eingabe.replace(" ", "");
         for (int i = 0; i < eingabe.length(); i++) {
@@ -53,19 +52,15 @@ public class Checksummeberechnen {
                 checksumme = checksumme * 2;
             }
         }
-        return checksumme;
-    }
-
-    private long ueberpruefenobminus(long checksumme) throws IllegalArgumentException {
-        if (checksumme < 0){
-            throw new IllegalArgumentException("Die Checksumme wäre Negativ! Deine negative Checksumme lautet: " + checksumme);
-        }else {
             return checksumme;
-        }
     }
 
-    public String deziinhexa(long dez){
-        String hex = Integer.toHexString((int) dez);
-        return hex;
+    public String deziinhexa(long dez)throws IllegalArgumentException{
+        if (dez < 0){
+            throw new IllegalArgumentException("Die Checksumme wäre Negativ! Deine negative Checksumme lautet: " + dez);
+        }else {
+            String hex = Integer.toHexString((int) dez);
+            return hex;
+        }
     }
 }

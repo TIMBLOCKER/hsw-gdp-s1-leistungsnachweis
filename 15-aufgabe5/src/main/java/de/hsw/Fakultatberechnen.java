@@ -5,39 +5,49 @@ import java.util.Scanner;
 public class Fakultatberechnen {
 
     public void fakultaetstarten(){
-        System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
-        int eingabe = eingabe();
-        System.out.println();
-        fakberechnen(eingabe);
+        try {
+            System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
+            int eingabe = eingabe();
+            System.out.println();
+            long fak = fakberechnen(eingabe);
+            System.out.println("Die Fakultät deiner Zahl ist: " + fak);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public int eingabe(){
         Scanner scanner = new Scanner(System.in);
-        int s = filter(scanner.nextInt());
+        int s = filter(scanner.next());
         return s;
     }
 
-    public int filter(int eingabe){
-        int s = -1;
-        while(s == -1){
-            if (eingabe < 0) {
-                System.out.println("Diese Eingabe ist nicht möglich! Versuche es erneut!");
-            }else {
-                s = eingabe;
-            }
+    public int filter(String eingabe)throws IllegalArgumentException{
+
+        if (eingabe.matches("^(?i:[.,]+)$")){
+            throw new IllegalArgumentException("Deine Eingabe ist keine ganze Zahl!");
         }
-        return s;
+
+        else if (Integer.parseInt(eingabe) < 0) {
+            throw new IllegalArgumentException("Deine Eingabe ist Negativ!");
+        }
+
+        else if (Integer.parseInt(eingabe) >= 0){
+            return Integer.parseInt(eingabe);
+        }
+
+        throw new IllegalArgumentException("Deine Eingabe ist keine Zahl!");
     }
 
-    public void fakberechnen(int eingabe){
+    public long fakberechnen(int eingabe){
         if (eingabe == 0){
-            System.out.println("Die Fakultät deiner Zahl ist: 1");
+            return 1;
         }else {
             long zahl = 1;
             for (long i = 1; i <= eingabe; i++) {
                 zahl = zahl * i;
             }
-            System.out.println("Die Fakultät deiner Zahl ist: " + zahl);
+            return zahl;
         }
     }
 }
