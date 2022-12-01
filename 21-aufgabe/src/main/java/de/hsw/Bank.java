@@ -81,9 +81,15 @@ public class Bank {
     }
 
 
-    public boolean transferMoney(String from, String to, double amount) {
-        Konto konto1 = konten.get(from);
-        Konto konto2 = konten.get(to);
+    public boolean transferMoney(String from, String to, double amount) throws NullPointerException{
+        Konto konto1, konto2;
+        try {
+             konto1 = konten.get(from);
+             konto2 = konten.get(to);
+        }catch (NullPointerException e){
+            throw new NullPointerException(e.getMessage());
+        }
+
 
         double saldo1 = konto1.getSaldo();
         double saldo2 = konto2.getSaldo();

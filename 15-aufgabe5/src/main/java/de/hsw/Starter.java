@@ -1,12 +1,10 @@
 package de.hsw;
 
-import java.util.Scanner;
-
 public class Starter {
     public static void main(String[] args) {
-        Fakultatberechnen fakultatberechnen = new Fakultatberechnen();
-
-        fakultatberechnen.fakultaetstarten();
+        //Starten des Codes
+        CalcFaculty calcFaculty = new CalcFaculty();
+        calcFaculty.facultyStarter();
     }
 
 }

@@ -1,13 +1,13 @@
 package eigentliche_Aufgabe;
 
-import de.hsw.DateiFormataendern;
+import de.hsw.ChangeFormat;
 
 public class Starter {
 
     public static void main(String[] args) {
-        DateiFormataendern dateiFormataendern = new DateiFormataendern();
-
-        dateiFormataendern.dateiformatstarten();
+        //Starten des Codes
+        RenameString renameString = new RenameString();
+        renameString.renameStringStarter();
     }
 
 }

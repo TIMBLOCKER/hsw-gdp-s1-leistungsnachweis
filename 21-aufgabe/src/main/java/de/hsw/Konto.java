@@ -44,11 +44,10 @@ public class Konto {
 
     public String generateIBANDE(String blz) {
         Random random = new Random();
-       // String blz = String.valueOf(random.nextInt(10000000, 99999999));
-        String ktn = String.valueOf(random.nextLong(0, 9999999999L));
-        String pruefziffer = String.valueOf(generateChecksum(ktn, blz));
+        String ktn = String.valueOf(String.format("%1$010d",random.nextLong(0, 9999999999L)));
+        String pruefziffer = String.valueOf(String.format("%1$02d",generateChecksum(ktn, blz)));
 
-        return assembleIban(blz, ktn, pruefziffer);
+        return assembleIban(ktn, blz, pruefziffer);
     }
 
     public long generateChecksum(String ktn, String blz) {

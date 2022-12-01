@@ -115,8 +115,12 @@ public class Starter {
         System.out.println("Wie viel Geld soll auf das Konto: " + iban + " eingezahlt werden?");
         double amount = promiseDoubleFromConsole();
         if (amount > 0){
-            bank.addMoney(iban, amount);
-            System.out.println("Es wurden " + amount + "€ eingezahlt.");
+            try {
+                bank.addMoney(iban, amount);
+                System.out.println("Es wurden " + amount + "€ eingezahlt.");
+            }catch (NullPointerException e){
+                System.out.println("\033[3mFehler: Das Konto wurde nicht gefunden!\033[0m");
+            }
         }else{
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
@@ -229,7 +233,7 @@ public class Starter {
                 Kunde kunde = kunden.get(kundennummer);
                 if (kunde != null) {
                     bank.assignKonto(kunde, iban);
-                    System.out.println("Konto zu Kunden hinzugefügt:" + iban);
+                    System.out.println("Konto zu Kunden hinzugefügt: " + iban);
                 }else{
                     System.out.println("Konto nicht im System gefunden.");
                 }
@@ -284,7 +288,7 @@ public class Starter {
         while (true) {
             try {
                 System.out.println("↓");
-                return mainScanner.next();
+                return mainScanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("\033[3mFehler: Bitte einen String eingeben!\033[0m");
                 mainScanner.nextLine();

@@ -1,14 +1,10 @@
 package de.hsw;
 
-import java.io.File;
-import java.util.Scanner;
-
 public class Starter {
 
     public static void main(String[] args) {
-        DateiFormataendern dateiFormataendern = new DateiFormataendern();
-
-        dateiFormataendern.dateiformatstarten();
-
+        //Starten des Codes
+        ChangeFormat changeFormat = new ChangeFormat();
+        changeFormat.dateiFormatStarter();
     }
 }
