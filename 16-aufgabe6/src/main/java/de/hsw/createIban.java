@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+//Todo Klassen werden immer groß geschrieben
+//todo camelCase
 public class createIban{
     public void Ibanstarten(){
         try {
@@ -23,6 +25,7 @@ public class createIban{
         }
     }
 
+    //Todo change to promise Methode -> Bank
     public int eingabe()throws InputMismatchException {
         Scanner scanner = new Scanner(System.in);
         while (true){
@@ -60,7 +63,7 @@ public class createIban{
             throw new IllegalArgumentException("Die Kontonummer konnte nicht erstellt werden!");
         }
     }
-
+//todo camelCase
     public String ibanbauen(String bankleitzahl, String kontonummer, String laenderkennziffer)  {
 
         String zsmfuegung = bankleitzahl + kontonummer + laenderkennziffer;
@@ -71,13 +74,15 @@ public class createIban{
         }catch (Exception e){
 
         }
-
+            //todo error
         String pruefziffer = String.valueOf(98 - div);
 
         String iban = "DE" + pruefziffer + bankleitzahl + kontonummer;
         return iban.subSequence(0, 4) + " " + iban.subSequence(4, 8) + " " + iban.substring(8, 12) + " " + iban.substring(12, 16) + " " + iban.substring(16, 20) + " " + iban.substring(20, 22);
     }
 
+
+    //todo ausgabe formatieren
     private void ausgabe(String bankleitzahl, String kontonummer, String iban){
         System.out.println("\nDie eingegebene BLZ lautet: " + bankleitzahl);
         System.out.println("\nDie eingegebene Kontonummer lautet: " + kontonummer);

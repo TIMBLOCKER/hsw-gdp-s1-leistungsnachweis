@@ -5,6 +5,9 @@ import java.util.Scanner;
 //In dieser Klasse wird die Main Methode gestartet
 public class Starter {
 
+    //TODO: huynh Exception handling
+    //Todo camelCase
+
     //In der Main Methode gibt der User die Spielrunden Anzahl ein
     public static void main(String[] args) throws Exception {
         //Eingabe der Anzahl der Spielrunde

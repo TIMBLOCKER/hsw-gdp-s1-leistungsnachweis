@@ -13,12 +13,14 @@ public class Palindromerkennen {
         try {
             String zeichenlos = replaceZeichen(scanner.nextLine());
             String umgedreht = flipString(zeichenlos);
-            isPalindrom(zeichenlos, umgedreht);
+            if(isPalindrom(zeichenlos, umgedreht)){
+                //TODO Hier palindrom code
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
-
+    //Todo: Variablennamen sprechend
     //Todo: rathg fragen, was das tut
     public String replaceZeichen(String s) throws IllegalArgumentException{
         if (s.matches("^(?i:[abcdefghijklmnopqrstuvwxyz,.!?;\": ]+)$")) {

@@ -7,19 +7,23 @@ package de.hsw;
 
 public class StarterTest {
 
+        //Todo: Javadoc nachziehen und Tests optimieren, Var in CamelCase --> halloDat
+
+
     @Test
     void testSuperZahlMin() {
-       Lottozahlen lottozahlen = new Lottozahlen(null);
+        Lottozahlen lottoZahlen = new Lottozahlen(1L);
         Long seed = 1L;
         assertEquals(4, lottozahlen.superZahl());
 
     }
     @Test
     void testSuperZahlMax() {
-        Lottozahlen lottozahlen = new Lottozahlen(null);
+        Lottozahlen lottozahlen = new Lottozahlen(1L);
         Long seed = 1L;
         assertEquals(4, lottozahlen.superZahl());
     }
+
 
     @Test
     void testZusatzZahl(){

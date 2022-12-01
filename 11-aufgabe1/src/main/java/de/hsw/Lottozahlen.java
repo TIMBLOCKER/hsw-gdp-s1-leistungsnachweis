@@ -7,6 +7,8 @@ import com.sun.source.tree.Tree;
 import java.lang.reflect.Array;
 import java.util.*;
 
+//TODO: JavaDoc nachziehen und Formatierung anpassen
+//Todo camelCase
 
 
  //In dieser Klasse Lottozahlen werden Lottozahlen, Zusatzzahl und Superzahl generiert und ausgegeben
@@ -14,15 +16,14 @@ public class Lottozahlen {
 
     Random rand;
 
-    public Lottozahlen(@Nullable Integer seed){
-        if (seed == null) {
-            rand = new Random();
-        }else{
-            rand = new Random(seed);
-        }
-
+    public Lottozahlen(long seed) {
+        rand = new Random(seed);
     }
 
+    public Lottozahlen() {
+        rand = new Random();
+
+    }
 
     /**
      * @param anzahl Gibt die Anzahl der Lottozahlen ein

@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class CalcFaculty {
 
+    //todo Sprechende Variablennamen
+
     /**
      * Startermethode
      */

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class calcFacultyTest {
 
+    //todo einmal tests durchlaufen lassen wg bigint
 
     /**
      * filterInput soll nur ganzzahlige Eingaben im Positiven durchlassen.

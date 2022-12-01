@@ -1,5 +1,6 @@
 package eigentliche_Aufgabe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RenameString {
@@ -9,10 +10,10 @@ public class RenameString {
      */
     public void renameStringStarter(){
         System.out.println("Welche Datei soll umbenannt werden? Bsp (C:\\Users\\rathg\\Desktop\\helloWorld.txt)");
-        String altedatei = eingabe(); // Alten Dateinamen speichern.
+        String altedatei = promiseStringFromConsole(); // Alten Dateinamen speichern.
 
         System.out.println("In welches Format soll die Datei umgewandelt werden? Bsp. (.html)");
-        String neuedatei = eingabe(); // Neue Endung speichern.
+        String neuedatei = promiseStringFromConsole(); // Neue Endung speichern.
 
         String ausgabe = changeString(altedatei, neuedatei); // Fuktion Start; übergabe von Eingabe-Variablen.
         System.out.println(ausgabe); // Ausgabe Dateipfad mit neuer Endung.
@@ -44,6 +45,22 @@ public class RenameString {
     public String eingabe(){
         Scanner scanner = new Scanner(System.in);
         String eingabe = scanner.next();
-        return eingabe;
+        if (eingabe.matches("[a-zA-Z]+\\.[a-zA-Z]+")) {
+            return eingabe;
+        }
+         return "";
+    }
+
+    public static String promiseStringFromConsole() {
+        Scanner mainScanner = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.println("↓");
+                return mainScanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("\033[3mFehler: Bitte einen korrekten String eingeben!\033[0m");
+                mainScanner.nextLine();
+            }
+        }
     }
 }
