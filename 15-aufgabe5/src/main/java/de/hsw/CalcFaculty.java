@@ -1,5 +1,6 @@
 package de.hsw;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class CalcFaculty {
@@ -10,9 +11,9 @@ public class CalcFaculty {
     public void facultyStarter(){
         try {
             System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
-            int eingabe = eingabe();
+            long eingabe = eingabe();
             System.out.println();
-            long fak = facultyCalc(eingabe);
+            BigInteger fak = facultyCalc(eingabe);
             System.out.println("Die Fakultät deiner Zahl ist: " + fak);
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -23,13 +24,13 @@ public class CalcFaculty {
      * @param eingabe Die Methode nimmt eine Zahl als Eingabe
      * @return und gibt die Fakultät der Zahl zurück
      */
-    public long facultyCalc(int eingabe){
+    public BigInteger facultyCalc(long eingabe){
         if (eingabe == 0){
-            return 1;
+            return BigInteger.valueOf(1);
         }else {
-            long zahl = 1;
+            BigInteger zahl = BigInteger.valueOf(1);
             for (long i = 1; i <= eingabe; i++) {
-                zahl = zahl * i;
+                zahl = zahl.multiply(BigInteger.valueOf(i));
             }
             return zahl;
         }

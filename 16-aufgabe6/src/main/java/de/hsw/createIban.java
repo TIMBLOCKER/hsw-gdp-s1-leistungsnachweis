@@ -8,8 +8,14 @@ public class createIban{
     public void Ibanstarten(){
         try {
             String laenderkennziffer = "131400";
-            String bankleitzahl = bankleitzahleingabe();
-            String kontonummer = kontonummereingabe();
+            System.out.println("Bitte geben Sie ihre Bankleitzahl ein.");
+            String eingabe = String.valueOf(eingabe());
+            String ersteziffertrue = erstezifferueberpruefen(eingabe);
+            String bankleitzahl = bankleitzahleingabe(ersteziffertrue);
+
+            System.out.println("\nBitte geben Sie Ihre Kontonummer ein.");
+            String zehnstellentrue = String.format("%1$010d", eingabe());
+            String kontonummer = kontonummereingabe(zehnstellentrue);
             String iban = ibanbauen(bankleitzahl, kontonummer, laenderkennziffer);
             ausgabe(bankleitzahl, kontonummer, iban);
         }catch (Exception e){
@@ -39,10 +45,7 @@ public class createIban{
         }
     }
 
-    public String bankleitzahleingabe()throws IllegalArgumentException{
-        System.out.println("Bitte geben Sie ihre Bankleitzahl ein.");
-        String eingabe = String.valueOf(eingabe());
-        String bankleitzahl = erstezifferueberpruefen(eingabe);
+    public String bankleitzahleingabe(String bankleitzahl)throws IllegalArgumentException{
         if (bankleitzahl.length() == 8){
             return bankleitzahl;
         }else{
@@ -50,9 +53,7 @@ public class createIban{
         }
     }
 
-    public String kontonummereingabe()throws IllegalArgumentException{
-        System.out.println("\nBitte geben Sie Ihre Kontonummer ein.");
-        String kontonummer = String.format("%1$010d", eingabe());
+    public String kontonummereingabe(String kontonummer)throws IllegalArgumentException{
         if (kontonummer.length() == 10){
             return kontonummer;
         }else{
@@ -60,12 +61,17 @@ public class createIban{
         }
     }
 
-    public String ibanbauen(String bankleitzahl, String kontonummer, String laenderkennziffer) {
+    public String ibanbauen(String bankleitzahl, String kontonummer, String laenderkennziffer)  {
 
         String zsmfuegung = bankleitzahl + kontonummer + laenderkennziffer;
         BigInteger vormodulo = new BigInteger(zsmfuegung);
         BigInteger faktor = new BigInteger("97");
-        long div = vormodulo.remainder(faktor).longValue();
+        try {
+            long div = vormodulo.remainder(faktor).longValue();
+        }catch (Exception e){
+
+        }
+
         String pruefziffer = String.valueOf(98 - div);
 
         String iban = "DE" + pruefziffer + bankleitzahl + kontonummer;
