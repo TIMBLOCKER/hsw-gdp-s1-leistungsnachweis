@@ -35,6 +35,8 @@ public class ChangeFormat {
         }
     }
 
+    //TOdo eingabe mit error handling
+
     /**
      * Handling der Konsoleneingabe
      * @return String der in der Konsole eingegeben wurde.

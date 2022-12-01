@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class CalcChecksum {
 
 
+    //TODO: Variablennamen sprechend machen
+
     /**
      * Startermethode
      */

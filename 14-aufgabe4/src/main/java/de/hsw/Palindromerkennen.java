@@ -56,6 +56,8 @@ public class Palindromerkennen {
         }
     }
 
+    //Todo: Return type einbinden
+
     /**
      * @param s1 Diese Methode nimmt zwei Strings und vergleicht diese.
      * @param s2 Die Strings sind die Ordiginaleingabe und der umgedrehte String.

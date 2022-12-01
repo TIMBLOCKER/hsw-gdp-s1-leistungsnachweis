@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class RenameString {
 
+    //TODO eingabe errorhandling Eingabe weg
+
+
     /**
      * Startermethode
      */
