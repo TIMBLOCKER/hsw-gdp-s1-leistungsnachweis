@@ -1,11 +1,7 @@
 package de.hsw;
 
 import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 //Todo Klassen werden immer groß geschrieben
@@ -18,10 +14,10 @@ public class CreateIban{
             int ersteziffertrue = checkFirstDigit(eingabe);
             int bankleitzahl = checkBankCode(ersteziffertrue);
             System.out.println("\nBitte geben Sie Ihre Kontonummer ein.");
-            String kontonummertrue = String.format("%1$010d", input());
-            int kontonummer = checkAccountNumber(kontonummertrue);
-            String iban = buildIban(bankleitzahl, kontonummer);
-            output(bankleitzahl, kontonummer, iban);
+
+            long[] kontonummer = checkAccountNumber(input());
+            String iban = buildIban(bankleitzahl, kontonummer[0], kontonummer[1]);
+            output(bankleitzahl, kontonummer[0], kontonummer[1], iban);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -65,20 +61,35 @@ public class CreateIban{
         }
     }
 
-    public int checkAccountNumber(int uebergabe)throws IllegalArgumentException{
-        String kontonummer = String.valueOf(uebergabe);
-        if (kontonummer.length() == 10){
-            return uebergabe;
-        }else{
-            throw new IllegalArgumentException("Die Kontonummer konnte nicht erstellt werden!");
+    public long[] checkAccountNumber(long uebergabe)throws IllegalArgumentException {
+        if (uebergabe >= 0) {
+            String.format("%1$010d", uebergabe);
+            String kontonummer = String.valueOf(uebergabe);
+            if (kontonummer.length() == 10) {
+                int i = 0;
+                while (kontonummer.substring(i).equals("0")){
+                    i++;
+                }
+                long[] kontonummer1 = {uebergabe, Long.valueOf(i)};
+                return kontonummer1;
+            } else {
+                throw new IllegalArgumentException("Die Kontonummer konnte nicht erstellt werden!");
+            }
+        }else {
+            throw new IllegalArgumentException();
         }
     }
+
 //todo camelCase
-    public String buildIban(int b, int k)  {
+    public String buildIban(int b, long k1, long k2)  {
         String laenderkennziffer = "131400";
-        k = 120087859;
+        String nullen = "";
+        for (int i = 0; i < k2; i++) {
+            nullen += 0;
+        }
+        String k = nullen + k1;
         String bankleitzahl = String.valueOf(checkBankCode(b));
-        String kontonummer = String.valueOf(checkAccountNumber(k));
+        String kontonummer = String.valueOf(checkAccountNumber(Long.parseLong(k)));
 
         String zsmfuegung = bankleitzahl + kontonummer + laenderkennziffer;
         BigInteger vormodulo = new BigInteger(zsmfuegung);
@@ -92,9 +103,9 @@ public class CreateIban{
 
 
     //todo ausgabe formatieren
-    private void output(int bankleitzahl, int kontonummer, String iban){
+    private void output(int bankleitzahl, long k1, long k2, String iban){
         System.out.println("\nDie eingegebene BLZ lautet: " + bankleitzahl);
-        System.out.println("\nDie eingegebene Kontonummer lautet: " + kontonummer);
+        System.out.println("\nDie eingegebene Kontonummer lautet: " + String.valueOf(k1) + k2);
         System.out.println("\nDie generierte IBAN lautet: " + iban);
     }
 
