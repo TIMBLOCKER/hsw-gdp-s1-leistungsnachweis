@@ -50,7 +50,7 @@ public class Palindromerkennen {
      * @throws IllegalArgumentException Wenn die eingabe inkorrekt ist, wird dieser Fehler geschmissen.
      */
     public String replacePunctuation(String handover) throws IllegalArgumentException{
-        if (handover.matches("^(?i:[abcdefghijklmnopqrstuvwxyz,.!?;\": ]+)$")) {
+        if (handover.matches("(?i:[abcdefghijklmnopqrstuvwxyz,.!?;\": ]+)")) {
             handover = handover.replaceAll("[^a-zA-Z]", "");
             handover = handover.replace(" ", "");
             handover = handover.toLowerCase();
