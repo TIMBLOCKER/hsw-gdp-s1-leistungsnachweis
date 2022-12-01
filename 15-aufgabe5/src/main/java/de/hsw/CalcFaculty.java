@@ -1,6 +1,7 @@
 package de.hsw;
 
 import java.math.BigInteger;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CalcFaculty {
@@ -13,58 +14,52 @@ public class CalcFaculty {
     public void facultyStarter(){
         try {
             System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
-            long eingabe = eingabe();
+            long input = promiseStringFromConsole();
             System.out.println();
-            BigInteger fak = facultyCalc(eingabe);
-            System.out.println("Die Fakultät deiner Zahl ist: " + fak);
+            String faculty = facultyCalc(input);
+            System.out.println("Die Fakultät deiner Zahl ist: " + faculty);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
     /**
-     * @param eingabe Die Methode nimmt eine Zahl als Eingabe
-     * @return und gibt die Fakultät der Zahl zurück
+     * Handling der Konsoleneingabe und Eingabefilter
+     * @return String der in der Konsole eingegeben wurde.
      */
-    public BigInteger facultyCalc(long eingabe){
-        if (eingabe == 0){
-            return BigInteger.valueOf(1);
-        }else {
-            BigInteger zahl = BigInteger.valueOf(1);
-            for (long i = 1; i <= eingabe; i++) {
-                zahl = zahl.multiply(BigInteger.valueOf(i));
+    public long promiseStringFromConsole() {
+        Scanner mainScanner = new Scanner(System.in);
+        while (true){
+            try {
+                System.out.println("↓");
+                long input = mainScanner.nextLong();
+                if (input>=0){
+                    return input;
+                }
+                System.out.println("\033[30m\033[41mFehler: Bitte nur positive Zahlen eingeben!\033[0m");
+            } catch (InputMismatchException e) {
+                System.out.println("\033[30m\033[41mFehler: Bitte eine korrekte Zahl eingeben!\033[0m");
+                mainScanner.nextLine();
             }
-            return zahl;
         }
     }
 
     /**
-     * @return Methode für die Systemeingabe
+     * @param handover Die Methode nimmt eine Zahl als Eingabe.
+     * @return Die Methode gibt für die Ausnahme 0 die Fakultät 1 als String zurück und gibt die Fakultät der Zahl als String zurück.
+     * @throws IllegalArgumentException wenn die übergebene Zahl negativ ist.
      */
-    public int eingabe(){
-        Scanner scanner = new Scanner(System.in);
-        int s = filterInput(scanner.next());
-        return s;
-    }
-
-    /**
-     * @param eingabe Diese Methode nimmt eine Stringeingabe
-     * @return und gibt diese zurück, wenn keine fehlerhaften Eingaben sind.
-     * @throws IllegalArgumentException Dies Execption wird nur dann geworfen wenn fehlerhafte Eingaben sind.
-     */
-    public int filterInput(String eingabe)throws IllegalArgumentException{
-        if (eingabe.matches("^(?i:[.,]+)$")){
-
-            throw new IllegalArgumentException("Deine Eingabe ist keine ganze Zahl!");
-
-        }else if (Integer.parseInt(eingabe) < 0) {
-
-            throw new IllegalArgumentException("Deine Eingabe ist Negativ!");
-
-        }else if (Integer.parseInt(eingabe) >= 0){
-
-            return Integer.parseInt(eingabe);
-
-        }throw new IllegalArgumentException("Deine Eingabe ist keine Zahl!");
+    public String facultyCalc(long handover) throws IllegalArgumentException{
+        if (handover == 0){
+            return "1";
+        } else if (handover > 0) {
+            BigInteger calculationinteger = BigInteger.valueOf(1);
+            for (long i = 1; i <= handover; i++) {
+                calculationinteger = calculationinteger.multiply(BigInteger.valueOf(i));
+            }
+            return calculationinteger.toString();
+        }else {
+            throw new IllegalArgumentException("\033[30m\033[41mFehler:Invalide Eingabe!\033[0m");
+        }
     }
 }

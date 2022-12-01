@@ -6,58 +6,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class calcFacultyTest {
 
-    //todo einmal tests durchlaufen lassen wg bigint
+    //todo einmal tests durchlaufen lassen wg bigint! Done!
 
     /**
-     * filterInput soll nur ganzzahlige Eingaben im Positiven durchlassen.
-     * Hier wird geprüft, dass eine Kommazahl abgewiesen wird.
+     * Hier wird geprüft, dass die Methode für die Eingabe 0, als Fakultät eine 1 ausgibt.
      */
     @Test
-    void filterTest1() {
+    void facultyCalcTest1() {
         CalcFaculty calcFaculty = new CalcFaculty();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcFaculty.filterInput("1.6");
-                });
-    }
-
-    /**
-     * filterInput soll nur ganzzahlige Eingaben im Positiven durchlassen.
-     * Hier wird geprüft, dass eine negative Zahl abgewiesen wird.
-     */
-    @Test
-    void filterTest2() {
-        CalcFaculty calcFaculty = new CalcFaculty();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcFaculty.filterInput("-1");
-                });
-    }
-    /**
-     * filterInput soll nur ganzzahlige Eingaben im Positiven durchlassen.
-     * Hier wird geprüft, dass eine korrekte Eingabe durchgelassen wird.
-     */
-    @Test
-    void filterTest3() {
-        CalcFaculty calcFaculty = new CalcFaculty();
-        assertEquals(3, calcFaculty.filterInput("3"));
-    }
-    /**
-     * filterInput soll nur ganzzahlige Eingaben im Positiven durchlassen.
-     * Hier wird geprüft, dass Buchstaben abgewiesen werden.
-     */
-    @Test
-    void filterTest4() {
-        CalcFaculty calcFaculty = new CalcFaculty();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcFaculty.filterInput("ABC");
-                });
+        assertEquals("1", calcFaculty.facultyCalc(0));
     }
 
     /**
      * Hier wird geprüft, dass die Methode wirklich die richtige Fakultät berechnet.
      */
     @Test
-    void fakberechnentest1() {
+    void facultyCalcTest2() {
         CalcFaculty calcFaculty = new CalcFaculty();
-        assertEquals(6, calcFaculty.facultyCalc(3));
+        assertEquals("6", calcFaculty.facultyCalc(3));
+    }
+
+    /**
+     * Hier wird geprüft, dass die Methode für negative Werte, eine Exception wirft.
+     */
+    @Test
+    void facultyCalcTest3() {
+        CalcFaculty calcFaculty = new CalcFaculty();
+        assertThrows(IllegalArgumentException.class, () -> {
+            calcFaculty.facultyCalc(-1);
+        });
     }
 }
