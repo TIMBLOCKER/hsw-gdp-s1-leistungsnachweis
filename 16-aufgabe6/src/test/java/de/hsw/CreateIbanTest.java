@@ -11,68 +11,90 @@ class CreateIbanTest {
     //TODO unittests nachziehen
 
     @Test
-    void erstezifferueberpruefenTest1() {
-        createIban createIban = new createIban();
+    void checkFirstDigitTest1() {
+        CreateIban createIban = new CreateIban();
 
-        assertEquals("12345678", createIban.erstezifferueberpruefen("12345678"));
+        assertEquals(12345678, createIban.checkFirstDigit(12345678));
     }
 
     @Test
-    void erstezifferueberpruefenTest2() {
-        createIban createIban = new createIban();
+    void checkFirstDigitTest2() {
+        CreateIban createIban = new CreateIban();
 
         assertThrows(IllegalArgumentException.class,
                 () -> {
-                    createIban.erstezifferueberpruefen("1234567");
+                    createIban.checkFirstDigit(1234567);
                 });
     }
 
     @Test
-    void erstezifferueberpruefenTest3() {
-        createIban createIban = new createIban();
+    void checkFirstDigitTest3() {
+        CreateIban createIban = new CreateIban();
 
         assertThrows(IllegalArgumentException.class,
                 () -> {
-                    createIban.erstezifferueberpruefen("01234567");
+                    createIban.checkFirstDigit(01234567);
                 });
     }
 
     @Test
-    void bankleitzahlTest1() {
-        createIban createIban = new createIban();
+    void checkBankCodeTest1() {
+        CreateIban createIban = new CreateIban();
 
-        assertEquals("12345678", createIban.bankleitzahleingabe("12345678"));
+        assertEquals(12345678, createIban.checkBankCode(12345678));
     }
 
     @Test
-    void bankleitzahlTest2() {
-        createIban createIban = new createIban();
+    void checkBankCodeTest2() {
+        CreateIban createIban = new CreateIban();
 
         assertThrows(IllegalArgumentException.class,
                 () -> {
-                    createIban.bankleitzahleingabe("01234567");
+                    createIban.checkBankCode(1234567);
                 });
     }
     @Test
-    void kontonummerTest1() {
-        createIban createIban = new createIban();
+    void checkAccountNumberTest1() {
+        CreateIban createIban = new CreateIban();
 
-        assertEquals("1234567890", createIban.kontonummereingabe("1234567890"));
+        assertEquals(1234567890, createIban.checkAccountNumber(1234567890));
     }
     @Test
-    void kontonummerTest2() {
-        createIban createIban = new createIban();
+    void checkAccountNumberTest2() {
+        CreateIban createIban = new CreateIban();
 
         assertThrows(IllegalArgumentException.class,
                 () -> {
-                    createIban.kontonummereingabe("01234567");
+                    createIban.checkAccountNumber(01234567);
                 });
     }
     @Test
-    void ibanbauenTest1() {
-        createIban createIban = new createIban();
+    void buildIbanTest1() {
+        CreateIban createIban = new CreateIban();
 
-        assertEquals("1234567890", createIban.ibanbauen("56050180", "1200878591", "131400"));
+        assertEquals("DE30 5605 0180 1200 8785 91", createIban.buildIban(56050180, 1200878591));
     }
+
+    @Test
+    void buildIbanTest2() {
+        CreateIban createIban = new CreateIban();
+
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    createIban.buildIban(01234567, 1200878591);
+                });
+    }
+
+    @Test
+    void buildIbanTest3() {
+        CreateIban createIban = new CreateIban();
+
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    createIban.buildIban(56050180, 120087859);
+                });
+    }
+
+
 
 }

@@ -1,7 +1,5 @@
 package eigentliche_Aufgabe;
 
-import de.hsw.ChangeFormat;
-
 public class Starter {
 
     public static void main(String[] args) {
