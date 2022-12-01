@@ -48,7 +48,7 @@ public class Lottozahlen {
                 zusatzZahl = rand.nextInt(1, 49);
             }
             lottozahlenArray.add(zusatzZahl);
-            //Es wird eine Zusatzzahl generiert und überprüft ob sie schon vorhanden ist
+            //Es wird eine Zusatzzahl generiert und überprüft, ob sie schon vorhanden ist
             //Dies wird solange ausgeführt bis eine Zahl gefunden wird die nicht schon vorhanden ist
             System.out.println("Ihre Zusatzzahl: [" + zusatzZahl + "]\n");
             //Ausgabe der Zusatzzahl
