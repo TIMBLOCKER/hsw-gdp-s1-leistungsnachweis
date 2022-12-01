@@ -7,48 +7,48 @@ import static org.junit.jupiter.api.Assertions.*;
 class PalindromerkennenTest {
 
     /**
-     * Test zur Bereinigung eines Strings
+     * Test zur Bereinigung eines Strings.
      */
     @Test
-    void nurelaubtezeichenersetzentest1() {
+    void replacePunctuationtest1() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
-        assertEquals("ab", palindromerkennen.replaceZeichen(" A: b"));
+        assertEquals("ab", palindromerkennen.replacePunctuation(" A: b"));
     }
 
     /**
-     * Gegentest zur Bereinigung eines Strings
+     * Test zur Funktionalität des Filters.
      */
     @Test
-    void nurelaubtezeichenersetzentest2() {
+    void replacePunctuationtest2() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
         assertThrows(IllegalArgumentException.class, () -> {
-                    palindromerkennen.replaceZeichen(" A_ B");
+                    palindromerkennen.replacePunctuation(" A_ B");
                 });
     }
 
     /**
-     * Test zum Umdrehen eines Strings
+     * Test zum Umdrehen eines Strings.
      */
     @Test
-    void strumdrehenTest1() {
+    void flipStringTest1() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
         assertEquals("ba", palindromerkennen.flipString("ab"));
     }
 
     /**
-     * Gegentest zum Umdrehen eines Strings
+     * Gegentest zum Umdrehen eines Strings.
      */
     @Test
-    void strumdrehenTest2() {
+    void flipStringTest2() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
         assertNotEquals("ab", palindromerkennen.flipString("ab"));
     }
 
     /**
-     * Test zum Umdrehen eines Strings (Exception)
+     * Test zum Umdrehen eines Strings. (Exception)
      */
     @Test
-    void strumdrehenTest3() {
+    void flipStringTest3() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
         assertThrows(IllegalArgumentException.class, () -> {
                     palindromerkennen.flipString("lel _");
