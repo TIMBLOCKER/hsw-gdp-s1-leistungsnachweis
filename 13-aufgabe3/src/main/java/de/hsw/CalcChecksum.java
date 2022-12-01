@@ -40,6 +40,10 @@ public class CalcChecksum {
             return eingabe;
         }}
 
+    /**
+     * @param eingabe
+     * @return
+     */
     //Todo: rathg fragen was das macht
     public long onCalcChecksum(String eingabe){
         long checksumme = 0;
