@@ -11,7 +11,18 @@ import java.util.*;
 
  //In dieser Klasse Lottozahlen werden Lottozahlen, Zusatzzahl und Superzahl generiert und ausgegeben
 public class Lottozahlen {
-     public static Random rand = new Random();
+
+    Random rand;
+
+    public Lottozahlen(@Nullable Integer seed){
+        if (seed == null) {
+            rand = new Random();
+        }else{
+            rand = new Random(seed);
+        }
+
+    }
+
 
     /**
      * @param anzahl Gibt die Anzahl der Lottozahlen ein
@@ -57,18 +68,11 @@ public class Lottozahlen {
         }
 
 
-        public int superZahl(@Nullable Long seed){
+        public int superZahl(){
             System.out.println("--------------------SUPERZAHL--------------------");
             int superZahl = 0;
-            if (seed == null) {
-                superZahl = rand.nextInt(1, 9);
-                System.out.println("Ihre Superzahl: [" + superZahl + "]");
-                //generiert und gibt eine Superzahl aus, die zwischen 1 und 9 liegt
-            } else {
-                rand.setSeed(seed);
-                superZahl = rand.nextInt(1, 9);
-                System.out.println("Ihre Superzahl: [" + superZahl + "]");
-            }
+            superZahl = rand.nextInt(1, 9);
+            System.out.println("Ihre Superzahl: [" + superZahl + "]");
             return superZahl;
         }
 

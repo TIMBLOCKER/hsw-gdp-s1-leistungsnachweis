@@ -9,24 +9,21 @@ public class StarterTest {
 
     @Test
     void testSuperZahlMin() {
-       Lottozahlen lottozahlen = new Lottozahlen();
+       Lottozahlen lottozahlen = new Lottozahlen(null);
         Long seed = 1L;
-        assertEquals(4, lottozahlen.superZahl(seed));
+        assertEquals(4, lottozahlen.superZahl());
 
     }
     @Test
     void testSuperZahlMax() {
-        Lottozahlen lottozahlen = new Lottozahlen();
+        Lottozahlen lottozahlen = new Lottozahlen(null);
         Long seed = 1L;
-        assertEquals(4, lottozahlen.superZahl(seed));
+        assertEquals(4, lottozahlen.superZahl());
     }
 
     @Test
     void testZusatzZahl(){
-     assertTrue();
-
-
-
+     //  Lottozahlen zusatzZahl = new
     }
 
 

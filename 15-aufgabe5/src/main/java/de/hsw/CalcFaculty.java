@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class CalcFaculty {
 
+    /**
+     * Startermethode
+     */
     public void facultyStarter(){
         try {
             System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
@@ -16,6 +19,10 @@ public class CalcFaculty {
         }
     }
 
+    /**
+     * @param eingabe Die Methode nimmt eine Zahl als Eingabe
+     * @return und gibt die Fakultät der Zahl zurück
+     */
     public long facultyCalc(int eingabe){
         if (eingabe == 0){
             return 1;
@@ -28,12 +35,20 @@ public class CalcFaculty {
         }
     }
 
+    /**
+     * @return Methode für die Systemeingabe
+     */
     public int eingabe(){
         Scanner scanner = new Scanner(System.in);
         int s = filterInput(scanner.next());
         return s;
     }
 
+    /**
+     * @param eingabe Diese Methode nimmt eine Stringeingabe
+     * @return und gibt diese zurück, wenn keine fehlerhaften Eingaben sind.
+     * @throws IllegalArgumentException Dies Execption wird nur dann geworfen wenn fehlerhafte Eingaben sind.
+     */
     public int filterInput(String eingabe)throws IllegalArgumentException{
         if (eingabe.matches("^(?i:[.,]+)$")){
 
