@@ -27,7 +27,10 @@ public class CreateIban{
         }
     }
 
-    //Todo change to promise Methode -> Bank
+    /**
+     * Handling der Konsoleneingabe und Eingabefilter
+     * @return String der in der Konsole eingegeben wurde.
+     */
     public int input()throws InputMismatchException {
         Scanner mainScanner = new Scanner(System.in);
         while (true) {

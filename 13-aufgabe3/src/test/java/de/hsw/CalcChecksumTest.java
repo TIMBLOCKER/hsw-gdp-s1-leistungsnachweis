@@ -7,10 +7,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalcChecksumTest {
 
     /**
+     * Test zum Prüfen, ob die eingabe korrekte Zeichen enthält
+     */
+    @Test
+    void checkInputtest1() {
+        CalcChecksum calcChecksum = new CalcChecksum();
+        assertEquals("A2ddd", calcChecksum.checkInput("A2ddd"));
+    }
+
+    /**
+     * Gegentest zum Prüfen, ob die eingabe korrekte Zeichen enthält
+     */
+    @Test
+    void checkInputtest2() {
+        CalcChecksum calcChecksum = new CalcChecksum();
+        assertThrows(IllegalArgumentException.class, () -> {
+            calcChecksum.checkInput("M0 in-");
+        });
+    }
+
+    /**
      * Test zum Prüfen, ob das erste Zeichen der eingabe eine Zahl ist.
      */
     @Test
-    void ueberpruefeersteziffertest1(){
+    void checkFirstDigittest1(){
         CalcChecksum calcChecksum = new CalcChecksum();
         assertThrows(IllegalArgumentException.class, () -> {
                     calcChecksum.checkFirstDigit("0Moin");
@@ -21,62 +41,68 @@ class CalcChecksumTest {
      * Gegentest zum Prüfen, ob das erste Zeichen der eingabe eine Zahl ist.
      */
     @Test
-     void ueberpruefeersteziffertest2(){
+     void checkFirstDigittest2(){
         CalcChecksum calcChecksum = new CalcChecksum();
         assertEquals("A2ddd", calcChecksum.checkFirstDigit("A2ddd"));
     }
 
-    /**
-     * Test zum Prüfen, ob die eingabe korrekte Zeichen enthält
-     */
-    @Test
-    void ueberpruefenaufzeichentest1() {
-        CalcChecksum calcChecksum = new CalcChecksum();
-        assertEquals("A2ddd", calcChecksum.checkInput("A2ddd"));
-    }
+    //Todo: rathg fragen was das tut! Done!
 
     /**
-     * Gegentest zum Prüfen, ob die eingabe korrekte Zeichen enthält
+     * Test ob Rechnung von Konsonanten und Vokalen richtig funktioniert.
      */
     @Test
-    void ueberpruefenaufzeichentest2() {
+    void onCalcChecksumtest1() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcChecksum.checkInput("M0 in-");
-                });
+        assertEquals(2, calcChecksum.onCalcChecksum("addd"));
     }
 
     //Todo: rathg fragen was das tut
+
+    /**
+     * Test ob Rechnung von Konsonanten und Vokalen, ungeachtet der Groß-undKleinschreibung, richtig funktioniert.
+     */
     @Test
-    void stringhochzaehlentest1() {
+    void onCalcChecksumtest2() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertEquals(1, calcChecksum.onCalcChecksum("a2ddd"));
+        assertEquals(1, calcChecksum.onCalcChecksum("aAdDd"));
     }
 
-    //Todo: rathg fragen was das tut
+    /**
+     * Test ob Rechnung von Konsonanten und Vokalen, ungeachtet Leerzeichen und Satzzeichen, richtig funktioniert.
+     */
     @Test
-    void stringhochzaehlentest2() {
+    void onCalcChecksumtest3() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertEquals(4, calcChecksum.onCalcChecksum("Dd 2"));
+        assertEquals(1, calcChecksum.onCalcChecksum("aA,d Dd"));
+    }
+
+    /**
+     * Test ob Rechnung von Konsonanten und Vokalen, mit mal-2 Multiplikator, richtig funktioniert.
+     */
+    @Test
+    void onCalcChecksumtest4() {
+        CalcChecksum calcChecksum = new CalcChecksum();
+        assertEquals(4, calcChecksum.onCalcChecksum("aAd dDd2"));
     }
 
     /**
      * Test für das Umwandeln eines Longs in einen hexString
      */
     @Test
-    void deziinhexaTest1() {
+    void convertToHexTest1() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertEquals("1c", calcChecksum.longtohex(28));
+        assertEquals("1c", calcChecksum.convertToHex(28));
     }
 
     /**
      * Gegentest für das Umwandeln eines Longs in einen hexString
      */
     @Test
-    void deziinhexaTest2() {
+    void convertToHexTest2() {
         CalcChecksum calcChecksum = new CalcChecksum();
         assertThrows(IllegalArgumentException.class, () -> {
-                    calcChecksum.longtohex(-1);
+                    calcChecksum.convertToHex(-1);
                 });
     }
 }
