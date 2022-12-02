@@ -10,14 +10,14 @@ public class CalcChecksum {
      * Startermethode
      */
     public void checksumStarter(){
-        System.out.println("Bitte gib deinen String an: ");
+        System.out.println("Von welchem String möchtest du die Checksumme berechnen?");
         String input = promiseStringFromConsole();
         String checkedInput, checkedFirstDigit;
         try {
             checkedInput = checkInput(input);
             checkedFirstDigit = checkFirstDigit(checkedInput);
             long checkSum = onCalcChecksum(checkedFirstDigit);
-            String hexNumber = convertToHex(checkSum);
+            String hexNumber = convertToHex(checkSum).toUpperCase();
             System.out.println("\n\033[42m\033[30mDie Checksumme ist: " + hexNumber + "\033[0m");
 
         }catch (Exception e){

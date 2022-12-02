@@ -1,4 +1,4 @@
-package eigentliche_Aufgabe;
+package de.hsw.eigentliche_Aufgabe;
 
 import de.hsw.eigentliche_Aufgabe.RenameString;
 import org.junit.jupiter.api.Test;

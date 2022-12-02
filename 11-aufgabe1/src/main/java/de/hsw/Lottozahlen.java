@@ -17,6 +17,23 @@ public class Lottozahlen {
      }
 
      /**
+      * Handling der Konsoleneingabe und Eingabefilter
+      * @return String der in der Konsole eingegeben wurde.
+      */
+     public int eingabe()throws InputMismatchException {
+         Scanner mainScanner = new Scanner(System.in);
+         while (true) {
+             try {
+                 System.out.println("↓");
+                 return mainScanner.nextInt();
+             } catch (InputMismatchException e) {
+                 System.out.println("\n\033[41m\033[30mFehler: Bitte eine positive ganzzahlige Zahl eingeben!\033[0m");
+                 mainScanner.nextLine();
+             }
+         }
+     }
+
+     /**
       * Diese Methode generiert 6 zufalls generierte Zahlen (von 1 bis 49),
      * @param anzahl sind die Spielrunden/ Spielfelder ( 12< und 0>)
      */

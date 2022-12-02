@@ -21,9 +21,7 @@ class CalcChecksumTest {
     @Test
     void checkInputtest2() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertThrows(IllegalArgumentException.class, () -> {
-            calcChecksum.checkInput("M0 in-");
-        });
+        assertThrows(IllegalArgumentException.class, () -> calcChecksum.checkInput("M0 in-"));
     }
 
     /**
@@ -32,9 +30,7 @@ class CalcChecksumTest {
     @Test
     void checkFirstDigittest1(){
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcChecksum.checkFirstDigit("0Moin");
-                });
+        assertThrows(IllegalArgumentException.class, () -> calcChecksum.checkFirstDigit("0Moin"));
     }
 
     /**
@@ -101,8 +97,6 @@ class CalcChecksumTest {
     @Test
     void convertToHexTest2() {
         CalcChecksum calcChecksum = new CalcChecksum();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    calcChecksum.convertToHex(-1);
-                });
+        assertThrows(IllegalArgumentException.class, () -> calcChecksum.convertToHex(-1));
     }
 }

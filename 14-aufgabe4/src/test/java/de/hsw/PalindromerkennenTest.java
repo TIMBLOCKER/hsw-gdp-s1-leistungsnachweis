@@ -21,9 +21,7 @@ class PalindromerkennenTest {
     @Test
     void replacePunctuationtest2() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    palindromerkennen.replacePunctuation(" A_ B");
-                });
+        assertThrows(IllegalArgumentException.class, () -> palindromerkennen.replacePunctuation(" A_ B"));
     }
 
     /**
@@ -50,8 +48,6 @@ class PalindromerkennenTest {
     @Test
     void flipStringTest3() {
         Palindromerkennen palindromerkennen = new Palindromerkennen();
-        assertThrows(IllegalArgumentException.class, () -> {
-                    palindromerkennen.flipString("lel _");
-                });
+        assertThrows(IllegalArgumentException.class, () -> palindromerkennen.flipString("lel _"));
     }
 }

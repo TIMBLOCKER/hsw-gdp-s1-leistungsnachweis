@@ -32,8 +32,6 @@ class CalcFacultyTest {
     @Test
     void facultyCalcTest3() {
         CalcFaculty calcFaculty = new CalcFaculty();
-        assertThrows(IllegalArgumentException.class, () -> {
-            calcFaculty.facultyCalc(-1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> calcFaculty.facultyCalc(-1));
     }
 }

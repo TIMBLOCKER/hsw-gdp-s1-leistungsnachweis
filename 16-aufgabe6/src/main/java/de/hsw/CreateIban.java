@@ -10,8 +10,7 @@ public class CreateIban{
         try {
             System.out.println("Bitte geben Sie ihre Bankleitzahl ein.");
             int input = input();
-            int checkedFirstDigit = checkFirstDigit(input);
-            long bankcode = checkBankCode(checkedFirstDigit);
+            long bankcode = checkBankCode(input);
             System.out.println("\nBitte geben Sie Ihre Kontonummer ein.");
             String countryCheckDigit = "131400";
             String tenDigtits = String.format("%1$010d", input());
@@ -34,29 +33,23 @@ public class CreateIban{
                 System.out.println("↓");
                 return mainScanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("\n\033[41m\033[30mFehler: Bitte eine Zahl eingeben!\033[0m");
+                System.out.println("\n\033[41m\033[30mFehler: Bitte eine positive ganzzahlige Zahl eingeben!\033[0m");
                 mainScanner.nextLine();
             }
         }
     }
 
-    public int checkFirstDigit(int uebergabe)throws IllegalArgumentException{
-
-        String eingabe = String.valueOf(uebergabe);
-        if (eingabe.length() != 8){
-            throw new IllegalArgumentException("\n\033[41m\033[30mIhre Eingabe ist nicht genau 8 Stellen lang!\033[0m");
-        }else if (eingabe.matches("[1-8][0-9]{7}")){
-            return uebergabe;
-        }else{
-            throw new IllegalArgumentException("\n\033[41m\033[30mDie erste Zahl darf keine 0 oder 9 sein!\033[0m");
-        }
-    }
 
     public long checkBankCode(long handover)throws IllegalArgumentException{
         if (handover>=0){
             String bankcode = String.valueOf(handover);
             if (bankcode.length() == 8){
-                return handover;
+                if (bankcode.matches("[1-8][0-9]{7}")){
+                  return handover;
+                }
+                else {
+                    throw new IllegalArgumentException("\n\033[41m\033[30mDie erste Zahl darf keine 0 oder 9 sein!\033[0m");
+                }
             }else{
                 throw new IllegalArgumentException("\n\033[41m\033[30mDie Bankleitzahl muss 8 Stellen haben!\033[0m");
             }
@@ -80,7 +73,7 @@ public class CreateIban{
 
 
     public String buildIban(long bankcodeHandover, String accountNumberHandover, String countryCheckDigit)  {
-        String countryCode = "";
+        String countryCode;
         String bankcode = String.valueOf(checkBankCode(bankcodeHandover));
         String accountNumber = String.valueOf(checkAccountNumber(accountNumberHandover));
 

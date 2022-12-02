@@ -1,7 +1,6 @@
 package de.hsw;
 
 import java.util.Scanner;
-import java.util.Set;
 
 //In dieser Klasse wird die Main Methode gestartet
 public class Starter {
@@ -23,8 +22,8 @@ public class Starter {
         System.out.println("Wie viele Spielfelder möchten Sie ausgefüllt haben?: ");
         Scanner scanner = new Scanner(System.in);
         Lottozahlen lottozahlen = new Lottozahlen();
-        int anzahl = scanner.nextInt(); //Prüft, ob die eingegebene Zahl kleiner als 13 und größer als 0 ist
-        if (anzahl < 13 && anzahl > 0) {
+        int anzahl = lottozahlen.eingabe();
+        if (anzahl < 13 && anzahl > 0) { //Prüft, ob die eingegebene Zahl kleiner als 13 und größer als 0 ist
             lottozahlen.lottoscheinZahlen(anzahl);
             System.out.println("");
             lottozahlen.superZahl();
