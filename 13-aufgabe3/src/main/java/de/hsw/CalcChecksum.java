@@ -29,7 +29,7 @@ public class CalcChecksum {
      * Handling der Konsoleneingabe und Eingabefilter
      * @return String der in der Konsole eingegeben wurde.
      */
-    public static String promiseStringFromConsole() {
+    public String promiseStringFromConsole() {
         Scanner mainScanner = new Scanner(System.in);
         while (true) {
             try {

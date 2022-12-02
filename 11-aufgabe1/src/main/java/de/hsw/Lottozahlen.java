@@ -24,8 +24,12 @@ public class Lottozahlen {
          Scanner mainScanner = new Scanner(System.in);
          while (true) {
              try {
-                 System.out.println("↓");
-                 return mainScanner.nextInt();
+                 int eingabe = mainScanner.nextInt();
+                 if (eingabe < 13 && eingabe > 0){
+                     System.out.println("↓");
+                     return eingabe;
+                 }
+                 System.out.println("\n\033[41m\033[30mFehler: Bitte eine positive ganzzahlige Zahl eingeben die zwischen 1 und 12 liegt!\033[0m");
              } catch (InputMismatchException e) {
                  System.out.println("\n\033[41m\033[30mFehler: Bitte eine positive ganzzahlige Zahl eingeben!\033[0m");
                  mainScanner.nextLine();
@@ -55,7 +59,7 @@ public class Lottozahlen {
                 //generiert 6 zufällige Lottozahlen zwischen 1 bis 49
 
             }
-            System.out.println(lottozahlenArray.toString());
+            System.out.println(lottozahlenArray);
             //gibt die Lottozahlen aus
             zusatzZahlMethode(lottozahlenArray);
         }
@@ -66,9 +70,8 @@ public class Lottozahlen {
      /**
       * Diese Methode generiert die Zusatzzahl, also die 7. Zahl
       * @param lottozahlenArray 6 zufalls generierte Zahlen in einem Array
-      * @return gibt die Zusatzzahl nach der Ausführung zurück
       */
-        public int zusatzZahlMethode(Set<Integer> lottozahlenArray ){
+        public void zusatzZahlMethode(Set<Integer> lottozahlenArray ){
             int zusatzZahl = rand.nextInt(1, 49);
             while (lottozahlenArray.contains(zusatzZahl)) {
                 zusatzZahl = rand.nextInt(1, 49);
@@ -78,8 +81,6 @@ public class Lottozahlen {
             //es wird so lange ausgeführt, bis eine Zahl gefunden wird die nicht schon vorhanden ist
             System.out.println("Ihre Zusatzzahl: [" + zusatzZahl + "]\n");
             //Ausgabe der Zusatzzahl
-
-            return zusatzZahl;
         }
 
 
@@ -88,8 +89,8 @@ public class Lottozahlen {
       *  @return gibt die Superzahl nach der Ausführung zurück
       */
         public int superZahl(){
-            System.out.println("--------------------SUPERZAHL--------------------");
-            int superZahl = 0;
+            System.out.println("\n--------------------SUPERZAHL--------------------");
+            int superZahl;
                 superZahl = rand.nextInt(1, 9);
                 System.out.println("Ihre Superzahl: [" + superZahl + "]");
                 //generiert und gibt eine Superzahl aus, die zwischen 1 und 9 liegt
