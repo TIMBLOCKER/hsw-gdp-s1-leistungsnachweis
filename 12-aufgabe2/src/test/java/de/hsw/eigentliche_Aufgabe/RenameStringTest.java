@@ -1,6 +1,4 @@
 package de.hsw.eigentliche_Aufgabe;
-
-import de.hsw.eigentliche_Aufgabe.RenameString;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,9 +24,7 @@ class RenameStringTest {
     void changeStringEndingTest2() {
         RenameString renameString = new RenameString();
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloW!rld.txt", "html");
-        });
+        assertThrows(IllegalArgumentException.class, () -> renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloW!rld.txt", "html"));
     }
 
     /**
@@ -38,8 +34,6 @@ class RenameStringTest {
     void changeStringEndingTest3() {
         RenameString renameString = new RenameString();
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloWorld.txt", ".html");
-        });
+        assertThrows(IllegalArgumentException.class, () -> renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloWorld.txt", ".html"));
     }
 }
