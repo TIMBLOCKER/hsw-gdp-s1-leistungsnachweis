@@ -46,7 +46,7 @@ class CalcChecksumTest {
         assertEquals("A2ddd", calcChecksum.checkFirstDigit("A2ddd"));
     }
 
-    //Todo: rathg fragen was das tut! Done!
+
 
     /**
      * Test ob Rechnung von Konsonanten und Vokalen richtig funktioniert.
@@ -57,7 +57,7 @@ class CalcChecksumTest {
         assertEquals(2, calcChecksum.onCalcChecksum("addd"));
     }
 
-    //Todo: rathg fragen was das tut! Done!
+
 
     /**
      * Test ob Rechnung von Konsonanten und Vokalen, ungeachtet der Groß-undKleinschreibung, richtig funktioniert.

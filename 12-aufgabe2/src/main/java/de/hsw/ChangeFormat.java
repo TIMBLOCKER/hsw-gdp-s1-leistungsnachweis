@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class ChangeFormat {
 
-    //TODO: Wenn nötig Unitest! Kein Plan wie!
 
     /**
      * Startermethode
@@ -24,22 +23,6 @@ public class ChangeFormat {
     }
 
     /**
-     * Diese Methode benennt eine Datei in dem Projektordner um
-     * @param changeFrom String eingabe zum Ändern des Namens
-     * @param changeTo Namen in den das File geändert werden soll
-     */
-    public void changeName(String changeFrom, String changeTo){
-        File oldFile = new File(changeFrom);
-        if (oldFile.exists()){
-            File newFile = new File(changeTo);
-            System.out.println(oldFile.renameTo(newFile));
-        }else {
-            throw new IllegalArgumentException("Diese Datei existiert nicht!");
-        }
-
-    }
-
-    /**
      * Handling der Konsoleneingabe
      * @return String der in der Konsole eingegeben wurde.
      */
@@ -48,11 +31,50 @@ public class ChangeFormat {
         while (true) {
             try {
                 System.out.println("↓");
-                return mainScanner.nextLine();
+                String input = mainScanner.nextLine();
+                if (input.matches("[a-zA-Z_\\\\.\\-: 0-9AÖÜüöa]+")){
+                    return input;
+                }else {
+                    System.out.println("\n\033[41m\033[30mFehler: Bitte einen String eingeben!\033[0m");
+                }
             } catch (InputMismatchException e) {
-                System.out.println("\033[3mFehler: Bitte einen String eingeben!\033[0m");
+                System.out.println("\n\033[41m\033[30mFehler: Bitte einen String eingeben!\033[0m");
                 mainScanner.nextLine();
             }
         }
+    }
+
+    /**
+     * Diese Methode benennt eine Datei in dem Projektordner um.
+     * @param handoverChangeForm String eingabe zum Ändern des Namens.
+     * @param handoverchangeTo Namen in den das File geändert werden soll.
+     * @throws IllegalArgumentException wenn die zu verändernde File nicht existiert.
+     */
+    public void changeName(String handoverChangeForm, String handoverchangeTo){
+        String changeFrom = filter(handoverChangeForm);
+        String changeTo = filter(handoverchangeTo);
+        File oldFile = new File(changeFrom);
+        if (oldFile.exists()){
+            File newFile = new File(changeTo);
+            System.out.println(oldFile.renameTo(newFile));
+        }else {
+            throw new IllegalArgumentException("\n\033[41m\033[30mDiese Datei existiert nicht!\033[0m");
+        }
+
+    }
+
+    /**
+     * Diese Methode überprüft einen String auf illegale Zeichen.
+     * @param handover String eingabe zum Überprüfen des Strings.
+     * @return Den eingegebenen String, wenn er den vorgegebenen zeichen entspricht.
+     * @throws IllegalArgumentException wenn der String nicht den erlaubten Zeichen entspricht.
+     */
+    public String filter(String handover){
+        if (handover.matches("[a-zA-Z_\\\\.\\-: 0-9AÖÜüöa]+")){
+            return handover;
+        }else {
+            throw new IllegalArgumentException("Die Eingabe besteht nicht aus erlaubten Zeichen!");
+        }
+
     }
 }

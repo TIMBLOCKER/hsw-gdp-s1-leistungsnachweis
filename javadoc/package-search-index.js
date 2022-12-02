@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"de.hsw"},{"l":"de.hsw.eigentliche_Aufgabe"}];updateSearchResults();

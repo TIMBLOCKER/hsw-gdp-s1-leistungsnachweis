@@ -35,14 +35,13 @@ public class Palindromerkennen {
                 System.out.println("↓");
                 return mainScanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("\033[3mFehler: Bitte einen korrekten String eingeben!\033[0m");
+                System.out.println("\n\033[41m\033[30mFehler: Bitte einen korrekten String eingeben!\033[0m");
                 mainScanner.nextLine();
             }
         }
     }
 
-    //Todo: Variablennamen sprechend! Done!
-    //Todo: rathg fragen, was das tut! Done!
+
 
     /**
      * @param handover Diese Methode nimmt einen Eingabestring, entfernt alle Satz- und Leerzeichen und ersetzt alle Großbuchstaben mit den jeweiligen kleinen.
@@ -77,12 +76,12 @@ public class Palindromerkennen {
         }
     }
 
-    //Todo: Return type einbinden!Done!
+
 
     /**
      * @param baseString Diese Methode nimmt zwei Strings und vergleicht diese.
      * @param invertedString Die Strings sind die Originaleingabe und der umgedrehte String.
-     *           Wenn beide gleich sind, handelt es sich um ein Palindrom.
+     * Wenn beide gleich sind, handelt es sich um ein Palindrom.
      * @return Dies wird zurückgegeben und dem Nutzer in die Konsole gedruckt.
      */
     private boolean isPalindrom(String baseString, String invertedString){
