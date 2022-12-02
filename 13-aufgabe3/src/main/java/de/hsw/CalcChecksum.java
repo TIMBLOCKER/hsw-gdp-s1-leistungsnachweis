@@ -43,6 +43,7 @@ public class CalcChecksum {
     }
 
     /**
+     * Diese Methode überprüft den String auf illegale Zeichen.
      * @param eingabe Man gibt der Methode einen String mit.
      * @return Man erhält die eingabe nur dann zurück, wenn keine unerwarteten Zeichen im String sind.
      * @throws IllegalArgumentException Falls das doch der Fall ist, wird diese geworfen.
@@ -55,6 +56,7 @@ public class CalcChecksum {
     }
 
     /**
+     * Diese Methode überprüft, ob das erste Zeichen eines String eine Ziffer ist.
      * @param eingabe Man gibt der Methode einen String mit.
      * @return Man erhält die eingabe nur dann zurück, wenn am Beginn des Strings keine Ziffer steht.
      * @throws IllegalArgumentException Falls das doch der Fall ist, wird diese geworfen.
@@ -97,6 +99,7 @@ public class CalcChecksum {
     }
 
     /**
+     * Diese Methode wandelt die eingegebene Zahl in das hexadezimal-System um
      * @param input Zahl die in Hex String konvertiert werden soll
      * @return Gibt eine Zahl zurück, die in das Hexadezimal-System konvertiert wurde.
      * @throws IllegalArgumentException Wenn die Checksumme negativ ist, wird der Fehler geworfen

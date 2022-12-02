@@ -36,7 +36,6 @@ public class CalcFaculty {
                 if (input>=0){
                     return input;
                 }
-                System.out.println("\033[30m\033[41mFehler: Bitte nur positive Zahlen eingeben!\033[0m");
             } catch (InputMismatchException e) {
                 System.out.println("\033[30m\033[41mFehler: Bitte eine korrekte Zahl eingeben!\033[0m");
                 mainScanner.nextLine();

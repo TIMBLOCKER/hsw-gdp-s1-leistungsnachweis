@@ -82,7 +82,7 @@ public class Palindromerkennen {
     /**
      * @param baseString Diese Methode nimmt zwei Strings und vergleicht diese.
      * @param invertedString Die Strings sind die Originaleingabe und der umgedrehte String.
-     *           Wenn beide gleich sind, handelt es sich um ein Palindrom.
+     * Wenn beide gleich sind, handelt es sich um ein Palindrom.
      * @return Dies wird zurückgegeben und dem Nutzer in die Konsole gedruckt.
      */
     private boolean isPalindrom(String baseString, String invertedString){
