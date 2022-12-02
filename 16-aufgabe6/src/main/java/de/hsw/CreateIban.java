@@ -4,8 +4,7 @@ import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//Todo Klassen werden immer groß geschrieben! Done!
-//todo camelCase! Done!
+
 public class CreateIban{
     public void startIban(){
         try {
@@ -40,9 +39,9 @@ public class CreateIban{
             }
         }
     }
-//ToDO: Tim fragen ob ich zusammen mergen soll.
+
     public int checkFirstDigit(int uebergabe)throws IllegalArgumentException{
-        //TODO: erst hier in String umwandeln! Done!
+
         String eingabe = String.valueOf(uebergabe);
         if (eingabe.length() != 8){
             throw new IllegalArgumentException("\n\033[41m\033[30mIhre Eingabe ist nicht genau 8 Stellen lang!\033[0m");
@@ -79,7 +78,7 @@ public class CreateIban{
         }
     }
 
-//todo camelCase!Done!
+
     public String buildIban(long bankcodeHandover, String accountNumberHandover, String countryCheckDigit)  {
         String countryCode = "";
         String bankcode = String.valueOf(checkBankCode(bankcodeHandover));
@@ -90,7 +89,7 @@ public class CreateIban{
         BigInteger factor = new BigInteger("97");
         long div = beforeModulo.remainder(factor).longValue();
         String checkDigit = String.valueOf(98 - div);
-        switch (countryCheckDigit){
+        switch (countryCheckDigit){//Hier switch für die einfache Erweiterbarkeit in der Zukunft
             case "131400":
                 countryCode = "DE";
                 break;
@@ -103,7 +102,7 @@ public class CreateIban{
     }
 
 
-    //todo ausgabe formatieren! Done!
+
     private void output(long bankleitzahl, String kontonummer, String iban){
         System.out.println("\n\033[42m\033[30mDie eingegebene BLZ lautet: " + bankleitzahl + "\033[0m");
         System.out.println("\n\033[42m\033[30mDie eingegebene Kontonummer lautet: " + kontonummer + "\033[0m");

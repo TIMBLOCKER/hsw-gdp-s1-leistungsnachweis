@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalcFacultyTest {
 
-    //todo einmal tests durchlaufen lassen wg bigint! Done!
+
 
     /**
      * Hier wird geprüft, dass die Methode für die Eingabe 0, als Fakultät eine 1 ausgibt.

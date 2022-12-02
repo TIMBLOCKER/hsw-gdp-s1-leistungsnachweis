@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class CalcFaculty {
 
-    //todo Sprechende Variablennamen! Done!
-
     /**
      * Startermethode
      */
@@ -15,7 +13,6 @@ public class CalcFaculty {
         try {
             System.out.println("Von welcher Zahl möchtest du die Fakultät rechnen?");
             long input = promiseStringFromConsole();
-            System.out.println();
             String faculty = facultyCalc(input);
             System.out.println("\n\033[42m\033[30mDie Fakultät deiner Zahl ist: " + faculty + "\033[0m");
         }catch (Exception e){
@@ -35,6 +32,9 @@ public class CalcFaculty {
                 long input = mainScanner.nextLong();
                 if (input>=0){
                     return input;
+                }else{
+                    System.out.println("\033[30m\033[41mFehler: Die eingegebene Zahl muss positiv sein!\033[0m");
+                    mainScanner.nextLine();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\033[30m\033[41mFehler: Bitte eine korrekte Zahl eingeben!\033[0m");
@@ -58,7 +58,9 @@ public class CalcFaculty {
             }
             return calculationInteger.toString();
         }else {
-            throw new IllegalArgumentException("\033[30m\033[41mFehler:Invalide Eingabe!\033[0m");
+            throw new IllegalArgumentException("\033[30m\033[41mFehler: Bitte eine korrekte Zahl eingeben!\033[0m");
         }
     }
+
+
 }

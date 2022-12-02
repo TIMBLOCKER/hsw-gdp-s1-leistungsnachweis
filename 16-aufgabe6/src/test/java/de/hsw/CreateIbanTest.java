@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CreateIbanTest {
 
 
-    //TODO: Javadoc nachziehen! Done!
-    //TODO unittests nachziehen! Done!
+
 
     /**
      * Test prüft, ob Ziffern von 1-9, die an erster Stelle stehen, durchgelassen werden.
@@ -166,7 +165,6 @@ class CreateIbanTest {
                     createIban.buildIban(01234567, "1200878591", "131400");
                 });
     }
-    //ToDo: Tim fragen ob man das lassen kann weil die methoden checkBankcode und checkAccountNumber schon getestet werden.
 
     /**
      * Test überprüft, ob eine Exception geworfen wird, wenn die bankcode variable negativ ist.

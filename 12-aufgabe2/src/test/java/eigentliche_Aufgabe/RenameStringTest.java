@@ -1,12 +1,13 @@
 package eigentliche_Aufgabe;
 
+import de.hsw.eigentliche_Aufgabe.RenameString;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RenameStringTest {
 
-    //TODO: Unitest schreiben! Done!
+
 
     /**
      * Test zum Überprüfen ob der Filename richtig zusammengesetzt wurde
