@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CalcChecksum {
-    //TODO: Variablennamen sprechend machen! Done!
+
 
     /**
      * Startermethode
@@ -69,7 +69,7 @@ public class CalcChecksum {
             return eingabe;
         }}
 
-    //Todo: rathg fragen was das macht! Done!
+
 
     /**
      * @param handover
@@ -105,7 +105,6 @@ public class CalcChecksum {
      * @throws IllegalArgumentException Wenn die Checksumme negativ ist, wird der Fehler geworfen
      */
     public String convertToHex(long input)throws IllegalArgumentException{
-        input = -1;
         if (input < 0){
             throw new IllegalArgumentException("\n\033[41m\033[30mDie Checksumme wäre Negativ! Deine negative Checksumme lautet: " + input + "\033[0m");
         }else {

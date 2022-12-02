@@ -41,8 +41,7 @@ public class Palindromerkennen {
         }
     }
 
-    //Todo: Variablennamen sprechend! Done!
-    //Todo: rathg fragen, was das tut! Done!
+
 
     /**
      * @param handover Diese Methode nimmt einen Eingabestring, entfernt alle Satz- und Leerzeichen und ersetzt alle Großbuchstaben mit den jeweiligen kleinen.
@@ -77,7 +76,7 @@ public class Palindromerkennen {
         }
     }
 
-    //Todo: Return type einbinden!Done!
+
 
     /**
      * @param baseString Diese Methode nimmt zwei Strings und vergleicht diese.
