@@ -22,8 +22,8 @@ public class Lottozahlen {
      */
     public Set<Integer> lottoscheinZahlen(int anzahl) {
 
-        int[] spielRundenArray = new int[anzahl];
-        Set<Integer> lottozahlenArray = null;
+        int[] spielRundenArray = new int[anzahl]; //Spielfeld Anzahl als Array abgespeichert
+        Set<Integer> lottozahlenArray = null; // Set Integers = Sets, die nur Integers beinhalten können --> null
 
         for (int i = 0; i < spielRundenArray.length; i++) {
 
@@ -43,11 +43,11 @@ public class Lottozahlen {
             zusatzZahlMethode(lottozahlenArray);
         }
 
-        return lottozahlenArray;
+        return lottozahlenArray; //gibt das LottozahlenArray zurück
     }
 
      /**
-      * Diese Methode generiert die Zusatzahl, also die 7. Zahl
+      * Diese Methode generiert die Zusatzzahl, also die 7. Zahl
       * @param lottozahlenArray 6 zufalls generierte Zahlen in einem Array
       * @return gibt die Zusatzzahl nach der Ausführung zurück
       */

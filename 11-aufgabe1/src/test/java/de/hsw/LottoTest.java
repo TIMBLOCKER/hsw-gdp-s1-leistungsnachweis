@@ -30,7 +30,6 @@ public class LottoTest {
     void testLottoZahlenUndZusatzZahl() {
         Integer[] testList = new Integer[] {3, 8, 10, 15, 29, 41, 47}; //expected Output in einer Collection gespeichert
         int seed = 1; //Verwendeter Seed -> 1
-        Set<Integer> set = new TreeSet<>();
         int anzahl = 1; //Testet nur für eine Spielrunde
         Lottozahlen lottoZahlen = new Lottozahlen(seed);
         Set<Integer> expected = new TreeSet<>();
