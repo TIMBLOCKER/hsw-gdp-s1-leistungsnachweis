@@ -18,7 +18,7 @@ public class CalcChecksum {
             checkedFirstDigit = checkFirstDigit(checkedInput);
             long checkSum = onCalcChecksum(checkedFirstDigit);
             String hexNumber = convertToHex(checkSum);
-            System.out.println("Die Checksumme ist: " + hexNumber);
+            System.out.println("\n\033[42m\033[30mDie Checksumme ist: " + hexNumber + "\033[0m");
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -36,7 +36,7 @@ public class CalcChecksum {
                 System.out.println("↓");
                 return mainScanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("\033[3mFehler: Bitte einen korrekten String eingeben!\033[0m");
+                System.out.println("\n\033[41m\033[30mFehler: Bitte einen korrekten String eingeben!\033[0m");
                 mainScanner.nextLine();
             }
         }
@@ -51,7 +51,7 @@ public class CalcChecksum {
         if (eingabe.matches("^(?i:[a-z 0-9,.!?:\";]+)$")){
             return eingabe;
         }
-        throw new IllegalArgumentException("Dein String enthält illegale Zeichen!");
+        throw new IllegalArgumentException("\n\033[41m\033[30mDein String enthält illegale Zeichen!\033[0m");
     }
 
     /**
@@ -62,7 +62,7 @@ public class CalcChecksum {
     public String checkFirstDigit(String eingabe) throws IllegalArgumentException{
         String firstChar = eingabe.charAt(0) + "";
         if (firstChar.matches("-?\\d+")){
-            throw new IllegalArgumentException("Eine Zahl steht an der Front");
+            throw new IllegalArgumentException("\n\033[41m\033[30mEine Zahl steht an der Front\033[0m");
         } else {
             return eingabe;
         }}
@@ -102,8 +102,9 @@ public class CalcChecksum {
      * @throws IllegalArgumentException Wenn die Checksumme negativ ist, wird der Fehler geworfen
      */
     public String convertToHex(long input)throws IllegalArgumentException{
+        input = -1;
         if (input < 0){
-            throw new IllegalArgumentException("Die Checksumme wäre Negativ! Deine negative Checksumme lautet: " + input);
+            throw new IllegalArgumentException("\n\033[41m\033[30mDie Checksumme wäre Negativ! Deine negative Checksumme lautet: " + input + "\033[0m");
         }else {
             return Integer.toHexString((int) input);
         }

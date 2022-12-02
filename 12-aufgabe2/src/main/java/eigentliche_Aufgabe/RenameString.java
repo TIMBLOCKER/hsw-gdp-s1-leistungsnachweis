@@ -19,7 +19,7 @@ public class RenameString {
         String newfile = promiseStringFromConsole();
         try {
             String output = changeStringEnding(oldfile, newfile);
-            System.out.println(output);
+            System.out.println("\n\033[42m\033[30m" + output + "\033[0m");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -38,7 +38,7 @@ public class RenameString {
             s += "." + newFileName;
             return s;
         }else {
-            throw new IllegalArgumentException("Der eingegebene Dateiname entspricht nicht den Anforderungen");
+            throw new IllegalArgumentException("\n\033[41m\033[30mDer eingegebene Dateiname entspricht nicht den Anforderungen\033[0m");
         }
     }
 
@@ -56,7 +56,7 @@ public class RenameString {
                     return eingabe;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("\033[3mFehler: Bitte einen korrekten String eingeben!\033[0m");
+                System.out.println("\n\033[41m\033[30mFehler: Bitte einen korrekten String eingeben!\033[0m");
                 mainScanner.nextLine();
             }
         }

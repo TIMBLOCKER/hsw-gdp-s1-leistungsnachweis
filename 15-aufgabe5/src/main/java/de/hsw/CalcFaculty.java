@@ -17,7 +17,7 @@ public class CalcFaculty {
             long input = promiseStringFromConsole();
             System.out.println();
             String faculty = facultyCalc(input);
-            System.out.println("Die Fakultät deiner Zahl ist: " + faculty);
+            System.out.println("\n\033[42m\033[30mDie Fakultät deiner Zahl ist: " + faculty + "\033[0m");
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -53,11 +53,11 @@ public class CalcFaculty {
         if (handover == 0){
             return "1";
         } else if (handover > 0) {
-            BigInteger calculationinteger = BigInteger.valueOf(1);
+            BigInteger calculationInteger = BigInteger.valueOf(1);
             for (long i = 1; i <= handover; i++) {
-                calculationinteger = calculationinteger.multiply(BigInteger.valueOf(i));
+                calculationInteger = calculationInteger.multiply(BigInteger.valueOf(i));
             }
-            return calculationinteger.toString();
+            return calculationInteger.toString();
         }else {
             throw new IllegalArgumentException("\033[30m\033[41mFehler:Invalide Eingabe!\033[0m");
         }
