@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //Todo Klassen werden immer groß geschrieben! Done!
-//todo camelCase
+//todo camelCase! Done!
 public class CreateIban{
     public void startIban(){
         try {
@@ -79,7 +79,7 @@ public class CreateIban{
         }
     }
 
-//todo camelCase
+//todo camelCase!Done!
     public String buildIban(long bankcodeHandover, String accountNumberHandover, String countryCheckDigit)  {
         String countryCode = "";
         String bankcode = String.valueOf(checkBankCode(bankcodeHandover));
@@ -103,7 +103,7 @@ public class CreateIban{
     }
 
 
-    //todo ausgabe formatieren
+    //todo ausgabe formatieren! Done!
     private void output(long bankleitzahl, String kontonummer, String iban){
         System.out.println("\n\033[42m\033[30mDie eingegebene BLZ lautet: " + bankleitzahl + "\033[0m");
         System.out.println("\n\033[42m\033[30mDie eingegebene Kontonummer lautet: " + kontonummer + "\033[0m");

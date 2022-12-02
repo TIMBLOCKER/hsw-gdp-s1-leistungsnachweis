@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class CreateIbanTest {
 
 
-    //TODO: Javadoc nachziehen
-    //TODO unittests nachziehen
+    //TODO: Javadoc nachziehen! Done!
+    //TODO unittests nachziehen! Done!
 
     /**
      * Test prüft, ob Ziffern von 1-9, die an erster Stelle stehen, durchgelassen werden.
