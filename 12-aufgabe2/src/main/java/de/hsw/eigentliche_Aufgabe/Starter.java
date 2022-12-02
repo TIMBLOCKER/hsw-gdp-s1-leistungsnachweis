@@ -1,4 +1,4 @@
-package eigentliche_Aufgabe;
+package de.hsw.eigentliche_Aufgabe;
 
 public class Starter {
 

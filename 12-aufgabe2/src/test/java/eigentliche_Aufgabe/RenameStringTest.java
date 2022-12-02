@@ -1,5 +1,6 @@
 package eigentliche_Aufgabe;
 
+import de.hsw.eigentliche_Aufgabe.RenameString;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

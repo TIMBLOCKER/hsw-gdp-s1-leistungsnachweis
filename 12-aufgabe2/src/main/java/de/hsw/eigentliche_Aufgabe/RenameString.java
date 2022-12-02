@@ -1,11 +1,11 @@
-package eigentliche_Aufgabe;
+package de.hsw.eigentliche_Aufgabe;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RenameString {
 
-    //TODO eingabe errorhandling Eingabe weg! Done!
+
 
 
     /**
@@ -34,9 +34,9 @@ public class RenameString {
      */
     public String changeStringEnding(String oldFileName, String newFileName){
         if (oldFileName.matches("[a-zA-Z_\\\\.\\-: 0-9AÖÜüöa]+") && newFileName.matches("[a-z]+")){
-            String s = oldFileName.substring(0, oldFileName.lastIndexOf('.'));
-            s += "." + newFileName;
-            return s;
+            String result = oldFileName.substring(0, oldFileName.lastIndexOf('.'));
+            result += "." + newFileName;
+            return result;
         }else {
             throw new IllegalArgumentException("\n\033[41m\033[30mDer eingegebene Dateiname entspricht nicht den Anforderungen\033[0m");
         }

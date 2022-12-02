@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class CalcFaculty {
 
-    //todo Sprechende Variablennamen! Done!
-
     /**
      * Startermethode
      */
@@ -61,4 +59,6 @@ public class CalcFaculty {
             throw new IllegalArgumentException("\033[30m\033[41mFehler:Invalide Eingabe!\033[0m");
         }
     }
+
+
 }
