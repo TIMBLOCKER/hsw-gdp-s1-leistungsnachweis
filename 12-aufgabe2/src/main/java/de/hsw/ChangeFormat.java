@@ -11,9 +11,9 @@ public class ChangeFormat {
      * Startermethode
      */
     public void dateiFormatStarter(){
-        System.out.println("Welche Datei soll umbenannt werden? Bsp (engel.html)");
+        System.out.println("Welche Datei soll umbenannt werden? Bsp.: engel.html");
         String oldName = promiseStringFromConsole();
-        System.out.println("In was / welches Format soll die Datei umbenannt/umgewandelt werden? Bsp. (engel.css)");
+        System.out.println("In welches Format soll die Datei umgewandelt werden? Bsp.: css");
         String newName = promiseStringFromConsole();
         try {
             changeName(oldName, newName);
@@ -51,12 +51,13 @@ public class ChangeFormat {
      * @throws IllegalArgumentException wenn die zu verändernde File nicht existiert.
      */
     public void changeName(String handoverChangeForm, String handoverchangeTo){
-        String changeFrom = filter(handoverChangeForm);
-        String changeTo = filter(handoverchangeTo);
+        String changeFrom = filterChangeFrom(handoverChangeForm);
+        String changeTo = filterChangeTo(handoverchangeTo);
+        String toLastDot = changeFrom.substring(0, changeFrom.lastIndexOf('.'));
         File oldFile = new File(changeFrom);
         if (oldFile.exists()){
-            File newFile = new File(changeTo);
-            System.out.println(oldFile.renameTo(newFile));
+            File newFile = new File(toLastDot + "." + changeTo);
+            System.out.println("\n\033[42m\033[30m" + oldFile.renameTo(newFile)+ "\033[0m");
         }else {
             throw new IllegalArgumentException("\n\033[41m\033[30mDiese Datei existiert nicht!\033[0m");
         }
@@ -69,12 +70,25 @@ public class ChangeFormat {
      * @return Den eingegebenen String, wenn er den vorgegebenen zeichen entspricht.
      * @throws IllegalArgumentException wenn der String nicht den erlaubten Zeichen entspricht.
      */
-    public String filter(String handover){
+    public String filterChangeFrom(String handover){
         if (handover.matches("[a-zA-Z_\\\\.\\-: 0-9AÖÜüöa]+")){
             return handover;
         }else {
-            throw new IllegalArgumentException("Die Eingabe besteht nicht aus erlaubten Zeichen!");
+            throw new IllegalArgumentException("\n\033[41m\033[30mDie Eingabe besteht nicht aus erlaubten Zeichen!\033[0m");
         }
+    }
 
+    /**
+     * Diese Methode überprüft einen String auf illegale Zeichen.
+     * @param handover String eingabe zum Überprüfen des Strings.
+     * @return Den eingegebenen String, wenn er den vorgegebenen zeichen entspricht.
+     * @throws IllegalArgumentException wenn der String nicht den erlaubten Zeichen entspricht.
+     */
+    public String filterChangeTo(String handover){
+        if (handover.matches("[a-z]+")){
+            return handover;
+        }else {
+            throw new IllegalArgumentException("\n\033[41m\033[30mDie Eingabe darf nur aus kleinen Buchstaben bestehen!\033[0m");
+        }
     }
 }

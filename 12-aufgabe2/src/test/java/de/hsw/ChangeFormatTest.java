@@ -12,9 +12,7 @@ class ChangeFormatTest {
     @Test
     void changeNameTest1() {
         ChangeFormat changeFormat = new ChangeFormat();
-        assertThrows(IllegalArgumentException.class, () -> {
-            changeFormat.changeName("moin!", "moin");
-        });
+        assertThrows(IllegalArgumentException.class, () -> changeFormat.changeName("moin!", "moin"));
     }
 
     /**
@@ -23,28 +21,42 @@ class ChangeFormatTest {
     @Test
     void changeNameTest2() {
         ChangeFormat changeFormat = new ChangeFormat();
-        assertThrows(IllegalArgumentException.class, () -> {
-            changeFormat.changeName("moin", "moin!");
-        });
+        assertThrows(IllegalArgumentException.class, () -> changeFormat.changeName("moin", "moin!"));
     }
 
     /**
      * Überprüft, ob die Methode bei zulässigem String den eingegebenen String zurückgibt.
      */
     @Test
-    void filterTest1() {
+    void filterChangeFromTest1() {
         ChangeFormat changeFormat = new ChangeFormat();
-        assertEquals("Ab_0", changeFormat.filter("Ab_0"));
+        assertEquals("Ab_0", changeFormat.filterChangeFrom("Ab_0"));
     }
 
     /**
      * Überprüft, ob ein Exception geworfen wird, wenn die handover variable illegale Zeichen enthält.
      */
     @Test
-    void filterTest2() {
+    void filterChangeFromTest2() {
         ChangeFormat changeFormat = new ChangeFormat();
-        assertThrows(IllegalArgumentException.class, () -> {
-            changeFormat.filter("moin!");
-        });
+        assertThrows(IllegalArgumentException.class, () -> changeFormat.filterChangeFrom("moin!"));
+    }
+
+    /**
+     * Überprüft, ob die Methode bei zulässigem String den eingegebenen String zurückgibt.
+     */
+    @Test
+    void filterChangeToTest1() {
+        ChangeFormat changeFormat = new ChangeFormat();
+        assertEquals("css", changeFormat.filterChangeTo("css"));
+    }
+
+    /**
+     * Überprüft, ob ein Exception geworfen wird, wenn die handover variable illegale Zeichen enthält.
+     */
+    @Test
+    void filterChangeToTest2() {
+        ChangeFormat changeFormat = new ChangeFormat();
+        assertThrows(IllegalArgumentException.class, () -> changeFormat.filterChangeTo("moin!"));
     }
 }

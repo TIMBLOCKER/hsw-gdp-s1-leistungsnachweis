@@ -6,6 +6,10 @@ import java.util.Scanner;
 
 
 public class CreateIban{
+
+    /**
+     * Startermethode
+     */
     public void startIban(){
         try {
             System.out.println("Bitte geben Sie ihre Bankleitzahl ein.");
@@ -39,7 +43,11 @@ public class CreateIban{
         }
     }
 
-
+    /**
+     * Überprüfen ob die übergebene Variable positiv, 8 Stellen lang und die erste ziffer keine 0 oder 9 ist.
+     * @return long der übergeben wurde.
+     * @throws IllegalArgumentException Wenn eine der oben genannten bedingungen nicht erfüllt ist.
+     */
     public long checkBankCode(long handover)throws IllegalArgumentException{
         if (handover>=0){
             String bankcode = String.valueOf(handover);
@@ -58,6 +66,11 @@ public class CreateIban{
         }
     }
 
+    /**
+     * Überprüfen ob der übergebene String eine Zahl, positiv und 10 Stellen lang ist.
+     * @return String der übergeben wurde.
+     * @throws IllegalArgumentException Wenn eine der oben genannten bedingungen nicht erfüllt ist.
+     */
     public String checkAccountNumber(String accountNumber)throws IllegalArgumentException {
         long accountNumberIntoLong = Long.parseLong(accountNumber);
         if (accountNumberIntoLong >= 0) {
@@ -71,7 +84,11 @@ public class CreateIban{
         }
     }
 
-
+    /**
+     * Berechnet die Prüfziffer, legt für die übergebene Länderkennziffer das länderkürzel fest und setzt die Iban aus Länderkürzel, Prüfziffer, bankleitzahl und kontonummer zusammen.
+     * @return String der die fertige Iban enthält.
+     * @throws IllegalArgumentException Wenn die übergebene Länderkennziffer keinen Case aufruft.
+     */
     public String buildIban(long bankcodeHandover, String accountNumberHandover, String countryCheckDigit)  {
         String countryCode;
         String bankcode = String.valueOf(checkBankCode(bankcodeHandover));
@@ -95,7 +112,9 @@ public class CreateIban{
     }
 
 
-
+    /**
+     * Ausgabe der Bankleitzahl, Kontonummer und der erstellten Iban
+     */
     private void output(long bankleitzahl, String kontonummer, String iban){
         System.out.println("\n\033[42m\033[30mDie eingegebene BLZ lautet: " + bankleitzahl + "\033[0m");
         System.out.println("\n\033[42m\033[30mDie eingegebene Kontonummer lautet: " + kontonummer + "\033[0m");
