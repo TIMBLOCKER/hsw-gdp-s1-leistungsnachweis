@@ -1,17 +1,11 @@
 package de.hsw;
 
-import com.sun.source.tree.Tree;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
 
 //In dieser Klasse wird die Main Methode gestartet
 public class Starter {
 
-    //TODO: huynh Exception handling
-    //Todo camelCase
 
     //In der Main Methode gibt der User die Spielrunden Anzahl ein
     public static void main(String[] args) throws Exception {
@@ -29,10 +23,9 @@ public class Starter {
         System.out.println("Wie viele Spielfelder möchten Sie ausgefüllt haben?: ");
         Scanner scanner = new Scanner(System.in);
         Lottozahlen lottozahlen = new Lottozahlen();
-        int anzahl = scanner.nextInt();
-        Set<Integer> set = new TreeSet<>();
+        int anzahl = scanner.nextInt(); //Prüft, ob die eingegebene Zahl kleiner als 13 und größer als 0 ist
         if (anzahl < 13 && anzahl > 0) {
-            lottozahlen.lottoscheinZahlen(set, anzahl);
+            lottozahlen.lottoscheinZahlen(anzahl);
             System.out.println("");
             lottozahlen.superZahl();
         } else {
@@ -40,6 +33,4 @@ public class Starter {
             // Überprüfung ob Spielrundenanzahl > 12 mittels if, da nicht mehr als 12 möglich ist
         }
     }
-
 }
-
