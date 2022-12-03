@@ -47,12 +47,12 @@ public class ChangeFormat {
     /**
      * Diese Methode benennt eine Datei in dem Projektordner um.
      * @param handoverChangeForm String eingabe zum Ändern des Namens.
-     * @param handoverchangeTo Namen in den das File geändert werden soll.
+     * @param handoverChangeTo Namen in den das File geändert werden soll.
      * @throws IllegalArgumentException wenn die zu verändernde File nicht existiert.
      */
-    public void changeName(String handoverChangeForm, String handoverchangeTo){
+    public void changeName(String handoverChangeForm, String handoverChangeTo){
         String changeFrom = filterChangeFrom(handoverChangeForm);
-        String changeTo = filterChangeTo(handoverchangeTo);
+        String changeTo = filterChangeTo(handoverChangeTo);
         String toLastDot = changeFrom.substring(0, changeFrom.lastIndexOf('.'));
         File oldFile = new File(changeFrom);
         if (oldFile.exists()){
