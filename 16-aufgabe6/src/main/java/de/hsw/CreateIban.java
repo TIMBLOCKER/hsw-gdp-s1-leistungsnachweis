@@ -20,7 +20,9 @@ public class CreateIban{
             String tenDigtits = String.format("%1$010d", input());
             String accountNumber = checkAccountNumber(tenDigtits);
             String iban = buildIban(bankcode, accountNumber, countryCheckDigit);
-            output(bankcode, accountNumber, iban);
+            System.out.println("\n\033[42m\033[30mDie eingegebene BLZ lautet: " + bankcode + "\033[0m");
+            System.out.println("\n\033[42m\033[30mDie eingegebene Kontonummer lautet: " + accountNumber + "\033[0m");
+            System.out.println("\n\033[42m\033[30mDie generierte IBAN lautet: " + iban + "\033[0m");
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -109,15 +111,5 @@ public class CreateIban{
 
         String iban = countryCode + checkDigit + bankcode + accountNumber;
         return iban.subSequence(0, 4) + " " + iban.subSequence(4, 8) + " " + iban.substring(8, 12) + " " + iban.substring(12, 16) + " " + iban.substring(16, 20) + " " + iban.substring(20, 22);
-    }
-
-
-    /**
-     * Ausgabe der Bankleitzahl, Kontonummer und der erstellten Iban
-     */
-    private void output(long bankleitzahl, String kontonummer, String iban){
-        System.out.println("\n\033[42m\033[30mDie eingegebene BLZ lautet: " + bankleitzahl + "\033[0m");
-        System.out.println("\n\033[42m\033[30mDie eingegebene Kontonummer lautet: " + kontonummer + "\033[0m");
-        System.out.println("\n\033[42m\033[30mDie generierte IBAN lautet: " + iban + "\033[0m");
     }
 }
