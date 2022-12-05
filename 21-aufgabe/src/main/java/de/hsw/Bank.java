@@ -1,21 +1,39 @@
 package de.hsw;
 
+
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@XmlRootElement(name = "bank")
-@XmlType(propOrder = {"name", "adresse", "blz", "kunden", "konten"})
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Bank {
 
+    private static final String NAME = "HSW Bank";
+    private static final String ADRESSE = "Am Stockhof 2";
+    public static final String BANKLEITZAHL = "10000000";
+
+    @XmlAttribute
     String name, adresse;
+    @XmlAttribute
     String blz;
+
     HashMap<String, Konto> konten = new HashMap<String, Konto>();
+
     ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 
+
+    public Bank(){
+        this.name = NAME;
+        this.adresse = ADRESSE;
+        this.blz = BANKLEITZAHL;
+    }
 
     public Bank(String name, String adresse, String blz) {
         this.name = name;

@@ -1,5 +1,11 @@
 package de.hsw;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,14 +14,30 @@ import java.util.*;
 
 public class Starter {
 
-    public static final String NAME = "HSW Bank";
-    public static final String ADRESSE = "Am Stockhof 2";
-    public static final String BANKLEITZAHL = "10000000";
 
 
-    static Bank bank = new Bank(NAME, ADRESSE, BANKLEITZAHL);
+
+    private static Bank bank;
 
     public static void main(String[] args) {
+
+        try {
+            bank = loadBank();
+            System.out.println("Bank laden...");
+            showProgressBar();
+            System.out.println("Die Bank wurde geladen!");
+        } catch (JAXBException | IllegalArgumentException e) {
+            System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
+            System.out.println(e.getMessage());
+            bank = new Bank();
+        }
+
+        if (bank == null) {
+            bank = new Bank();
+
+            System.out.println("\033[3mDie Bank wurde neu instanziiert.\033[0m");
+        }
+
 
         boolean end = false;
 
@@ -71,6 +93,12 @@ public class Starter {
             }
         }
         System.out.println("Auf Wiedersehen!");
+        try {
+            saveBank(bank);
+        } catch (JAXBException e) {
+            System.out.println("\033[3mFehler: Die Bank konnte nicht gespeichert werden!\033[0m");
+            throw new RuntimeException(e);
+        }
     }
 
     public static void geldTransfer(){
@@ -200,7 +228,7 @@ public class Starter {
         System.out.println("Welchen Kontotypmöchten Sie eröffnen? (Tagesgeld - TG oder Giro - GI)");
         String eingabe = promiseStringFromConsole();
         if (eingabe.equalsIgnoreCase("TG")) {
-            Tagesgeld tagesgeld = new Tagesgeld(BANKLEITZAHL);
+            Tagesgeld tagesgeld = new Tagesgeld();
 
             System.out.println("Es wird ein Tagesgeldkonto für Sie eröffnet:");
             showProgressBar();
@@ -208,7 +236,7 @@ public class Starter {
             System.out.println("Auf das Tagesgeldkonto erhalten Sie " + tagesgeld.getZinsen() + "% Zinsen p.a.");
             kontoZuKunde(tagesgeld);
         } else if (eingabe.equalsIgnoreCase("GI")) {
-            Giro giro = new Giro(BANKLEITZAHL);
+            Giro giro = new Giro();
 
             System.out.println("Es wird ein Girokonto für Sie eröffnet:");
             showProgressBar();
@@ -311,6 +339,16 @@ public class Starter {
 
             }
         }
+    }
+
+    public static Bank loadBank() throws JAXBException {
+        Unmarshaller unmarshaller = JAXBContext.newInstance(Bank.class).createUnmarshaller();
+        return (Bank) unmarshaller.unmarshal(new File("bank.xml"));
+    }
+
+    public static void saveBank(Bank bank) throws JAXBException {
+        Marshaller marshaller = JAXBContext.newInstance(Bank.class).createMarshaller();
+        marshaller.marshal(bank, new File("bank.xml"));
     }
 
     public static void waitThread() {

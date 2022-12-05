@@ -10,7 +10,10 @@ public class Giro extends Konto {
         this.maxAuszahlung = maxAuszahlung;
     }
 
-
+    public Giro(){
+        this.maxDispo = 1000;
+        this.maxAuszahlung = 1000;
+    }
 
     public Giro(String blz) {
         super(blz);

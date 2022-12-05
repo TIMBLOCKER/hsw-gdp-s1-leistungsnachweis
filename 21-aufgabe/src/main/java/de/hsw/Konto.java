@@ -17,7 +17,11 @@ public class Konto {
         this.maxDispo = maxDispo;
     }
 
-
+    public Konto(){
+        this.iban = generateIBANDE(Bank.BANKLEITZAHL);
+        this.saldo = 0;
+        this.maxDispo = 0;
+    }
 
     public Konto(String blz) {
         this.iban = generateIBANDE(blz);
