@@ -24,8 +24,10 @@ public class Bank {
     @XmlAttribute
     String blz;
 
+
     HashMap<String, Konto> konten = new HashMap<String, Konto>();
 
+    @XmlAttribute
     ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 
 
@@ -146,4 +148,17 @@ public class Bank {
     public ArrayList<Kunde> getKunden() {
         return kunden;
     }
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "name='" + name + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", blz='" + blz + '\'' +
+                ", konten=" + konten.entrySet().toString() +
+                ", kunden=" + kunden.toString() +
+                '}';
+    }
+
+
 }

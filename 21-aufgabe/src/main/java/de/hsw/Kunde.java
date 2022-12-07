@@ -7,17 +7,15 @@ public class Kunde {
 
     String name, vorname, adresse;
     LocalDate geburtsdatum;
-    int bonitaet; //nach Creditreform Bonitätsindex
+
     ArrayList<Konto> konten = new ArrayList<>();
     int tgeld = 0, giro = 0;
 
-    public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum, int bonitaet, ArrayList<Konto> konten) {
-        this.name = name;
-        this.vorname = vorname;
-        this.adresse = adresse;
-        this.geburtsdatum = geburtsdatum;
-        this.bonitaet = bonitaet;
-        this.konten = konten;
+    public Kunde() {
+        this.name = "Mustermann";
+        this.vorname = "Max";
+        this.adresse = "Musterstraße 1";
+        this.geburtsdatum = LocalDate.of(2000, 1,1);
     }
 
     public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum) {
@@ -72,49 +70,41 @@ public class Kunde {
         return null;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getVorname() {
         return vorname;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
 
     public String getAdresse() {
         return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public LocalDate getGeburtsdatum() {
-        return geburtsdatum;
-    }
-
-    public void setGeburtsdatum(LocalDate geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
-    }
-
-    public int getBonitaet() {
-        return bonitaet;
-    }
-
-    public void setBonitaet(int bonitaet) {
-        this.bonitaet = bonitaet;
     }
 
     public ArrayList<Konto> getKonten() {
         return konten;
     }
 
-    public void setKonten(ArrayList<Konto> konten) {
-        this.konten = konten;
+    @Override
+    public String toString() {
+        return "Kunde{" +
+                "name='" + name + '\'' +
+                ", vorname='" + vorname + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", geburtsdatum=" + geburtsdatum +
+                ", konten=" + konten +
+                ", tgeld=" + tgeld +
+                ", giro=" + giro +
+                '}';
     }
 
-
+    public String getStringValue(){
+        return "Kunde{" +
+                "name='" + name + '\'' +
+                ", vorname='" + vorname + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", geburtsdatum=" + geburtsdatum +
+                ", konten=" + konten +
+                ", tgeld=" + tgeld +
+                ", giro=" + giro +
+                '}';
+    }
 }

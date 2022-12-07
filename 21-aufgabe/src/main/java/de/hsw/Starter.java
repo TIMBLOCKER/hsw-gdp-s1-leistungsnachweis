@@ -23,9 +23,6 @@ public class Starter {
 
         try {
             bank = loadBank();
-            System.out.println("Bank laden...");
-            showProgressBar();
-            System.out.println("Die Bank wurde geladen!");
         } catch (JAXBException | IllegalArgumentException e) {
             System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
             System.out.println(e.getMessage());
@@ -34,7 +31,6 @@ public class Starter {
 
         if (bank == null) {
             bank = new Bank();
-
             System.out.println("\033[3mDie Bank wurde neu instanziiert.\033[0m");
         }
 
@@ -342,8 +338,16 @@ public class Starter {
     }
 
     public static Bank loadBank() throws JAXBException {
-        Unmarshaller unmarshaller = JAXBContext.newInstance(Bank.class).createUnmarshaller();
-        return (Bank) unmarshaller.unmarshal(new File("bank.xml"));
+        File f = new File("bank.xml");
+        if(f.exists() && !f.isDirectory()) {
+            Unmarshaller unmarshaller = JAXBContext.newInstance(Bank.class).createUnmarshaller();
+            System.out.println("Bank laden...");
+            showProgressBar();
+            System.out.println("Die Bank wurde geladen!");
+            return (Bank) unmarshaller.unmarshal(new File("bank.xml"));
+        }
+        System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
+            return new Bank();
     }
 
     public static void saveBank(Bank bank) throws JAXBException {

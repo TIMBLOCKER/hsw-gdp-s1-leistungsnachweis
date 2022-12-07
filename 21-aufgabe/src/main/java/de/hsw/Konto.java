@@ -11,11 +11,6 @@ public class Konto {
     String iban;
     private double saldo, maxDispo;
 
-    public Konto(String iban, double saldo, double maxDispo) {
-        this.iban = iban;
-        this.saldo = saldo;
-        this.maxDispo = maxDispo;
-    }
 
     public Konto(){
         this.iban = generateIBANDE(Bank.BANKLEITZAHL);
@@ -32,10 +27,6 @@ public class Konto {
 
     public String getIban() {
         return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
     }
 
     public double getSaldo() {
@@ -80,12 +71,20 @@ public class Konto {
         return ibanBuilder.toString();
     }
 
-
     public double getMaxDispo() {
         return maxDispo;
     }
 
     public String getType() {
         return "Konto";
+    }
+
+    @Override
+    public String toString() {
+        return "Konto{" +
+                "iban='" + iban + '\'' +
+                ", saldo=" + saldo +
+                ", maxDispo=" + maxDispo +
+                '}';
     }
 }
