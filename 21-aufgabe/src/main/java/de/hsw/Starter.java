@@ -1,5 +1,8 @@
 package de.hsw;
 
+import de.hsw.jaxbUtils.Bankdaten;
+import de.hsw.jaxbUtils.Kontendaten;
+import de.hsw.jaxbUtils.Kundendaten;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -14,24 +17,19 @@ import java.util.*;
 
 public class Starter {
 
-
-
-
     private static Bank bank;
+    private static Bankdaten bankdaten;
 
     public static void main(String[] args) {
 
         try {
-            bank = loadBank();
+            bankdaten = loadBankdaten();
+            bank = bankdatenToBank(bankdaten);
         } catch (JAXBException | IllegalArgumentException e) {
             System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
             System.out.println(e.getMessage());
+            e.printStackTrace();
             bank = new Bank();
-        }
-
-        if (bank == null) {
-            bank = new Bank();
-            System.out.println("\033[3mDie Bank wurde neu instanziiert.\033[0m");
         }
 
 
@@ -90,7 +88,7 @@ public class Starter {
         }
         System.out.println("Auf Wiedersehen!");
         try {
-            saveBank(bank);
+            saveBankdaten(bankToBankdaten(bank));
         } catch (JAXBException e) {
             System.out.println("\033[3mFehler: Die Bank konnte nicht gespeichert werden!\033[0m");
             throw new RuntimeException(e);
@@ -256,6 +254,7 @@ public class Starter {
                 String iban = promiseStringFromConsole();
                 Kunde kunde = kunden.get(kundennummer);
                 if (kunde != null) {
+                    bank.addKonto(konto);
                     bank.assignKonto(kunde, iban);
                     System.out.println("Konto zu Kunden hinzugefügt: " + iban);
                 }else{
@@ -350,9 +349,67 @@ public class Starter {
             return new Bank();
     }
 
-    public static void saveBank(Bank bank) throws JAXBException {
-        Marshaller marshaller = JAXBContext.newInstance(Bank.class).createMarshaller();
-        marshaller.marshal(bank, new File("bank.xml"));
+    public static Bankdaten bankToBankdaten(Bank bank){
+        ArrayList<Kundendaten> kundendatenArrayList = new ArrayList<>();
+        int i = 0;
+        for (Kunde k: bank.getKunden()) {
+            ArrayList<Kontendaten> kontendatenArrayList = new ArrayList<>();
+            for (Konto konto:k.getKonten()) {
+               if (konto instanceof Tagesgeld){
+                    kontendatenArrayList.add(new Kontendaten(konto.getIban(), konto.getSaldo(), konto.getMaxDispo(), "TG"));
+               }else{
+                   kontendatenArrayList.add(new Kontendaten(konto.getIban(), konto.getSaldo(), konto.getMaxDispo(), "GI"));
+               }
+            }
+            Kundendaten kundendaten = new Kundendaten(i, k.getName(), k.getVorname(), k.getAdresse(), k.getGeburtsdatum(), kontendatenArrayList);
+            kundendatenArrayList.add(kundendaten);
+            i++;
+        }
+        Bankdaten bankdaten = new Bankdaten(bank.getName(), bank.getAdresse(), bank.getBlz(), kundendatenArrayList);
+        return bankdaten;
+    }
+
+    public static Bank bankdatenToBank(Bankdaten bankdaten){
+        HashMap<String, Konto> konten = new HashMap<>();
+        ArrayList<Kunde> kunden = new ArrayList<>();
+        ArrayList<Kundendaten> kundendatenArrayList = bankdaten.getKunden();
+        for (Kundendaten k: kundendatenArrayList) {
+            ArrayList<Kontendaten> kontendatenArrayList = k.getKonten();
+            ArrayList<Konto> kontList = new ArrayList<>();
+            for (Kontendaten kd: kontendatenArrayList) {
+                if (kd.getType().equals("TG")){
+                    Tagesgeld tg = new Tagesgeld(kd.getIban(), kd.getSaldo());
+                    konten.put(kd.getIban(), tg);
+                    kontList.add(tg);
+                }else{
+                    Giro gi = new Giro(kd.getIban(), kd.getSaldo());
+                    konten.put(kd.getIban(), gi);
+                    kontList.add(gi);
+                }
+            }
+            Kunde kunde = new Kunde(k.getName(), k.getVorname(), k.getAdresse(), k.getGeburtsdatum(), kontList);
+            kunden.add(kunde);
+        }
+        return new Bank(bankdaten.getName(), bankdaten.getAdresse(), bankdaten.getBlz(), konten, kunden);
+    }
+
+    public static Bankdaten loadBankdaten() throws JAXBException {
+        File f = new File("bankdaten.xml");
+        if(f.exists() && !f.isDirectory()) {
+            Unmarshaller unmarshaller = JAXBContext.newInstance(Bankdaten.class).createUnmarshaller();
+            System.out.println("Bank laden...");
+            showProgressBar();
+            System.out.println("Die Bank wurde geladen!");
+            return (Bankdaten) unmarshaller.unmarshal(f);
+        }
+        System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
+        throw new JAXBException("Fehler: Die Bank konnte nicht geladen werden! (Keine Datei gefunden)");
+    }
+
+    public static void saveBankdaten(Bankdaten bankdaten) throws JAXBException {
+        Marshaller marshaller = JAXBContext.newInstance(Bankdaten.class).createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(bankdaten, new File("bankdaten.xml"));
     }
 
     public static void waitThread() {

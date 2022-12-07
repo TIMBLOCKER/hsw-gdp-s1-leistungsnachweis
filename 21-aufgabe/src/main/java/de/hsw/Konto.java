@@ -1,14 +1,20 @@
 package de.hsw;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.math.BigInteger;
 import java.util.Random;
 
-
+@XmlRootElement(name = "konto")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Konto {
 
+    @XmlAttribute
     String iban;
+    @XmlAttribute
     private double saldo, maxDispo;
 
 
@@ -24,6 +30,10 @@ public class Konto {
         this.maxDispo = 0;
     }
 
+    public Konto(String iban, double saldo) {
+        this.iban = iban;
+        this.saldo = saldo;
+    }
 
     public String getIban() {
         return iban;

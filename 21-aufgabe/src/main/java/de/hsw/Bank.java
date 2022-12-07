@@ -24,12 +24,24 @@ public class Bank {
     @XmlAttribute
     String blz;
 
-
-    HashMap<String, Konto> konten = new HashMap<String, Konto>();
+    @XmlAttribute
+    HashMap<String, Konto> konten = new HashMap<>();
 
     @XmlAttribute
     ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public String getBlz() {
+        return blz;
+    }
 
     public Bank(){
         this.name = NAME;
@@ -41,6 +53,14 @@ public class Bank {
         this.name = name;
         this.adresse = adresse;
         this.blz = blz;
+    }
+
+    public Bank(String name, String adresse, String blz, HashMap<String, Konto> konten, ArrayList<Kunde> kunden) {
+        this.name = name;
+        this.adresse = adresse;
+        this.blz = blz;
+        this.konten = konten;
+        this.kunden = kunden;
     }
 
     public Kunde addKunde(String name, String vorname, String adresse, LocalDate geburtstag) {
