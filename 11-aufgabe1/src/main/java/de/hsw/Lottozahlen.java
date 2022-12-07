@@ -56,7 +56,7 @@ public class Lottozahlen {
 
             while (lottozahlenArray.size() < 6) {
                 lottozahlenArray.add(rand.nextInt(1, 49));
-                //generiert 6 zufällige Lottozahlen zwischen 1 bis 49
+                //generiert 6 zufällige Lottozahlen zwischen 1 bis 48
 
             }
             System.out.println(lottozahlenArray);
