@@ -20,13 +20,14 @@ public class Starter {
     private static Bank bank;
     private static Bankdaten bankdaten;
 
+   // In der Main Methode Startet der User das Programm und gibt die gewünschten Funktionen ein
     public static void main(String[] args) {
 
         try {
             bankdaten = loadBankdaten();
             bank = bankdatenToBank(bankdaten);
         } catch (JAXBException | IllegalArgumentException e) {
-            System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
+            System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m"); //Bei einer Exception wird diese Nachricht ausgegeben
             System.out.println(e.getMessage());
             e.printStackTrace();
             bank = new Bank();
@@ -57,7 +58,7 @@ public class Starter {
             System.out.println("[6]. Geld auszahlen");
             System.out.println("[7]. Überweisung tätigen");
             System.out.println("[8]. Bank beenden");
-            switch (promiseIntFromConsole()) {
+            switch (promiseIntFromConsole()) { //Switch Case um gewünschte Funktion auszuführen
                 case 1:
                     addKundeToBank();
                     break;
@@ -89,39 +90,44 @@ public class Starter {
         System.out.println("Auf Wiedersehen!");
         try {
             saveBankdaten(bankToBankdaten(bank));
-        } catch (JAXBException e) {
+        } catch (JAXBException e) { //Abfangen einer Exception
             System.out.println("\033[3mFehler: Die Bank konnte nicht gespeichert werden!\033[0m");
             throw new RuntimeException(e);
         }
     }
 
-    public static void geldTransfer(){
+
+    /**
+     *
+     */
+    public static void geldTransfer(){ //Methode zur Abfrage für einen Transfer von Geld
         System.out.println("Von welchem Konto soll die Überweisung erfolgen?");
-        System.out.println("Bitte IBAN eingeben:");
+        System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Versenders
         String ibanfrom = promiseStringFromConsole();
         System.out.println("Auf welches Konto soll die Überweisung erfolgen?" );
-        System.out.println("Bitte IBAN eingeben:");
+        System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Empfängers.
         String ibanto = promiseStringFromConsole();
-        System.out.println("Bitte Betrag eingeben:");
+        System.out.println("Bitte Betrag eingeben:"); //Eingabe des Transferbetrages
         double amount = promiseDoubleFromConsole();
-        if (amount > 0){
+        if (amount > 0){ //If Statement, um zu überprüfen, ob der eingegebene Betrag positiv ist
             bank.transferMoney(ibanfrom, ibanto, amount);
             System.out.println("Es wurden " + amount + "€ von " + ibanfrom + " auf das Konto " + ibanto + " überwiesen.");
-            System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€");
-            System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€");
+            System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€"); //Zeigt Saldo des Geldversenders
+            System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€"); //Zeigt Saldo des Geldempfängers
         }else{
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
     }
 
 
-    public static void geldAuszahlen(){
+
+    public static void geldAuszahlen(){ //Methode zur Abfrage zur Auszahlung
         System.out.println("Von welchem Konto möchten Sie Geld auszahlen?");
         System.out.println("Bitte IBAN eingeben:");
         String iban = promiseStringFromConsole();
         System.out.println("Wie viel Geld möchten Sie vom Konto: " + iban + " auszahlen? (ohne Währungszeichen)");
         double amount = promiseDoubleFromConsole();
-        if (amount > 0){
+        if (amount > 0){ //if Statement, damit der eingegebene Betrag nicht negativ ist
             bank.outputMoney(iban, amount);
             geldAuszahlen(amount);
         }else{
@@ -130,7 +136,7 @@ public class Starter {
     }
 
 
-    public static void geldEinzahlen(){
+    public static void geldEinzahlen(){ //Methode zur Abfrage einer Einzahlung
         System.out.println("Auf welches Konto möchten Sie Geld einzahlen?");
         System.out.println("Bitte IBAN eingeben:");
         String iban = promiseStringFromConsole();
@@ -167,22 +173,22 @@ public class Starter {
         geldAufloesen(konto.getSaldo());
     }
 
-    public static void geldAuszahlen(double amount) {
-        System.out.println("Es werdem nun " + amount + "€ ausgezahlt:");
+    public static void geldAuszahlen(double amount) { //Methode zur Anzeige des ausgezahlten Betrages
+        System.out.println("Es werden nun " + amount + "€ ausgezahlt:");
         for (int i = 0; i < amount; i++) {
-            String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
-            System.out.print(moneyOutput + "\r");
-            waitThread();
+            String moneyOutput = String.join("", Collections.nCopies(i, "[€] ")); //delimiter splittet den String
+            System.out.print(moneyOutput + "\r"); //Anzeige des Betrages
+            waitThread(); //waitThread hält den Thread für eine Zeit an
         }
 
     }
 
-    public static void geldAufloesen(double amount) {
+    public static void geldAufloesen(double amount) { //Methode um den verbleibenden Betrag auszuzahlen
         System.out.println("Das verbleibende Saldo beträgt " + amount + "€ und wird nun ausgezahlt:");
         for (int i = 0; i < amount; i++) {
             String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
             System.out.print(moneyOutput + "\r");
-            waitThread();
+            waitThread(); //waitThread hält den Thread für eine kurze Zeit an
         }
 
     }
@@ -269,14 +275,14 @@ public class Starter {
             bank.deleteKonto(konto);
         }}
 
-    public static void showProgressBar() {
-        for (int i = 0; i < 101; i++) {
+    public static void showProgressBar() { //Methode zur Anzeige des Ladebalkens
+        for (int i = 0; i < 101; i++) { //wird mittels for-loop und Collections erzeugt
             int progress = i / 10;
             String progressBarSteps = String.join("", Collections.nCopies(progress, "="));
             String progressBarSpaces = String.join("", Collections.nCopies(10 - progress, " "));
             String progressStart = i + "% [";
             System.out.print(progressStart + progressBarSteps + ">" + progressBarSpaces + "]\r");
-            waitThread();
+            waitThread(); //waitThread hält den Thread für eine kurze Zeit an
         }
     }
 
@@ -306,7 +312,7 @@ public class Starter {
         }
     }
 
-    public static String promiseStringFromConsole() {
+    public static String promiseStringFromConsole() { //Methode zur eingabe eines Strings über die Konsole
         Scanner mainScanner = new Scanner(System.in);
         while (true) {
             try {
@@ -319,6 +325,10 @@ public class Starter {
         }
     }
 
+    /**
+     * Methode zur Eingabe eines Datums in verbindung mit LocalDate
+     * @return Rückgabe des LocalDates
+     */
     public static LocalDate promiseLocalDateFromConsole() {
         Scanner mainScanner = new Scanner(System.in);
         while (true) {
@@ -328,7 +338,7 @@ public class Starter {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMANY);
                 LocalDate localDate = LocalDate.parse(eingabe, formatter);
                 return localDate;
-            } catch (InputMismatchException | DateTimeParseException e) {
+            } catch (InputMismatchException | DateTimeParseException e) { //Exception bei einer falschen Eingabe
                 System.out.println("\033[3mFehler: Bitte ein valides Datum eingeben!\033[0m");
                 mainScanner.nextLine();
 
@@ -336,12 +346,17 @@ public class Starter {
         }
     }
 
+    /**
+     * Methode, um die Bankdaten zu laden
+     * @return Rückgabe der neuen Bankdaten
+     * @throws JAXBException
+     */
     public static Bank loadBank() throws JAXBException {
         File f = new File("bank.xml");
         if(f.exists() && !f.isDirectory()) {
             Unmarshaller unmarshaller = JAXBContext.newInstance(Bank.class).createUnmarshaller();
             System.out.println("Bank laden...");
-            showProgressBar();
+            showProgressBar(); //anzeige des Ladebalkens
             System.out.println("Die Bank wurde geladen!");
             return (Bank) unmarshaller.unmarshal(new File("bank.xml"));
         }
@@ -349,6 +364,11 @@ public class Starter {
             return new Bank();
     }
 
+    /**
+     * @param bank Bank
+     * Bank wird in Bankdaten umgewandelt für XML
+     * @return Rückgabe der Bankdaten
+     */
     public static Bankdaten bankToBankdaten(Bank bank){
         ArrayList<Kundendaten> kundendatenArrayList = new ArrayList<>();
         int i = 0;
@@ -369,8 +389,13 @@ public class Starter {
         return bankdaten;
     }
 
+    /**
+     * @param bankdaten Daten der Bank
+     * Bankdaten wird zur Bank umgewandelt für die XML
+     * @return Rückgabe der Bankdaten (Name, Adresse,Blz, Konten, Kunden)
+     */
     public static Bank bankdatenToBank(Bankdaten bankdaten){
-        HashMap<String, Konto> konten = new HashMap<>();
+        HashMap<String, Konto> konten = new HashMap<>(); //HashMap ist zur speicherung der Daten in einer Datentabelle
         ArrayList<Kunde> kunden = new ArrayList<>();
         ArrayList<Kundendaten> kundendatenArrayList = bankdaten.getKunden();
         for (Kundendaten k: kundendatenArrayList) {
@@ -393,6 +418,11 @@ public class Starter {
         return new Bank(bankdaten.getName(), bankdaten.getAdresse(), bankdaten.getBlz(), konten, kunden);
     }
 
+    /**
+     * @return Rückrabe der Bankdaten an Klasse Bankdaten
+     * Methode um zu prüfen ob Bankdaten vorhanden sind, um diese anzuzeigen
+     * @throws JAXBException
+     */
     public static Bankdaten loadBankdaten() throws JAXBException {
         File f = new File("bankdaten.xml");
         if(f.exists() && !f.isDirectory()) {
@@ -403,15 +433,23 @@ public class Starter {
             return (Bankdaten) unmarshaller.unmarshal(f);
         }
         System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
-        throw new JAXBException("Fehler: Die Bank konnte nicht geladen werden! (Keine Datei gefunden)");
+        throw new JAXBException("Fehler: Die Bank konnte nicht geladen werden! (Keine Datei gefunden)"); //Exception die geworfen wird, wenn keine Bankdaten vorhanden sind
     }
 
+    /**
+     * @param bankdaten Bankdaten --> Konto, Kundenattribute etc..
+     * Methode um Bankdaten in der XML Datei einzupflegen
+     * @throws JAXBException Exception, falls keine Daten vorhanden sind --> Daten konnten nicht gefunden werden
+     */
     public static void saveBankdaten(Bankdaten bankdaten) throws JAXBException {
         Marshaller marshaller = JAXBContext.newInstance(Bankdaten.class).createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(bankdaten, new File("bankdaten.xml"));
     }
 
+    /**
+     * Methode um den Thread für eine bestimmte Zeit anzuhalten (Millisekunden)
+     */
     public static void waitThread() {
         Random random = new Random();
         try {

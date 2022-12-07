@@ -25,6 +25,7 @@ public class Kunde {
     @XmlAttribute
     int tgeld = 0, giro = 0;
 
+    //TODO Was ist das??? 0 Usage
     public Kunde() {
         this.name = "Mustermann";
         this.vorname = "Max";
@@ -32,6 +33,14 @@ public class Kunde {
         this.geburtsdatum = LocalDate.of(2000, 1,1);
     }
 
+    /**
+     * @param name Vorname des Kunden
+     * @param vorname Nachname des Kunden
+     * @param adresse Adresse des Kunden
+     * @param geburtsdatum Geburtsdatum des Kunden
+     * @param konten Konten des Kunden
+     * Konstruktor für Nachnamen, Vornamen, Adresse, Geburtsdatum, Konten in einer ArrayList
+     */
     public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum, ArrayList<Konto> konten) {
         this.name = name;
         this.vorname = vorname;
@@ -41,6 +50,14 @@ public class Kunde {
         updateIndex();
     }
 
+    /**
+     * @param name Nachname des Kunden
+     * @param vorname Vorname des Kunden
+     * @param adresse Adresse
+     * @param geburtsdatum
+     * Methode zur Notation der Kunden attribute
+     * Konstruktor für Nachnamen, Vornamen, Adresse, Geburtsdatum,
+     */
     public Kunde(String name, String vorname, String adresse, LocalDate geburtsdatum) {
         this.name = name;
         this.vorname = vorname;
@@ -48,10 +65,18 @@ public class Kunde {
         this.geburtsdatum = geburtsdatum;
     }
 
+    /**
+     * @return Rückgabe des Nachnamens
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param konto Konto
+     * Methode zur Überprüfung beim Hinzufügen eines Kontos, ob der Kunde mehr als 3 Tagesgeldkonten und mehr als 2 Girokonten hat
+     * @return Rückgabe Boolean False Wert
+     */
     public boolean addKonto(Konto konto) {
         updateIndex();
         if (konto instanceof Tagesgeld) {
@@ -68,6 +93,9 @@ public class Kunde {
         return false;
     }
 
+    /**
+     * Methode zum Hinzufügen der Anzahl der Konten
+     */
     public void updateIndex() {
         giro = 0;
         tgeld = 0;
@@ -80,6 +108,11 @@ public class Kunde {
         }
     }
 
+    /**
+     * @param konto Konto
+     * Methode zum Löschen eines Kontos (Anzahl)
+     * @return Rückgabe eines NULL-Wertes
+     */
     public Konto deleteKonto(Konto konto) {
         if (konto instanceof Tagesgeld) {
             konten.remove(konto);
@@ -93,22 +126,37 @@ public class Kunde {
         return null;
     }
 
+    /**
+     * @return Rückgabe des Vornamens mit get
+     */
     public String getVorname() {
         return vorname;
     }
 
+    /**
+     * @return Rückgabe des Geburtstages mit get
+     */
     public LocalDate getGeburtsdatum() {
         return geburtsdatum;
     }
 
+    /**
+     * @return Rückgabe der Adresse mit get
+     */
     public String getAdresse() {
         return adresse;
     }
 
+    /**
+     * @return  Rückgabe der Konten mit get in einer ArrayList
+     */
     public ArrayList<Konto> getKonten() {
         return konten;
     }
 
+    /**
+     * @return Rückgabe der Strings: Nachnamen, Vornamen, Adresse, Geburtsdatums, Konten, Tagesgeld und Giro
+     */
     @Override
     public String toString() {
         return "Kunde{" +
@@ -122,6 +170,9 @@ public class Kunde {
                 '}';
     }
 
+    /**
+     * @return Rückgabe der String Werte der String: Name, Vorname, Adresse, Geburtstagsdatum, Konten
+     */
     public String getStringValue(){
         return name+"|"+vorname+"|"+adresse+"|"+geburtsdatum+"|"+konten;
     }
