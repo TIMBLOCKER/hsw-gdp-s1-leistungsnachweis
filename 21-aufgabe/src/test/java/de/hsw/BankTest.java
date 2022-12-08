@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankTest {
-
+/*
     @Test
     void addKunde() {
         Bank bank = new Bank();
@@ -17,10 +17,10 @@ class BankTest {
         assertEquals(kunde.toString(), bank.addKunde("Test", "Test", "Teststraße 3", LocalDate.of(1999, 7,25)).toString());
     }
 
-    /*@Test
+    @Test
     void deleteKunde() {
 
-    }*/
+    }
 
     @Test
     void deleteKundeAtPosition() {
@@ -30,9 +30,9 @@ class BankTest {
     void addKonto() {
     }
 
-    /*@Test
+    @Test
     void deleteKontofromIBAN() {
-    }*/
+    }
 
     public static Bank launchtestbank(){
         Bank banktest = new Bank("Testbank", "hamelner 3", "10000000");
@@ -97,6 +97,7 @@ class BankTest {
         assertTrue(launchtestbank().deleteKonto(tagesgeld));
     }
 
+
     @Test
     void assignKonto() {
     }
@@ -116,4 +117,6 @@ class BankTest {
     @Test
     void outputMoney() {
     }
+
+    */
 }
