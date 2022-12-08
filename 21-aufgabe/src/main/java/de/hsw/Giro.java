@@ -46,7 +46,7 @@ public class Giro extends Konto {
     }
 
     /**
-     * @return Gibt den Kontotypen zurück --> GIRO
+     * @return Gibt den Kontotypen zurück --> giro
      */
     public String getType() {
         return "Giro";

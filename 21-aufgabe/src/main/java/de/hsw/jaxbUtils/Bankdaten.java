@@ -22,7 +22,7 @@ public class Bankdaten {
         this.blz = blz;
         this.kunden = kunden;
     }
-
+    //TODO: 0 Usage??
     public Bankdaten() {
     }
 
