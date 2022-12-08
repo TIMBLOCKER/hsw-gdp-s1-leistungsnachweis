@@ -1,8 +1,5 @@
 package de.hsw;
 
-
-
-import de.hsw.jaxbUtils.ConvertBank;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -14,7 +11,7 @@ import java.util.HashMap;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Bank extends ConvertBank {
+public class Bank  {
 
     private static final String NAME = "HSW Bank";
     private static final String ADRESSE = "Am Stockhof 2";
@@ -29,7 +26,7 @@ public class Bank extends ConvertBank {
     HashMap<String, Konto> konten = new HashMap<>();
 
     @XmlAttribute
-    ArrayList<Kunde> kunden = new ArrayList<Kunde>();
+    ArrayList<Kunde> kunden = new ArrayList<>();
 
 
     public String getName() {
@@ -52,12 +49,7 @@ public class Bank extends ConvertBank {
         this.adresse = ADRESSE;
         this.blz = BANKLEITZAHL;
     }
-//TODO: Was mach das? 0 Usage
-    public Bank(String name, String adresse, String blz) {
-        this.name = name;
-        this.adresse = adresse;
-        this.blz = blz;
-    }
+
 
     /**
      * @param name Name der Bank
@@ -88,22 +80,15 @@ public class Bank extends ConvertBank {
         kunden.add(kunde);
         return kunde;
     }
-//TODO: 0 Usage
-    public boolean deleteKunde(Kunde kunde) {
-        return kunden.remove(kunde);
-    }
+
 
     public Kunde deleteKundeAtPosition(int position) {
         return kunden.remove(position);
     }
 
-    public Konto addKonto(Konto konto) {
+    public void addKonto(Konto konto) {
         String iban = konto.getIban();
-        return konten.putIfAbsent(iban, konto);
-    }
-//TODO: 0 Usage?
-    public Konto deleteKontofromIBAN(String iban) {
-        return konten.remove(iban);
+        konten.putIfAbsent(iban, konto);
     }
 
     /**
@@ -134,9 +119,9 @@ public class Bank extends ConvertBank {
      * Methode um das Konto zu löschen
      * @return Rückgabe der Iban zur Löschung des Kontos
      */
-    public boolean deleteKonto(Konto konto) {
+    public void deleteKonto(Konto konto) {
         String iban = konto.getIban();
-        return konten.remove(iban, konto);
+        konten.remove(iban, konto);
     }
 
     /**
@@ -172,7 +157,7 @@ public class Bank extends ConvertBank {
      * @param amount Betrag des transferierten Geldes
      * Methode um Geld von Konten zu transferieren
      * @return Rückgabe boolean false
-     * @throws NullPointerException
+     * @throws NullPointerException Wenn eins der oder beide Konten nicht gefunden werden konnten wird die Exception geworfen
      */
     public boolean transferMoney(String from, String to, double amount) throws NullPointerException{
         Konto konto1, konto2;
@@ -205,7 +190,7 @@ public class Bank extends ConvertBank {
     public boolean addMoney(String iban, double amount) {
         Konto konto1 = konten.get(iban);
         double saldo1 = konto1.getSaldo();
-
+        //Todo what happend here?
         saldo1 += amount;
 
         return false;
@@ -246,7 +231,7 @@ public class Bank extends ConvertBank {
                 "name='" + name + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", blz='" + blz + '\'' +
-                ", konten=" + konten.entrySet().toString() +
+                ", konten=" + konten.entrySet() +
                 ", kunden=" + kunden.toString() +
                 '}';
     }

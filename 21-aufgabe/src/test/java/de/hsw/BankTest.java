@@ -34,14 +34,15 @@ class BankTest {
     void deleteKontofromIBAN() {
     }*/
 
+    /* TODO
     @Test
     void getKundefromIBAN() {
         Bank bank = new Bank();
         Kunde kunde = new Kunde("Test", "Test", "Teststraße 3", LocalDate.of(1999, 7,25));
 
-        assertEquals(kunde, );
+       // assertEquals(kunde, );
     }
-
+*/
     @Test
     void getKontofromIBAN() {
     }

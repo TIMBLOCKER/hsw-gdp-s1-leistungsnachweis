@@ -13,21 +13,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class Starter extends Bank {
+public class Starter  {
 
     private static Bank bank;
-    private static Bankdaten bankdaten;
-    private static ConvertBank convertBank;
 
     /**
      * In der Main-Methode Startet der User das Programm und gibt die gewünschten Funktionen ein
      */
     public static void main(String[] args) {
-        convertBank = new ConvertBank();
+        ConvertBank convertBank = new ConvertBank();
         boolean end = false;
 
         try {
-            bankdaten = loadBankdaten();
+            Bankdaten bankdaten = loadBankdaten();
             bank = convertBank.bankdatenToBank(bankdaten);
         } catch (JAXBException | IllegalArgumentException e) {
             System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m"); //Bei einer Exception wird diese Nachricht ausgegeben
@@ -37,15 +35,16 @@ public class Starter extends Bank {
         }
 
         System.out.println("Wilkommen bei der");
-        System.out.println("\n" +
-                " /$$   /$$  /$$$$$$  /$$      /$$       /$$$$$$$                      /$$      \n" +
-                "| $$  | $$ /$$__  $$| $$  /$ | $$      | $$__  $$                    | $$      \n" +
-                "| $$  | $$| $$  \\__/| $$ /$$$| $$      | $$  \\ $$  /$$$$$$  /$$$$$$$ | $$   /$$\n" +
-                "| $$$$$$$$|  $$$$$$ | $$/$$ $$ $$      | $$$$$$$  |____  $$| $$__  $$| $$  /$$/\n" +
-                "| $$__  $$ \\____  $$| $$$$_  $$$$      | $$__  $$  /$$$$$$$| $$  \\ $$| $$$$$$/ \n" +
-                "| $$  | $$ /$$  \\ $$| $$$/ \\  $$$      | $$  \\ $$ /$$__  $$| $$  | $$| $$_  $$ \n" +
-                "| $$  | $$|  $$$$$$/| $$/   \\  $$      | $$$$$$$/|  $$$$$$$| $$  | $$| $$ \\  $$\n" +
-                "|__/  |__/ \\______/ |__/     \\__/      |_______/  \\_______/|__/  |__/|__/  \\__/\n");
+        System.out.println("""
+                 /$$   /$$  /$$$$$$  /$$      /$$       /$$$$$$$                      /$$     \s
+                | $$  | $$ /$$__  $$| $$  /$ | $$      | $$__  $$                    | $$     \s
+                | $$  | $$| $$  \\__/| $$ /$$$| $$      | $$  \\ $$  /$$$$$$  /$$$$$$$ | $$   /$$
+                | $$$$$$$$|  $$$$$$ | $$/$$ $$ $$      | $$$$$$$  |____  $$| $$__  $$| $$  /$$/
+                | $$__  $$ \\____  $$| $$$$_  $$$$      | $$__  $$  /$$$$$$$| $$  \\ $$| $$$$$$/\s
+                | $$  | $$ /$$  \\ $$| $$$/ \\  $$$      | $$  \\ $$ /$$__  $$| $$  | $$| $$_  $$\s
+                | $$  | $$|  $$$$$$/| $$/   \\  $$      | $$$$$$$/|  $$$$$$$| $$  | $$| $$ \\  $$
+                |__/  |__/ \\______/ |__/     \\__/      |_______/  \\_______/|__/  |__/|__/  \\__/
+                """);
         while (!end) {
             System.out.println("--- Menü: Was möchten Sie tun? ---\n");
             System.out.println("[1]. Kunden hinzufügen");
@@ -57,32 +56,15 @@ public class Starter extends Bank {
             System.out.println("[7]. Überweisung tätigen");
             System.out.println("[8]. Bank beenden");
             switch (promiseIntFromConsole()) { //Switch Case um gewünschte Funktion auszuführen
-                case 1:
-                    addKundeToBank();
-                    break;
-                case 2:
-                    kontoEroeffnen();
-                    break;
-                case 3:
-                    kontoAufloesen();
-                    break;
-                case 4:
-                    kundeLoeschen();
-                    break;
-                case 5:
-                    geldEinzahlen();
-                    break;
-                case 6:
-                    geldAuszahlen();
-                    break;
-                case 7:
-                    geldTransfer();
-                    break;
-                case 8:
-                    end = true;
-                    break;
-                default:
-                    System.out.println("\033[3mFehler: Bitte eine Zahl aus dem Menü eingeben!\033[0m");
+                case 1 -> addKundeToBank();
+                case 2 -> kontoEroeffnen();
+                case 3 -> kontoAufloesen();
+                case 4 -> kundeLoeschen();
+                case 5 -> geldEinzahlen();
+                case 6 -> geldAuszahlen();
+                case 7 -> geldTransfer();
+                case 8 -> end = true;
+                default -> System.out.println("\033[3mFehler: Bitte eine Zahl aus dem Menü eingeben!\033[0m");
             }
         }
         System.out.println("Auf Wiedersehen!");
@@ -107,11 +89,12 @@ public class Starter extends Bank {
         System.out.println("Bitte Betrag eingeben:"); //Eingabe des Transferbetrages
         double amount = promiseDoubleFromConsole();
         if (amount > 0){ //If Statement, um zu überprüfen, ob der eingegebene Betrag positiv ist
-            bank.transferMoney(ibanfrom, ibanto, amount);
-            System.out.println("Es wurden " + amount + "€ von " + ibanfrom + " auf das Konto " + ibanto + " überwiesen.");
-            System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€"); //Zeigt Saldo des Geldversenders
-            System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€"); //Zeigt Saldo des Geldempfängers
-        }else{
+            if (bank.transferMoney(ibanfrom, ibanto, amount)) {
+                System.out.println("Es wurden " + amount + "€ von " + ibanfrom + " auf das Konto " + ibanto + " überwiesen.");
+                System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€"); //Zeigt Saldo des Geldversenders
+                System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€"); //Zeigt Saldo des Geldempfängers
+            }
+            }else{
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
     }
@@ -123,8 +106,9 @@ public class Starter extends Bank {
         System.out.println("Wie viel Geld möchten Sie vom Konto: " + iban + " auszahlen? (ohne Währungszeichen)");
         double amount = promiseDoubleFromConsole();
         if (amount > 0){ //if Statement, damit der eingegebene Betrag nicht negativ ist
-            bank.outputMoney(iban, amount);
-            geldAuszahlen(amount);
+            if (bank.outputMoney(iban, amount)) {
+                geldAuszahlen(amount);
+            }
         }else{
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
@@ -254,9 +238,9 @@ public class Starter extends Bank {
                 Kunde kunde = kunden.get(kundennummer);
                 if (kunde != null) {
                     bank.addKonto(konto);
-                    bank.assignKonto(kunde, iban);
-                    System.out.println("Konto zu Kunden hinzugefügt: " + iban);
-                }else{
+                    if(bank.assignKonto(kunde, iban)) {
+                        System.out.println("Konto zu Kunden hinzugefügt: " + iban);
+                    } }else{
                     System.out.println("Konto nicht im System gefunden.");
                 }
             }else{
@@ -329,8 +313,7 @@ public class Starter extends Bank {
                 System.out.println("[Format: dd.mm.yyyy]↓");
                 String eingabe = mainScanner.next();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMANY);
-                LocalDate localDate = LocalDate.parse(eingabe, formatter);
-                return localDate;
+                return LocalDate.parse(eingabe, formatter);
             } catch (InputMismatchException | DateTimeParseException e) { //Exception bei einer falschen Eingabe
                 System.out.println("\033[3mFehler: Bitte ein valides Datum eingeben!\033[0m");
                 mainScanner.nextLine();
