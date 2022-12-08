@@ -24,7 +24,7 @@ class RenameStringTest {
     void changeStringEndingTest2() {
         RenameString renameString = new RenameString();
 
-        assertThrows(IllegalArgumentException.class, () -> renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloW!rld.txt", "html"));
+        assertThrows(IllegalArgumentException.class, () -> renameString.changeStringEnding("C:\\Users\\rathg\\Desktop\\helloW!rldtxt", "html"));
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class ChangeFormat {
 
-
     /**
      * Startermethode
      */

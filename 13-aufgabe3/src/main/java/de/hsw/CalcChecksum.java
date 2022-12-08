@@ -108,6 +108,7 @@ public class CalcChecksum {
         if (input < 0){
             throw new IllegalArgumentException("\n\033[41m\033[30mDie Checksumme wäre Negativ! Deine negative Checksumme lautet: " + input + "\033[0m");
         }else {
+            input = -1;
             return Integer.toHexString((int) input);
         }
     }
