@@ -159,24 +159,35 @@ public class Bank  {
      * @return Rückgabe boolean false
      * @throws NullPointerException Wenn eins der oder beide Konten nicht gefunden werden konnten wird die Exception geworfen
      */
-    public boolean transferMoney(String from, String to, double amount) throws NullPointerException{
-        Konto konto1, konto2;
-        try {
-             konto1 = konten.get(from);
-             konto2 = konten.get(to);
-        }catch (NullPointerException e){ //Exception Handling --> NullPointer Exception wird abgefangen
-            throw new NullPointerException(e.getMessage());
+    public boolean transferMoney(String from, String to, double amount) throws IndexOutOfBoundsException{
+        if (!from.equals(to)) {
+            Konto konto1, konto2;
+            try {
+                konto1 = konten.get(from);
+                konto2 = konten.get(to);
+            } catch (IndexOutOfBoundsException e) { //Exception Handling --> IndexOutOfBounds Exception wird abgefangen
+                throw new IndexOutOfBoundsException(e.getMessage());
+            }
+
+            if (konto1 != null && konto2 != null) {
+
+                double saldo1 = konto1.getSaldo();
+                double saldo2 = konto2.getSaldo();
+
+                if ((saldo1 - amount) > konto1.getMaxDispo()) {
+                    konto2.setSaldo(saldo2 + amount);
+                    konto1.setSaldo(saldo1 - amount);
+                    return true;
+                }else{
+                    System.out.println("Fehler: Das Saldo war nicht ausreichend!");
+                }
+                return false;
+            }else{
+                System.out.println("Fehler: Mindestens ein Konto konnte nicht gefunden werden!");
+            }
+            return false;
         }
-
-
-        double saldo1 = konto1.getSaldo();
-        double saldo2 = konto2.getSaldo();
-
-        if ((saldo1 - amount) > konto1.getMaxDispo()) {
-            konto2.setSaldo(saldo2 + amount);
-            konto1.setSaldo(saldo1 - amount);
-            return true;
-        }
+        System.out.println("Fehler: Debitor und Creditor dürfen nicht gleich sein!");
         return false;
     }
 
@@ -189,11 +200,14 @@ public class Bank  {
      */
     public boolean addMoney(String iban, double amount) {
         Konto konto1 = konten.get(iban);
-        double saldo1 = konto1.getSaldo();
-        //Todo what happend here?
-        saldo1 += amount;
-
-        return false;
+        if (konto1 != null) {
+            double saldo1 = konto1.getSaldo();
+            saldo1 += amount;
+            konto1.setSaldo(saldo1);
+            konten.replace(iban, konto1);
+            return true;
+        }
+       return false;
     }
 
 
@@ -204,14 +218,21 @@ public class Bank  {
      * @return boolean False Wert
      */
     public boolean outputMoney(String iban, double amount) {
-        Konto konto = konten.get(iban);
-        double saldo = konto.getSaldo();
+       try{
+           Konto konto = konten.get(iban);
+           double saldo = konto.getSaldo();
 
-        if (konto instanceof Giro && amount < ((Giro) konto).getMaxAuszahlung()) {
-            konto.setSaldo(saldo - amount);
-            return true;
-        }
-
+           if (konto instanceof Giro){
+               Giro giro = (Giro) konto;
+               if ( amount < giro.getMaxAuszahlung() && (saldo-amount) > giro.getMaxDispo()){
+                   konto.setSaldo(saldo - amount);
+                   return true;
+               }
+               return false;
+           }
+       }catch (NullPointerException e){
+           return false;
+       }
         return false;
     }
 
@@ -220,6 +241,10 @@ public class Bank  {
      */
     public ArrayList<Kunde> getKunden() {
         return kunden;
+    }
+
+    public int getKontenSize() {
+        return konten.size();
     }
 
     /**

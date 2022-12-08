@@ -80,41 +80,55 @@ public class Starter  {
      * Methode zur Abfrage für einen Transfer von Geld
      * TODO
      */
-    public static void geldTransfer(){
-        System.out.println("Von welchem Konto soll die Überweisung erfolgen?");
-        System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Versenders
-        String ibanfrom = promiseStringFromConsole();
-        System.out.println("Auf welches Konto soll die Überweisung erfolgen?" );
-        System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Empfängers.
-        String ibanto = promiseStringFromConsole();
-        System.out.println("Bitte Betrag eingeben:"); //Eingabe des Transferbetrages
-        double amount = promiseDoubleFromConsole();
-        if (amount > 0){ //If Statement, um zu überprüfen, ob der eingegebene Betrag positiv ist
-            if (bank.transferMoney(ibanfrom, ibanto, amount)) {
-                System.out.println("Es wurden " + amount + "€ von " + ibanfrom + " auf das Konto " + ibanto + " überwiesen.");
-                System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€"); //Zeigt Saldo des Geldversenders
-                System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€"); //Zeigt Saldo des Geldempfängers
+    public static void geldTransfer(){ //Methode zur Abfrage für einen Transfer von Geld
+        if (bank.getKontenSize()>= 2) {
+            System.out.println("Von welchem Konto soll die Überweisung erfolgen?");
+            System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Versenders
+            String ibanfrom = promiseStringFromConsole();
+            System.out.println("Auf welches Konto soll die Überweisung erfolgen?");
+            System.out.println("Bitte IBAN eingeben:"); //Abfrage auf das Konto des Empfängers.
+            String ibanto = promiseStringFromConsole();
+            System.out.println("Bitte Betrag eingeben:"); //Eingabe des Transferbetrages
+            double amount = promiseDoubleFromConsole();
+            if (amount > 0) { //If Statement, um zu überprüfen, ob der eingegebene Betrag positiv ist
+                try {
+                    if (bank.transferMoney(ibanfrom, ibanto, amount)) {
+                        System.out.println("Es wurden " + amount + "€ von " + ibanfrom + " auf das Konto " + ibanto + " überwiesen.");
+                        System.out.println("Neues Saldo des Debitors: " + bank.getKontofromIBAN(ibanfrom).getSaldo() + "€"); //Zeigt Saldo des Geldversenders
+                        System.out.println("Neues Saldo des Creditors: " + bank.getKontofromIBAN(ibanto).getSaldo() + "€"); //Zeigt Saldo des Geldempfängers
+                    }
+                }catch (IndexOutOfBoundsException e){
+                    System.out.println("\033[3mFehler: Das Debitor- oder Creditorkonto konnte nicht gefunden werden!\033[0m");
+                }
+            } else {
+                System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
             }
-            }else{
-            System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
+        }else{
+            System.out.println("\033[3mFehler: Für eine Überweisung müssen min. 2 Konten existieren!\033[0m");
         }
     }
 
     /**
      * Methode zur Abfrage einer Auszahlung
      */
-    public static void geldAuszahlen(){
-        System.out.println("Von welchem Konto möchten Sie Geld auszahlen?");
-        System.out.println("Bitte IBAN eingeben:");
-        String iban = promiseStringFromConsole();
-        System.out.println("Wie viel Geld möchten Sie vom Konto: " + iban + " auszahlen? (ohne Währungszeichen)");
-        double amount = promiseDoubleFromConsole();
-        if (amount > 0){ //if Statement, damit der eingegebene Betrag nicht negativ ist
-            if (bank.outputMoney(iban, amount)) {
-                geldAuszahlen(amount);
+    public static void geldAuszahlen(){ //Methode zur Abfrage zur Auszahlung
+        if (bank.getKontenSize()>0) {
+            System.out.println("Von welchem Konto möchten Sie Geld auszahlen?");
+            System.out.println("Bitte IBAN eingeben:");
+            String iban = promiseStringFromConsole();
+            System.out.println("Wie viel Geld möchten Sie vom Konto: " + iban + " auszahlen? (ohne Währungszeichen)");
+            double amount = promiseDoubleFromConsole();
+            if (amount > 0) { //if Statement, damit der eingegebene Betrag nicht negativ ist
+                    if (bank.outputMoney(iban, amount)) {
+                        geldAuszahlen(amount);
+                    }else {
+                        System.out.println("Das Konto konnte nicht gefunden werden oder der Saldo war nicht ausreichend");
+                    }
+            } else {
+                System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
             }
         }else{
-            System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
+            System.out.println("\033[3mFehler: Es muss ein Konto zum Auszahlen existieren!\033[0m");
         }
     }
 
@@ -122,20 +136,27 @@ public class Starter  {
      * Methode zur Abfrage einer Einzahlung
      */
     public static void geldEinzahlen(){
-        System.out.println("Auf welches Konto möchten Sie Geld einzahlen?");
-        System.out.println("Bitte IBAN eingeben:");
-        String iban = promiseStringFromConsole();
-        System.out.println("Wie viel Geld soll auf das Konto: " + iban + " eingezahlt werden?");
-        double amount = promiseDoubleFromConsole();
-        if (amount > 0){
-            try {
-                bank.addMoney(iban, amount);
-                System.out.println("Es wurden " + amount + "€ eingezahlt.");
-            }catch (NullPointerException e){
-                System.out.println("\033[3mFehler: Das Konto wurde nicht gefunden!\033[0m");
+        if (bank.getKontenSize()>0) {
+            System.out.println("Auf welches Konto möchten Sie Geld einzahlen?");
+            System.out.println("Bitte IBAN eingeben:");
+            String iban = promiseStringFromConsole();
+            System.out.println("Wie viel Geld soll auf das Konto: " + iban + " eingezahlt werden?");
+            double amount = promiseDoubleFromConsole();
+            if (amount > 0) {
+                try {
+                    if(bank.addMoney(iban, amount)){
+                        System.out.println("Es wurden " + amount + "€ eingezahlt.");
+                    }else{
+                        System.out.println("\033[3mFehler: Das Konto geld konnte nicht eingezahlt werden!\033[0m");
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("\033[3mFehler: Das Konto wurde nicht gefunden!\033[0m");
+                }
+            } else {
+                System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
             }
         }else{
-            System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
+            System.out.println("\033[3mFehler: Es muss ein Konto zum Einzahlen vorhanden sein!\033[0m");
         }
     }
 
@@ -143,24 +164,40 @@ public class Starter  {
      * Methode zum Löschen eines Kunden
      */
     public static void kundeLoeschen(){
-        System.out.println("Welcher Kunde soll gelöscht werden?");
-        getKundenListe();
-        System.out.println("Bitte Kundennummer eingeben:");
-        int position = promiseIntFromConsole();
-        Kunde kunde = bank.deleteKundeAtPosition(position);
-        System.out.println("Der Kunde: " + kunde.getName() + ", " + kunde.getVorname() + " wurde gelöscht...");
+        if (bank.getKunden().size()>0) {
+            System.out.println("Welcher Kunde soll gelöscht werden?");
+            getKundenListe();
+            System.out.println("Bitte Kundennummer eingeben:");
+            int position = promiseIntFromConsole();
+            try {
+                Kunde kunde = bank.deleteKundeAtPosition(position);
+                System.out.println("Der Kunde: " + kunde.getName() + ", " + kunde.getVorname() + " wurde gelöscht...");
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("\033[3mFehler: Diesee Kundennummer ist nicht im System!\033[0m");
+            }
+        }else{
+            System.out.println("\033[3mFehler: Kein Kunde vorhanden!\033[0m");
+        }
     }
 
     /**
      * Methode zum Auflösens eines Kontos
      */
     public static void kontoAufloesen() {
-        System.out.println("Welches Konto möchten Sie auflösen?");
-        getKontenListe();
-        System.out.println("\nBitte IBAN eingeben:");
-        String iban = promiseStringFromConsole();
-        Konto konto = bank.unAssignKonto(bank.getKundefromIBAN(iban), iban);
-        geldAufloesen(konto.getSaldo());
+        if (bank.getKontenSize()>0) {
+            System.out.println("Welches Konto möchten Sie auflösen?");
+            getKontenListe();
+            System.out.println("\nBitte IBAN eingeben:");
+            String iban = promiseStringFromConsole();
+            try {
+                Konto konto = bank.unAssignKonto(bank.getKundefromIBAN(iban), iban);
+                geldAufloesen(konto.getSaldo());
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("\033[3mFehler: Das Konto konnte nicht gefunden werden!\033[0m");
+            }
+        }else{
+            System.out.println("\033[3mFehler: Kein Konto vorhanden!\033[0m");
+        }
     }
 
     /**
@@ -182,13 +219,16 @@ public class Starter  {
      * Methode zur Auszahlung des verbleibenden Betrages bei einer Kontoauflösung
      */
     public static void geldAufloesen(double amount) {
-        System.out.println("Das verbleibende Saldo beträgt " + amount + "€ und wird nun ausgezahlt:");
-        for (int i = 0; i < amount; i++) {
-            String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
-            System.out.print(moneyOutput + "\r");
-            waitThread(); //waitThread hält den Thread für eine kurze Zeit an
+        if (amount >= 1) {
+            System.out.println("Das verbleibende Saldo beträgt " + amount + "€ und wird nun ausgezahlt:");
+            for (int i = 0; i < amount; i++) {
+                String moneyOutput = String.join("", Collections.nCopies(i, "[€] "));
+                System.out.print(moneyOutput + "\r");
+                waitThread(); //waitThread hält den Thread für eine kurze Zeit an
+            }
+        }else{
+            System.out.println("Das Konto war leer und wurde aufgelöst!");
         }
-
     }
 
     /**
@@ -235,27 +275,31 @@ public class Starter  {
      * Methode zur Abfrage und Anzeige zur Erstellung der Konten
      */
     public static void kontoEroeffnen() {
-        System.out.println("Welchen Kontotypmöchten Sie eröffnen? (Tagesgeld - TG oder Giro - GI)");
-        String eingabe = promiseStringFromConsole();
-        if (eingabe.equalsIgnoreCase("TG")) {
-            Tagesgeld tagesgeld = new Tagesgeld();
+        if (bank.getKunden().size()>0) {
+            System.out.println("Welchen Kontotypmöchten Sie eröffnen? (Tagesgeld - TG oder Giro - GI)");
+            String eingabe = promiseStringFromConsole();
+            if (eingabe.equalsIgnoreCase("TG")) {
+                Tagesgeld tagesgeld = new Tagesgeld();
 
-            System.out.println("Es wird ein Tagesgeldkonto für Sie eröffnet:");
-            showProgressBar();
-            System.out.println("Die Iban lautet: " + tagesgeld.getIban());
-            System.out.println("Auf das Tagesgeldkonto erhalten Sie " + tagesgeld.getZinsen() + "% Zinsen p.a.");
-            kontoZuKunde(tagesgeld);
-        } else if (eingabe.equalsIgnoreCase("GI")) {
-            Giro giro = new Giro();
+                System.out.println("Es wird ein Tagesgeldkonto für Sie eröffnet:");
+                showProgressBar();
+                System.out.println("Die Iban lautet: " + tagesgeld.getIban());
+                System.out.println("Auf das Tagesgeldkonto erhalten Sie " + tagesgeld.getZinsen() + "% Zinsen p.a.");
+                kontoZuKunde(tagesgeld);
+            } else if (eingabe.equalsIgnoreCase("GI")) {
+                Giro giro = new Giro();
 
-            System.out.println("Es wird ein Girokonto für Sie eröffnet:");
-            showProgressBar();
-            System.out.println("Die Iban lautet: " + giro.getIban());
-            System.out.println("Das tägliche Auszahlungslimit beträgt " + giro.getMaxAuszahlung() + "€.");
-            System.out.println("Außerdem dürfen Sie ihr Konto nur " + giro.getMaxDispo() + "€ überziehen.");
-            kontoZuKunde(giro);
-        } else {
-            System.out.println("Kontotyp nicht erkannt. Bitte erneut versuchen.");
+                System.out.println("Es wird ein Girokonto für Sie eröffnet:");
+                showProgressBar();
+                System.out.println("Die Iban lautet: " + giro.getIban());
+                System.out.println("Das tägliche Auszahlungslimit beträgt " + giro.getMaxAuszahlung() + "€.");
+                System.out.println("Außerdem dürfen Sie ihr Konto nur " + giro.getMaxDispo() + "€ überziehen.");
+                kontoZuKunde(giro);
+            } else {
+                System.out.println("Kontotyp nicht erkannt. Bitte erneut versuchen.");
+            }
+        }else{
+            System.out.println("\033[3mFehler: Es muss ein Kunde zum Eröffnen eines Kontos existieren!\033[0m");
         }
     }
 

@@ -16,7 +16,7 @@ public class Giro extends Konto {
      * Konstruktor der den maximalen Auszahlungsbetrag und den maximalen Übererziehungsbetrag festlegt
      */
     public Giro(){
-        this.maxDispo = 1000;
+        this.maxDispo = -1000;
         this.maxAuszahlung = 1000;
     }
 
@@ -26,7 +26,7 @@ public class Giro extends Konto {
      */
     public Giro(String iban, double saldo) {
         super(iban, saldo);
-        this.maxDispo = 1000; //Maximaler Wert für die Überziehung
+        this.maxDispo = -1000; //Maximaler Wert für die Überziehung
         this.maxAuszahlung = 1000; //Eine Auszahlung darf nicht 1000 € Übersteigen
     }
 
