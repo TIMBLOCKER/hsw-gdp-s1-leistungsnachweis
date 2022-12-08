@@ -45,4 +45,17 @@ Recherchieren Sie den Aufbau einer IBAN in Deutschland. Erstellen Sie ein Konso-
 
 # Dateien (Teil 2) (50 Punkte)
 
-Der Bankbetrieb soll mindestens die Eigenschaften Bankname, Bankleitzahl(muss dem Format einer gültigen deutschen Bankleitzahl entsprechen), Adresse besitzen.Beim Erstellen des Bankbetriebs müssen diese Eigenschaften sinnvoll initialisiert werden.Der Bankbetrieb hat Kunden(mit typischen Eigenschaften)und Konten(mit typischen Eigen-schaften), die in jeweils sinnvollenCollections gespeichert werden sollen.Es gibt zwei Konten-typen: Girokonto und Tagesgeldkonto.•(10 Punkte) Der Bankbetrieb kann Kunden und Konten erstellenund löschen. Beim Erstellenvon Konten, nutzen Sie das Ergebnis aus Teil 1 Aufgabe 6, um eine zufällige IBAN zu erzeugen. Prüfen Sie, dass die neu generierte IBAN nicht bereits existiert.Ein Kunde darf maximal 2 Gi-rokonten und 3 Tagesgeldkonten besitzen•(20 Punkte) Der Bankbetrieb kann Einzahlungen, Auszahlungen und Umbuchungen durchfüh-ren, dafür gelten folgende Regeln:oMan kann Geld zwischen Girokonto und Tagesgeldkonto umbuchenoEin Girokonto nicht mehr als 1000 € überzogen werden, ein Tagesgeldkonto darf nicht überzogen werdenoEs darf vom Girokonto nicht mehr als 1000 € auf einmal ausgezahlt werden können, vom Tagesgeldkonto darf nichts ausgezahlt werden•(10Punkte) Speichern Sie den Zustand des Bankbetriebs bei Programmende und laden Sie den Zustand bei Programmstart.Implementieren Sie eine Funktion, um den gespeicherten Zustand zu löschen und beachten Sie den Startohne gespeicherten Zustand.
+Der Bankbetrieb soll mindestens die Eigenschaften Bankname, Bankleitzahl(muss dem Format einer gültigen deutschen Bankleitzahl entsprechen), Adresse besitzen.Beim Erstellen des Bankbetriebs müssen diese Eigenschaften sinnvoll initialisiert werden.Der Bankbetrieb hat Kunden(mit typischen Eigenschaften)und Konten(mit typischen Eigenschaften), die in jeweils sinnvollenCollections gespeichert werden sollen. Es gibt zwei Kontentypen: Girokonto und Tagesgeldkonto.
+
+### (10 Punkte) 
+Der Bankbetrieb kann Kunden und Konten erstellen und löschen. Beim Erstellenvon Konten, nutzen Sie das Ergebnis aus Teil 1 Aufgabe 6, um eine zufällige IBAN zu erzeugen. Prüfen Sie, dass die neu generierte IBAN nicht bereits existiert.Ein Kunde darf maximal 2 Gi-rokonten und 3 Tagesgeldkonten besitzen.
+
+### (20 Punkte) 
+Der Bankbetrieb kann Einzahlungen, Auszahlungen und Umbuchungen durchführen, dafür gelten folgende Regeln:
+
+1. Man kann Geld zwischen Girokonto und Tagesgeldkonto umbuchen
+2. Ein Girokonto nicht mehr als 1000 € überzogen werden, ein Tagesgeldkonto darf nicht überzogen werden
+3. Es darf vom Girokonto nicht mehr als 1000 € auf einmal ausgezahlt werden können, vom Tagesgeldkonto darf nichts ausgezahlt werden
+
+### (10 Punkte) 
+Speichern Sie den Zustand des Bankbetriebs bei Programmende und laden Sie den Zustand bei Programmstart. Implementieren Sie eine Funktion, um den gespeicherten Zustand zu löschen und beachten Sie den Start ohne gespeicherten Zustand.
