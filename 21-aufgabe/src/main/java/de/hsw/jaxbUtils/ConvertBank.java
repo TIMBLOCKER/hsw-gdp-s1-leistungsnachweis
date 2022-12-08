@@ -5,7 +5,7 @@ import de.hsw.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ConvertBank extends Bankdaten {
+public class ConvertBank  {
 
     public ConvertBank() {
     }
@@ -31,8 +31,8 @@ public class ConvertBank extends Bankdaten {
             kundendatenArrayList.add(kundendaten);
             i++;
         }
-        Bankdaten bankdaten = new Bankdaten(bank.getName(), bank.getAdresse(), bank.getBlz(), kundendatenArrayList);
-        return bankdaten;
+       return new Bankdaten(bank.getName(), bank.getAdresse(), bank.getBlz(), kundendatenArrayList);
+
     }
 
     /**

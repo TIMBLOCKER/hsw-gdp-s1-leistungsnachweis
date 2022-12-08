@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @XmlRootElement(name = "KUNDENDATEN")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Kundendaten extends Kontendaten {
+public class Kundendaten {
 
     @XmlAttribute
     int kundennummer;
@@ -31,54 +31,33 @@ public class Kundendaten extends Kontendaten {
         this.konten = konten;
     }
 
-    public Kundendaten() {
-    }
-
-    public int getKundennummer() {
-        return kundennummer;
-    }
-
-    public void setKundennummer(int kundennummer) {
-        this.kundennummer = kundennummer;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public String getVorname() {
         return vorname;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
+
 
     public String getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
+
 
     public LocalDate getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(LocalDate geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
-    }
+
 
     public ArrayList<Kontendaten> getKonten() {
         return konten;
     }
 
-    public void setKonten(ArrayList<Kontendaten> konten) {
-        this.konten = konten;
-    }
+
 }

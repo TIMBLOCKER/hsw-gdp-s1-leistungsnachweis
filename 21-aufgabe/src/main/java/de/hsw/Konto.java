@@ -4,14 +4,13 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import org.glassfish.jaxb.core.v2.TODO;
 
 import java.math.BigInteger;
 import java.util.Random;
 
 @XmlRootElement(name = "konto")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Konto extends Kunde {
+public class Konto  {
 
     @XmlAttribute
     String iban;
@@ -27,12 +26,7 @@ public class Konto extends Kunde {
         this.saldo = 0;
         this.maxDispo = 0;
     }
- //TODO: 0 Usage??? Was macht es?
-    public Konto(String blz) {
-        this.iban = generateIBANDE(blz);
-        this.saldo = 0;
-        this.maxDispo = 0;
-    }
+
 
     /**
      * @param iban Iban
