@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/timbo/OneDrive/Dokumente/Studium/Grundlagen der Programmierung/hsw-gdp-uebung/21-aufgabe/src/main/java/de/hsw</OriginalElement>
+  <nodes>
+    <node x="-746.7416666666666" y="2411.068640883978">de.hsw.Starter</node>
+    <node x="21.63301691815832" y="1584.0">de.hsw.Tagesgeld</node>
+    <node x="-959.7" y="-70.0">de.hsw.jaxbUtils.Kundendaten</node>
+    <node x="-802.2416666666666" y="1584.0">de.hsw.Bank</node>
+    <node x="-251.95833333333326" y="1584.0">de.hsw.Giro</node>
+    <node x="-1182.3470797790055" y="1223.0">de.hsw.jaxbUtils.ConvertBank</node>
+    <node x="-864.7" y="1223.0">de.hsw.jaxbUtils.LocalDateAdapter</node>
+    <node x="-911.7" y="-499.0">de.hsw.jaxbUtils.Kontendaten</node>
+    <node x="-959.2" y="575.0">de.hsw.jaxbUtils.Bankdaten</node>
+    <node x="-295.45833333333326" y="1078.0">de.hsw.Konto</node>
+    <node x="-486.4083333333333" y="430.99999999999994">de.hsw.Kunde</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="de.hsw.Tagesgeld" target="de.hsw.Konto" relationship="GENERALIZATION">
+      <point x="0.0" y="-93.5" />
+      <point x="128.13301691815832" y="1512.1164198895028" />
+      <point x="-140.95833333333326" y="1512.1164198895028" />
+      <point x="0.0" y="201.5" />
+    </edge>
+    <edge source="de.hsw.Bank" target="de.hsw.jaxbUtils.ConvertBank" relationship="GENERALIZATION">
+      <point x="0.0" y="-369.5" />
+      <point x="-586.7416666666666" y="1512.1164198895028" />
+      <point x="-1046.8470797790055" y="1512.1164198895028" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="de.hsw.Bank" target="de.hsw.Konto" relationship="GENERALIZATION">
+      <point x="0.0" y="-369.5" />
+      <point x="-586.7416666666666" y="1512.0" />
+      <point x="-140.95833333333326" y="1512.0" />
+      <point x="0.0" y="201.5" />
+    </edge>
+    <edge source="de.hsw.jaxbUtils.Kundendaten" target="de.hsw.jaxbUtils.Kontendaten" relationship="GENERALIZATION">
+      <point x="0.0" y="-261.5" />
+      <point x="0.0" y="189.5" />
+    </edge>
+    <edge source="de.hsw.Bank" target="de.hsw.Kunde" relationship="GENERALIZATION">
+      <point x="0.0" y="-369.5" />
+      <point x="-586.7416666666666" y="1052.0" />
+      <point x="-279.9083333333333" y="1052.0" />
+      <point x="0.0" y="261.5" />
+    </edge>
+    <edge source="de.hsw.Konto" target="de.hsw.Kunde" relationship="GENERALIZATION">
+      <point x="0.0" y="-201.5" />
+      <point x="-140.95833333333326" y="1052.0" />
+      <point x="-279.9083333333333" y="1052.0" />
+      <point x="0.0" y="261.5" />
+    </edge>
+    <edge source="de.hsw.jaxbUtils.ConvertBank" target="de.hsw.jaxbUtils.Bankdaten" relationship="GENERALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="-1046.8470797790055" y="1052.0" />
+      <point x="-751.7" y="1052.0" />
+      <point x="0.0" y="189.5" />
+    </edge>
+    <edge source="de.hsw.Giro" target="de.hsw.Konto" relationship="GENERALIZATION">
+      <point x="0.0" y="-117.5" />
+      <point x="0.0" y="201.5" />
+    </edge>
+    <edge source="de.hsw.jaxbUtils.LocalDateAdapter" target="de.hsw.jaxbUtils.Bankdaten" relationship="GENERALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="0.0" y="189.5" />
+    </edge>
+    <edge source="de.hsw.jaxbUtils.Bankdaten" target="de.hsw.jaxbUtils.Kundendaten" relationship="GENERALIZATION">
+      <point x="0.0" y="-189.5" />
+      <point x="0.0" y="261.5" />
+    </edge>
+    <edge source="de.hsw.Starter" target="de.hsw.Bank" relationship="GENERALIZATION">
+      <point x="0.0" y="-321.5" />
+      <point x="-586.7416666666666" y="2307.0" />
+      <point x="-586.7416666666666" y="2307.0" />
+      <point x="0.0" y="369.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6323619508443047" showDependencies="false" x="-386.2675076243096" y="2103.3638240883975" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -11,7 +11,7 @@ import java.util.Random;
 
 @XmlRootElement(name = "konto")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Konto {
+public class Konto extends Kunde {
 
     @XmlAttribute
     String iban;

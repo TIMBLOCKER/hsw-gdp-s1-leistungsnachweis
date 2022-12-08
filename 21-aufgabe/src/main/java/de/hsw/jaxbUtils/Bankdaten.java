@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @XmlRootElement (name = "BANKDATEN")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Bankdaten {
+public class Bankdaten extends Kundendaten {
 
     @XmlAttribute
     String name, adresse;
@@ -64,7 +64,7 @@ public class Bankdaten {
     /**
      * @return Rückgabe der Kundendaten
      */
-    public ArrayList<Kundendaten> getKunden() {
+    public ArrayList<Kundendaten> getKundenDaten() {
         return kunden;
     }
     //Todo: 0 Usage

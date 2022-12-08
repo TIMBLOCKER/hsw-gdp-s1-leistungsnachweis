@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @XmlRootElement(name = "KUNDENDATEN")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Kundendaten {
+public class Kundendaten extends Kontendaten {
 
     @XmlAttribute
     int kundennummer;
