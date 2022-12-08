@@ -10,21 +10,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class LocalDateAdapterTest {
 
     @Test
-    void unmarshalTest1() {
+    void unmarshalTest1() throws Exception {
         LocalDateAdapter localDateAdapter = new LocalDateAdapter();
 
-        assertEquals(LocalDate.of(2000, 2,2), "2000-02-02");
+        assertEquals(LocalDate.of(2000, 2,2).toString(), localDateAdapter.unmarshal("2000-02-02").toString());
     }
 
     @Test
     void unmarshalTest2() {
         LocalDateAdapter localDateAdapter = new LocalDateAdapter();
 
-        assertThrows(DateTimeParseException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> localDateAdapter.unmarshal("2000/02/02"));
 
-        assertThrows(DateTimeParseException.class,
-                () -> localDateAdapter.unmarshal("200O-02-02"));
+        assertThrows(IllegalArgumentException.class,
+                () -> localDateAdapter.unmarshal("200O0-02-02"));
     }
 
     @Test
