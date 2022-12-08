@@ -17,23 +17,6 @@ class BankTest {
         assertEquals(kunde.toString(), bank.addKunde("Test", "Test", "Teststraße 3", LocalDate.of(1999, 7,25)).toString());
     }
 
-    @Test
-    void deleteKunde() {
-
-    }
-
-    @Test
-    void deleteKundeAtPosition() {
-    }
-
-    @Test
-    void addKonto() {
-    }
-
-    @Test
-    void deleteKontofromIBAN() {
-    }
-
     public static Bank launchtestbank(){
         Bank banktest = new Bank();
         Kunde testkundetagesgeld = banktest.addKunde("Mustermann", "Max", "Mustermannstraße 1", LocalDate.of(1999, 7,25));
@@ -91,10 +74,21 @@ class BankTest {
 
     @Test
     void assignKonto() {
+        Bank banktest = new Bank();
+        Kunde testkundegiro = banktest.addKunde("Musterfrau", "Sabine", "Musterfraustraße 1", LocalDate.of(2000, 2,2));
+        Giro giro = new Giro("DE88 1200 8785 9156 0501 80", 1000);
+        banktest.addKonto(giro);
+        assertTrue(banktest.assignKonto(testkundegiro, "DE88 1200 8785 9156 0501 80"));
     }
 
     @Test
     void unAssignKonto() {
+        Bank banktest = new Bank();
+        Kunde testkundegiro = banktest.addKunde("Musterfrau", "Sabine", "Musterfraustraße 1", LocalDate.of(2000, 2,2));
+        Giro giro = new Giro("DE88 1200 8785 9156 0501 80", 1000);
+        banktest.addKonto(giro);
+        banktest.assignKonto(testkundegiro, "DE88 1200 8785 9156 0501 80");
+        assertEquals(giro, banktest.unAssignKonto(testkundegiro, "DE88 1200 8785 9156 0501 80"));
     }
 
     @Test
