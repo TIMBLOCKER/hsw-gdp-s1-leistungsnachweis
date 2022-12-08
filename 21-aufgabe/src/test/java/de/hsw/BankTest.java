@@ -92,15 +92,86 @@ class BankTest {
     }
 
     @Test
-    void transferMoney() {
+    void transferMoneyTest1() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 1000);
+        banktest.addKonto(giro1);
+        Giro giro2 = new Giro("DE88 1200 8785 9156 0501 81", 1000);
+        banktest.addKonto(giro2);
+
+        assertTrue(banktest.transferMoney("DE88 1200 8785 9156 0501 80", "DE88 1200 8785 9156 0501 81",100));
+
     }
 
     @Test
-    void addMoney() {
+    void transferMoneyTest2() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 0);
+        banktest.addKonto(giro1);
+        Giro giro2 = new Giro("DE88 1200 8785 9156 1501 81", 0);
+        banktest.addKonto(giro2);
+
+        assertFalse(banktest.transferMoney("DE88 1200 8785 9156 0501 80", "DE88 1200 8785 9156 0501 81",100));
     }
 
     @Test
-    void outputMoney() {
+    void transferMoneyTest3() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 10);
+        banktest.addKonto(giro1);
+        Giro giro2 = new Giro("DE88 1200 8785 9156 1501 81", 0);
+        banktest.addKonto(giro2);
+
+        assertFalse(banktest.transferMoney("DE88 1200 8785 9156 0501 80", "DE88 1200 8785 9156 0501 81",10000));
+    }
+
+    @Test
+    void addMoneyTest1() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 0);
+        banktest.addKonto(giro1);
+        assertTrue(banktest.addMoney("DE88 1200 8785 9156 0501 80", 10000));
+    }
+
+    @Test
+    void addMoneyTest2() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 0);
+
+        assertFalse(banktest.addMoney("DE88 1200 8785 9156 0501 80", 10000));
+    }
+
+    @Test
+    void outputMoneyTest1() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 1000000);
+        banktest.addKonto(giro1);
+
+        assertTrue(banktest.outputMoney("DE88 1200 8785 9156 0501 80", 1000));
+    }
+
+    @Test
+    void outputMoneyTest2() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 1000000);
+
+        assertFalse(banktest.outputMoney("DE88 1200 8785 9156 0501 80", 1000));
+    }
+
+    @Test
+    void outputMoneyTest3() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 0);
+
+        assertFalse(banktest.outputMoney("DE88 1200 8785 9156 0501 80", 1000));
+    }
+
+    @Test
+    void outputMoneyTest4() {
+        Bank banktest = new Bank();
+        Giro giro1 = new Giro("DE88 1200 8785 9156 0501 80", 0);
+
+        assertFalse(banktest.outputMoney("DE88 1200 8785 9156 0501 80", 10000));
     }
 
 
