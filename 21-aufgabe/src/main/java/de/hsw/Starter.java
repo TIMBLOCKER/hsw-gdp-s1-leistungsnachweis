@@ -55,17 +55,22 @@ public class Starter  {
             System.out.println("[6]. Geld auszahlen");
             System.out.println("[7]. Überweisung tätigen");
             System.out.println("[8]. Bank beenden");
-            switch (promiseIntFromConsole()) { //Switch Case um gewünschte Funktion auszuführen
-                case 1 -> addKundeToBank();
-                case 2 -> kontoEroeffnen();
-                case 3 -> kontoAufloesen();
-                case 4 -> kundeLoeschen();
-                case 5 -> geldEinzahlen();
-                case 6 -> geldAuszahlen();
-                case 7 -> geldTransfer();
-                case 8 -> end = true;
-                default -> System.out.println("\033[3mFehler: Bitte eine Zahl aus dem Menü eingeben!\033[0m");
+            try {
+                switch (promiseIntFromConsole()) { //Switch Case um gewünschte Funktion auszuführen
+                    case 1 -> addKundeToBank();
+                    case 2 -> kontoEroeffnen();
+                    case 3 -> kontoAufloesen();
+                    case 4 -> kundeLoeschen();
+                    case 5 -> geldEinzahlen();
+                    case 6 -> geldAuszahlen();
+                    case 7 -> geldTransfer();
+                    case 8 -> end = true;
+                    default -> System.out.println("\033[3mFehler: Bitte eine Zahl aus dem Menü eingeben!\033[0m");
+                }
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
             }
+
         }
         System.out.println("Auf Wiedersehen!");
         try {
@@ -317,13 +322,17 @@ public class Starter  {
                 System.out.println("Bitte IBAN eingeben (mit Leerzeichen): ");
                 String iban = promiseStringFromConsole();
                 Kunde kunde = kunden.get(kundennummer);
-                if (kunde != null) {
-                    bank.addKonto(konto);
-                    if(bank.assignKonto(kunde, iban)) {
-                        System.out.println("Konto zu Kunden hinzugefügt: " + iban);
-                    } }else{
-                    System.out.println("Konto nicht im System gefunden.");
-                }
+                    if (iban.equals(konto.getIban())){
+                        if (kunde != null) {
+                            bank.addKonto(konto);
+                            if(bank.assignKonto(kunde, iban)) {
+                                System.out.println("Konto zu Kunden hinzugefügt: " + iban);
+                            } }else{
+                            System.out.println("Fehler: Konto nicht im System gefunden.");
+                        }
+                    }else {
+                        throw new IllegalArgumentException("Bitte passende Iban eingeben!");
+                    }
             }else{
                 System.out.println("Bitte korrekte Kundennummer eingeben");
                 bank.deleteKonto(konto);

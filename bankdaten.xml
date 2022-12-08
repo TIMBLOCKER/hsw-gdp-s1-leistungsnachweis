@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<BANKDATEN name="HSW Bank" adresse="Am Stockhof 2" blz="10000000"/>
+<BANKDATEN name="HSW Bank" adresse="Am Stockhof 2" blz="10000000">
+    <KUNDE kundennummer="0" name="fshg" vorname="fsh" adresse="adh" geburtsdatum="2003-09-22">
+        <KONTEN iban="DE55 1000 0000 8157 8072 90" saldo="0.0" maxDispo="0.0" type="TG"/>
+        <KONTEN iban="DE55 1000 0000 8157 8072 90" saldo="0.0" maxDispo="0.0" type="TG"/>
+        <KONTEN iban="DE55 1000 0000 8157 8072 90" saldo="0.0" maxDispo="0.0" type="TG"/>
+    </KUNDE>
+</BANKDATEN>
