@@ -246,6 +246,7 @@ public class Starter  {
             }else{
                 System.out.println("Bitte korrekte Kundennummer eingeben");
                 bank.deleteKonto(konto);
+
             }
         } else {
             System.out.println("Bitte zuerst Kunden anlegen");

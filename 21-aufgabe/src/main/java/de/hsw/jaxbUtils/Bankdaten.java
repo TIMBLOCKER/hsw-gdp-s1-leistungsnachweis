@@ -23,7 +23,10 @@ public class Bankdaten {
         this.kunden = kunden;
     }
 
-      /**
+    public Bankdaten() {
+    }
+
+    /**
      * @return Rückgabe des Namens
      */
     public String getName() {

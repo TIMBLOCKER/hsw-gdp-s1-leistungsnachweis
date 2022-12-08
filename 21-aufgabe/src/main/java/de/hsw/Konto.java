@@ -57,7 +57,20 @@ public class Konto  {
      */
     public String generateIBANDE(String blz) {
         Random random = new Random();
-        String ktn = String.valueOf(String.format("%1$010d",random.nextLong(0, 9999999999L)));
+        String ktn = String.valueOf(String.format("%1$010d",random.nextLong(0, 9999999999L+1)));
+        String pruefziffer = String.valueOf(String.format("%1$02d",generateChecksum(ktn, blz)));
+
+        return assembleIban(ktn, blz, pruefziffer);
+    }
+
+    /**
+     * @param blz Bankleitzahl
+     * Methode zur Generierung der Iban
+     * @return Rückgabe der Kontonummer, Bankleitzahl und Prüfziffer an assembleIban
+     */
+    public String generateIBANDESeed(String blz, long seed) {
+        Random random = new Random(seed);
+        String ktn = String.valueOf(String.format("%1$010d",random.nextLong(0, 9999999999L+1)));
         String pruefziffer = String.valueOf(String.format("%1$02d",generateChecksum(ktn, blz)));
 
         return assembleIban(ktn, blz, pruefziffer);

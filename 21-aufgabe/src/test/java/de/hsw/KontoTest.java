@@ -10,7 +10,7 @@ class KontoTest {
     void generateIBANDE() {
         Konto konto = new Konto();
 
-
+            //todo test
     }
 
     @Test

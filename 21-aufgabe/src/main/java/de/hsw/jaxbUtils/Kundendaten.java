@@ -31,6 +31,9 @@ public class Kundendaten {
         this.konten = konten;
     }
 
+    public Kundendaten() {
+    }
+
     public String getName() {
         return name;
     }
