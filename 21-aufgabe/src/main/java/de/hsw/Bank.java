@@ -224,7 +224,7 @@ public class Bank  {
 
            if (konto instanceof Giro){
                Giro giro = (Giro) konto;
-               if ( amount < giro.getMaxAuszahlung() && (saldo-amount) > giro.getMaxDispo()){
+               if ( amount <= giro.getMaxAuszahlung() && (saldo-amount) > giro.getMaxDispo()){
                    konto.setSaldo(saldo - amount);
                    return true;
                }
