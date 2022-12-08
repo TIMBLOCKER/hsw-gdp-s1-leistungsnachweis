@@ -34,7 +34,7 @@ public class Starter  {
             bank = new Bank();
         }
 
-        System.out.println("Wilkommen bei der");
+        System.out.println("Willkommen bei der");
         System.out.println("""
                  /$$   /$$  /$$$$$$  /$$      /$$       /$$$$$$$                      /$$     \s
                 | $$  | $$ /$$__  $$| $$  /$ | $$      | $$__  $$                    | $$     \s
