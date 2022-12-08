@@ -2,6 +2,7 @@ package de.hsw.jaxbUtils;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -28,10 +29,10 @@ class LocalDateAdapterTest {
     }
 
     @Test
-    void marshalTest1() {
+    void marshalTest1() throws Exception {
         LocalDateAdapter localDateAdapter = new LocalDateAdapter();
 
-        assertEquals("2000-02-02", LocalDate.of(2000, 2,2));
+        assertEquals("2000-02-02", localDateAdapter.marshal(LocalDate.of(2000, 2,2)));
     }
 
     //ToDo: Filter
@@ -39,10 +40,16 @@ class LocalDateAdapterTest {
     void marshalTest2() {
         LocalDateAdapter localDateAdapter = new LocalDateAdapter();
 
-        assertThrows(DateTimeParseException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> localDateAdapter.marshal(LocalDate.of(200, 2,2)));
 
-        assertThrows(DateTimeParseException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> localDateAdapter.marshal(LocalDate.of(20000, 2,2)));
+
+        assertThrows(DateTimeException.class,
+                () -> localDateAdapter.marshal(LocalDate.of(2000, 200,2)));
+
+        assertThrows(DateTimeException.class,
+                () -> localDateAdapter.marshal(LocalDate.of(2000, 2,200)));
     }
 }
