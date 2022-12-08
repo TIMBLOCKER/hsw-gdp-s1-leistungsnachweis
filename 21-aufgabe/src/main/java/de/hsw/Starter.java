@@ -1,8 +1,7 @@
 package de.hsw;
 
 import de.hsw.jaxbUtils.Bankdaten;
-import de.hsw.jaxbUtils.Kontendaten;
-import de.hsw.jaxbUtils.Kundendaten;
+import de.hsw.jaxbUtils.ConvertBank;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -14,27 +13,28 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-
-public class Starter {
+public class Starter extends Bank {
 
     private static Bank bank;
     private static Bankdaten bankdaten;
+    private static ConvertBank convertBank;
 
-   // In der Main Methode Startet der User das Programm und gibt die gewünschten Funktionen ein
+    /**
+     * In der Main-Methode Startet der User das Programm und gibt die gewünschten Funktionen ein
+     */
     public static void main(String[] args) {
+        convertBank = new ConvertBank();
+        boolean end = false;
 
         try {
             bankdaten = loadBankdaten();
-            bank = bankdatenToBank(bankdaten);
+            bank = convertBank.bankdatenToBank(bankdaten);
         } catch (JAXBException | IllegalArgumentException e) {
             System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m"); //Bei einer Exception wird diese Nachricht ausgegeben
             System.out.println(e.getMessage());
             e.printStackTrace();
             bank = new Bank();
         }
-
-
-        boolean end = false;
 
         System.out.println("Wilkommen bei der");
         System.out.println("\n" +
@@ -46,9 +46,7 @@ public class Starter {
                 "| $$  | $$ /$$  \\ $$| $$$/ \\  $$$      | $$  \\ $$ /$$__  $$| $$  | $$| $$_  $$ \n" +
                 "| $$  | $$|  $$$$$$/| $$/   \\  $$      | $$$$$$$/|  $$$$$$$| $$  | $$| $$ \\  $$\n" +
                 "|__/  |__/ \\______/ |__/     \\__/      |_______/  \\_______/|__/  |__/|__/  \\__/\n");
-
         while (!end) {
-
             System.out.println("--- Menü: Was möchten Sie tun? ---\n");
             System.out.println("[1]. Kunden hinzufügen");
             System.out.println("[2]. Konto eröffnen");
@@ -89,16 +87,15 @@ public class Starter {
         }
         System.out.println("Auf Wiedersehen!");
         try {
-            saveBankdaten(bankToBankdaten(bank));
+            saveBankdaten(convertBank.bankToBankdaten(bank));
         } catch (JAXBException e) { //Abfangen einer Exception
             System.out.println("\033[3mFehler: Die Bank konnte nicht gespeichert werden!\033[0m");
             throw new RuntimeException(e);
         }
     }
 
-
     /**
-     *
+     *TODO
      */
     public static void geldTransfer(){ //Methode zur Abfrage für einen Transfer von Geld
         System.out.println("Von welchem Konto soll die Überweisung erfolgen?");
@@ -119,8 +116,6 @@ public class Starter {
         }
     }
 
-
-
     public static void geldAuszahlen(){ //Methode zur Abfrage zur Auszahlung
         System.out.println("Von welchem Konto möchten Sie Geld auszahlen?");
         System.out.println("Bitte IBAN eingeben:");
@@ -134,7 +129,6 @@ public class Starter {
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
     }
-
 
     public static void geldEinzahlen(){ //Methode zur Abfrage einer Einzahlung
         System.out.println("Auf welches Konto möchten Sie Geld einzahlen?");
@@ -153,7 +147,6 @@ public class Starter {
             System.out.println("\033[3mFehler: Der Eingezahlte Betrag muss positiv sein!\033[0m");
         }
     }
-
 
     public static void kundeLoeschen(){
         System.out.println("Welcher Kunde soll gelöscht werden?");
@@ -347,81 +340,9 @@ public class Starter {
     }
 
     /**
-     * Methode, um die Bankdaten zu laden
-     * @return Rückgabe der neuen Bankdaten
-     * @throws JAXBException
-     */
-    public static Bank loadBank() throws JAXBException {
-        File f = new File("bank.xml");
-        if(f.exists() && !f.isDirectory()) {
-            Unmarshaller unmarshaller = JAXBContext.newInstance(Bank.class).createUnmarshaller();
-            System.out.println("Bank laden...");
-            showProgressBar(); //anzeige des Ladebalkens
-            System.out.println("Die Bank wurde geladen!");
-            return (Bank) unmarshaller.unmarshal(new File("bank.xml"));
-        }
-        System.out.println("\033[3mFehler: Die Bank konnte nicht geladen werden!\033[0m");
-            return new Bank();
-    }
-
-    /**
-     * @param bank Bank
-     * Bank wird in Bankdaten umgewandelt für XML
-     * @return Rückgabe der Bankdaten
-     */
-    public static Bankdaten bankToBankdaten(Bank bank){
-        ArrayList<Kundendaten> kundendatenArrayList = new ArrayList<>();
-        int i = 0;
-        for (Kunde k: bank.getKunden()) {
-            ArrayList<Kontendaten> kontendatenArrayList = new ArrayList<>();
-            for (Konto konto:k.getKonten()) {
-               if (konto instanceof Tagesgeld){
-                    kontendatenArrayList.add(new Kontendaten(konto.getIban(), konto.getSaldo(), konto.getMaxDispo(), "TG"));
-               }else{
-                   kontendatenArrayList.add(new Kontendaten(konto.getIban(), konto.getSaldo(), konto.getMaxDispo(), "GI"));
-               }
-            }
-            Kundendaten kundendaten = new Kundendaten(i, k.getName(), k.getVorname(), k.getAdresse(), k.getGeburtsdatum(), kontendatenArrayList);
-            kundendatenArrayList.add(kundendaten);
-            i++;
-        }
-        Bankdaten bankdaten = new Bankdaten(bank.getName(), bank.getAdresse(), bank.getBlz(), kundendatenArrayList);
-        return bankdaten;
-    }
-
-    /**
-     * @param bankdaten Daten der Bank
-     * Bankdaten wird zur Bank umgewandelt für die XML
-     * @return Rückgabe der Bankdaten (Name, Adresse,Blz, Konten, Kunden)
-     */
-    public static Bank bankdatenToBank(Bankdaten bankdaten){
-        HashMap<String, Konto> konten = new HashMap<>(); //HashMap ist zur speicherung der Daten in einer Datentabelle
-        ArrayList<Kunde> kunden = new ArrayList<>();
-        ArrayList<Kundendaten> kundendatenArrayList = bankdaten.getKunden();
-        for (Kundendaten k: kundendatenArrayList) {
-            ArrayList<Kontendaten> kontendatenArrayList = k.getKonten();
-            ArrayList<Konto> kontList = new ArrayList<>();
-            for (Kontendaten kd: kontendatenArrayList) {
-                if (kd.getType().equals("TG")){
-                    Tagesgeld tg = new Tagesgeld(kd.getIban(), kd.getSaldo());
-                    konten.put(kd.getIban(), tg);
-                    kontList.add(tg);
-                }else{
-                    Giro gi = new Giro(kd.getIban(), kd.getSaldo());
-                    konten.put(kd.getIban(), gi);
-                    kontList.add(gi);
-                }
-            }
-            Kunde kunde = new Kunde(k.getName(), k.getVorname(), k.getAdresse(), k.getGeburtsdatum(), kontList);
-            kunden.add(kunde);
-        }
-        return new Bank(bankdaten.getName(), bankdaten.getAdresse(), bankdaten.getBlz(), konten, kunden);
-    }
-
-    /**
      * @return Rückrabe der Bankdaten an Klasse Bankdaten
      * Methode um zu prüfen ob Bankdaten vorhanden sind, um diese anzuzeigen
-     * @throws JAXBException
+     * @throws JAXBException Sollten diese Daten nicht vorhanden sein,
      */
     public static Bankdaten loadBankdaten() throws JAXBException {
         File f = new File("bankdaten.xml");

@@ -2,6 +2,7 @@ package de.hsw;
 
 
 
+import de.hsw.jaxbUtils.ConvertBank;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Bank {
+public class Bank extends ConvertBank {
 
     private static final String NAME = "HSW Bank";
     private static final String ADRESSE = "Am Stockhof 2";
