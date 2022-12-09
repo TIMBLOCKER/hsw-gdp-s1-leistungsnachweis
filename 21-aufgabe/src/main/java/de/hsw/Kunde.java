@@ -90,6 +90,7 @@ public class Kunde {
                 return true;
             }
         }
+        System.out.println("Fehler: Es dürfen nur 2 Girokonten und 3 Tagesgeldkonten pro Kunde vergeben werden!");
         return false;
     }
 
